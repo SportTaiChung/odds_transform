@@ -50,3 +50,4 @@ Api (解析 .轉換 .轉成protobuf .傳到MQ)
 [BKZF.py]|改寫目前線上版本(之後不使用..)
 [mapping.py]|mapping
 [sendMQ].py]|sendMQfunction
+- - - - - -
