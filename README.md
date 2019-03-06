@@ -36,7 +36,7 @@ Api (解析 .轉換 .轉成protobuf .傳到MQ)
 [APHDC.proto]|protobuf格式
 [APHDC_pb2]|protoc --python_out=. APHDC.proto  產生
 [beforeSeason.py]|專用賽季前棒球
-[bsFunctionP.py]|專用棒球全場讓分
+[bsFunctionP.py]|棒球
 [bskFunctionP.py]|籃球
 [hcFunctionP.py]|冰球
 [couOneP.py]|美盤減一
@@ -44,10 +44,10 @@ Api (解析 .轉換 .轉成protobuf .傳到MQ)
 [testBKzf.py]|籃球讓分func
 [testBSds.py]|棒球冰球大小func
 [testBSde.py]|專用棒球用獨贏算讓分func
-[testBSzf.py]|專用棒球全場讓分func
+[testBSzf.py]|專用美棒全場讓分func
 [testHCzf.py]|冰球讓分func
-[BKDS.py]|改寫目前線上版本(之後不使用..)
-[BKZF.py]|改寫目前線上版本(之後不使用..)
+[BKDS.py]|改寫目前線上版本(誤差較小但不是盤室要的)
+[BKZF.py]|改寫目前線上版本(誤差較小但不是盤室要的)
 [mapping.py]|mapping
 [sendMQ].py]|sendMQfunction
 - - - - - -
