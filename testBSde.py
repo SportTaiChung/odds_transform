@@ -1,4 +1,6 @@
 
+
+
 def calBSde(gameType,homeDe,awayDe):
     if homeDe != '0' :
         homeDe = round((float(homeDe)-1),2)
