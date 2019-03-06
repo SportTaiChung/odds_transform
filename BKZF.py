@@ -1,5 +1,6 @@
 import mapping
 
+
 def calBKzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe):
         
     if homeO == '0.0' or homeO =='0' :
