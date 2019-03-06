@@ -3,7 +3,6 @@ import APHDC_pb2
 import copy
 import testBSde
 
-
 def seasonMLB(Data):
     sendData = []   
     for mlb in Data:
