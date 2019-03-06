@@ -4,7 +4,6 @@ import APHDC_pb2
 import json
 import copy
 
-
 def cutOne(home,away):
     if home != '0' :
         hO = str(round((float(home) -1),2))
