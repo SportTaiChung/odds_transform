@@ -1,5 +1,4 @@
 
-
 def bsMap (water) :
     oddsmap = {
             0.95: "1+95",
