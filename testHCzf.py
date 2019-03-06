@@ -1,5 +1,6 @@
 import mapping
 
+
 def calBSzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe):
     if homeO != '0' :
         homeO = round((float(homeO)-1),2)
