@@ -1,6 +1,5 @@
 import pika
 
-
 def split_list(data):   # 分成一次送50筆
 
     limit = 50
