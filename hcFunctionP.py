@@ -10,7 +10,6 @@ sys.stdout=io.TextIOWrapper(sys.stdout.buffer,encoding='utf8')
 import testHCzf
 import testBSds
 
-
 def hockey(Data):
     sendData = []      
     notNHL =[]
