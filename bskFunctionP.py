@@ -1,11 +1,11 @@
 # -*- coding:utf-8 -*-
 import numpy as np
 import APHDC_pb2
-import io
-import sys
+# import io
+# import sys
 import json
 import copy
-sys.stdout=io.TextIOWrapper(sys.stdout.buffer,encoding='utf8')
+# sys.stdout=io.TextIOWrapper(sys.stdout.buffer,encoding='utf8')
 
 def wt():
     wt = {}
