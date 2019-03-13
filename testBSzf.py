@@ -54,13 +54,13 @@ def calBSzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe):
         a = aL + L
         return h ,a , homeO ,awayO ,homeDe ,awayDe
         # print(h ,a , homeO ,awayO ,homeDe ,awayDe)
-if __name__ == '__main__':
-    gameType ='full'
-    homeL = '-1.5'
-    awayL = '+1.5'
-    homeO = '2.14'
-    awayO = '1.793'
-    homeDe = '1.427'
-    awayDe = '3.09'
-    calBSzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe)
+# if __name__ == '__main__':
+#     gameType ='full'
+#     homeL = '-1.5'
+#     awayL = '+1.5'
+#     homeO = '2.14'
+#     awayO = '1.793'
+#     homeDe = '1.427'
+#     awayDe = '3.09'
+#     calBSzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe)
  

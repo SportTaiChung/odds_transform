@@ -75,30 +75,30 @@ def calBSzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe):
         # print(h)
         # print(a)
     return h,a ,str(homeDe),str(awayDe),str(homeO),str(awayO)
-if __name__ == '__main__':
-    # gameType ='full'
-    # homeL = '-1.5'
-    # awayL = '+1.5'
-    # homeO = '3.06'
-    # awayO = '1.337'
-    # homeDe = '2.03'
-    # awayDe = '1.87'
-    # calBSzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe)
+# if __name__ == '__main__':
+#     # gameType ='full'
+#     # homeL = '-1.5'
+#     # awayL = '+1.5'
+#     # homeO = '3.06'
+#     # awayO = '1.337'
+#     # homeDe = '2.03'
+#     # awayDe = '1.87'
+#     # calBSzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe)
 
-    # gameType ='half'
-    # homeL = '-1.5'
-    # awayL = '+1.5'
-    # homeO = '3.06'
-    # awayO = '1.337'
-    # homeDe = '2.03'
-    # awayDe = '1.87'
-    # calBSzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe)
+#     # gameType ='half'
+#     # homeL = '-1.5'
+#     # awayL = '+1.5'
+#     # homeO = '3.06'
+#     # awayO = '1.337'
+#     # homeDe = '2.03'
+#     # awayDe = '1.87'
+#     # calBSzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe)
 
-    gameType ='full'
-    homeL = '-1.5'
-    awayL = '+1.5'
-    homeO = '2.65'
-    awayO = '1.54'
-    homeDe = '1.625'
-    awayDe = '2.44'
-    calBSzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe)
+#     gameType ='full'
+#     homeL = '-1.5'
+#     awayL = '+1.5'
+#     homeO = '2.65'
+#     awayO = '1.54'
+#     homeDe = '1.625'
+#     awayDe = '2.44'
+#     calBSzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe)
