@@ -8,6 +8,7 @@ import json
 import copy
 # sys.stdout=io.TextIOWrapper(sys.stdout.buffer,encoding='utf8')
 import testHCzf
+import testBSzf
 import testBSds
 
 def hockey(Data):
@@ -42,50 +43,55 @@ def hockey(Data):
             awayO = hc.usZF.awayZF.odds
             homeDe = hc.de.home
             awayDe = hc.de.away
-            zfBS = testHCzf.calBSzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe)
-            
+            # zfBS = testHCzf.calBSzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe)
+            zfBS = testBSzf.calBSzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe)
             hc.twZF.homeZF.line=zfBS[0]
             hc.twZF.awayZF.line=zfBS[1]
             
-            if homeO == '0' or homeDe == '0': 
+            ## 如果獨贏為0 讓分獨贏都關 因為算是需要讓分及獨贏缺一不可
+            if homeDe == '0' : 
                 hc.twZF.homeZF.odds="0"
                 hc.twZF.awayZF.odds="0" 
+                hc.de.home='0'
+                hc.de.away='0'
             else :
-                hc.twZF.homeZF.odds="0.95"
-                hc.twZF.awayZF.odds="0.95"  
-
-            if homeDe != '0' : 
                 hc.de.home=zfBS[2]
-                hc.de.away=zfBS[3]  
-            else :
-                hc.twZF.homeZF.odds="0"
-                hc.twZF.awayZF.odds="0"  
+                hc.de.away=zfBS[3]
+                if homeO == '0' :
+                    hc.twZF.homeZF.odds="0"
+                    hc.twZF.awayZF.odds="0"
+                else :
+                    hc.twZF.homeZF.odds="0.95"
+                    hc.twZF.awayZF.odds="0.95"  
 
+
+            ## 一輸二贏 (美盤讓分盤口減一)
             if homeO != '0' :
                 hc.esre.let = 1 if "-" in homeL else 2
                 hc.esre.home = zfBS[4]
                 hc.esre.away = zfBS[5]
 
+            ## 大小
             line = hc.usDS.line
             over = hc.usDS.over
             under = hc.usDS.under
-            if over == "0" or over == "0.0":
-                hc.twDS.line= '0+0'
-                hc.twDS.over= '0'
-                hc.twDS.under= '0'
-            else :
-                dsBS = testCutOneP.cutOne(over,under)
-                if '.5' in str(float(line)) :
-                    line = line
-                else :
-                    line = str(float(line)).replace('.0','+0')
-                hc.twDS.line= line
-                hc.twDS.over= dsBS[0]
-                hc.twDS.under= dsBS[1]
-            # dsBS = testBSds.calBSds(line,over,under)
-            # hc.twDS.line= dsBS
-            # hc.twDS.over= '0.94'
-            # hc.twDS.under= '0.94'
+            # if over == "0" or over == "0.0":
+            #     hc.twDS.line= '0+0'
+            #     hc.twDS.over= '0'
+            #     hc.twDS.under= '0'
+            # else :
+            #     dsBS = testCutOneP.cutOne(over,under)
+            #     if '.5' in str(float(line)) :
+            #         line = line
+            #     else :
+            #         line = str(float(line)).replace('.0','+0')
+            #     hc.twDS.line= line
+            #     hc.twDS.over= dsBS[0]
+            #     hc.twDS.under= dsBS[1]
+            dsBS = testBSds.calBSds(line,over,under)
+            hc.twDS.line= dsBS
+            hc.twDS.over= '0.94'
+            hc.twDS.under= '0.94'
        
             sendData.append(copy.deepcopy(hc))                
 
