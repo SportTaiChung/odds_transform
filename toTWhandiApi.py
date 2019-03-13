@@ -5,11 +5,16 @@ from flask import request
 import json
 import requests
 import sendMQ
-import hcFunctionP
+import testHcFunctionP
+import testBskFunctionP
+import testCutOneP
+import testBeforeSeason
+ 
+import bsFunctionP
 import bskFunctionP
 import cutOneP
-import beforeSeason
 import APHDC_pb2
+
 
 
 app = Flask(__name__)
@@ -28,21 +33,42 @@ def func3():
     enData = APHDC_pb2.ApHdcArr()
     enData.ParseFromString(data)
     Data = enData.aphdc
+    ## 球賽對應function
     for en in Data :
         game = en.game_class
-    if 'basketball' in game :
-        out = bskFunctionP.basketball(Data)
-    elif 'football' in game :
-        out = cutOneP.justCutOne_fun(Data)        
-    elif 'hockey'  in game :
-        out = hcFunctionP.hockey(Data)
-    elif 'mlb' or 'npb' or 'cpbl' or  'kbo' in game :
-        out = beforeSeason.seasonMLB(Data)
+    ## 測試用    
+    if 'testPs' == en.source  or 'CMD' == en.source:
+        if 'basketball' in game :
+            out = testBskFunctionP.basketball(Data)
+        elif 'football' in game :
+            out = testCutOneP.justCutOne_fun(Data)   
+        elif 'soccer' in game :
+            out = testCutOneP.justCutOne_fun(Data)   
+        elif 'hockey'  in game :
+            out = testHcFunctionP.hockey(Data)
+        elif 'mlb' or 'npb' or 'cpbl' or  'kbo' in game :
+            out = testBeforeSeason.seasonMLB(Data)    
+            
+    ## 正式用     
+    else :
+        if 'basketball' in game :
+            out = testBskFunctionP.basketball(Data)
+            # out = bskFunctionP.basketball_fun(Data)
+        elif 'football' in game :
+            out = testCutOneP.justCutOne_fun(Data) 
+        elif 'hockey'  in game :
+            out = bsFunctionP.baseball_fun(Data)
+        elif 'mlb'  in game :
+            out = testBeforeSeason.seasonMLB(Data) 
+        # elif 'mlb' or 'npb' or 'cpbl' or  'kbo' or 'hockey' in game :
+        #     out = bsFunctionP.baseball_fun(Data)
+
 
     
     outData = APHDC_pb2.ApHdcArr()
     outData.ParseFromString(out)
     Data = outData.aphdc
+    ## 來源對應que
     for ou in Data :
         ous = ou.source
         ouc = ou.game_class
@@ -65,11 +91,14 @@ def func3():
                 que = 'CMD_BK'
             elif 'hockey' == ouc:
                 que = 'CMD_HC'
-            
-   
-    # sendMQ.send_MQ(out,que)
-    sendMQ.send_MQ(out,'Apple')
-    return que
+            elif 'soccer' == ouc :
+                que = 'CMD_SC'
+        elif 'test' in ous :
+            que = 'Apple'
+        
+    sendMQ.send_MQ(out,que,'rabbit.avia520.com','AE86', '200p')
+    # sendMQ.send_MQ(out,que,'10.0.1.198','GTR', '565p')
+    return out
 
 
 if __name__ == '__main__':
