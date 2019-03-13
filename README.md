@@ -1,12 +1,13 @@
 # NewAsia function
 美盤轉台盤 API
 
-* 籃球 : bskFunctionP.py
-* 籃球 (多玩法) : cutOneP.py
-* 棒球 : bsFunctionP.py
-* 美足 : cutOneP.py
-* 冰球 (含加時): hcFunctionP.py
-* 冰球 : cutOneP.py
+* 籃球 : testBskFunctionP.py
+* 籃球 (多玩法) : testCutOneP.py
+* 棒球 : testBeforeSeason.py
+* 美足 : testCutOneP.py
+* 冰球 (含加時): bsFunctionP.py
+* 冰球 : testCutOneP.py
+* 足球 : testCutOneP.py
 
 Mehtod: POST
 
