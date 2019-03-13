@@ -8,13 +8,16 @@ def split_list(data):   # 分成一次送50筆
 
 
 
-def send_MQ(DATA,que):     #資料送rabbitMQ
+def send_MQ(DATA,que,host,user,ps):     #資料送rabbitMQ
 
-    cred = pika.PlainCredentials('AE86', '200p')
+    # cred = pika.PlainCredentials('AE86', '200p')
     # cred = pika.PlainCredentials('GTR', '565p')  #正式
+    cred = pika.PlainCredentials(user,ps)
     params = pika.ConnectionParameters(
         # host='10.0.1.198',
-        host='rabbit.avia520.com',
+        # host='rmq.nba1688.net',
+        # host='rabbit.avia520.com',
+        host = host,
         virtual_host='/',
         credentials=cred,
         socket_timeout=3
