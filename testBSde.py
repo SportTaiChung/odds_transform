@@ -23,7 +23,7 @@ def calBSde(gameType,homeDe,awayDe):
             percent = 5 * int(move/5)
         else :
             percent = 5 * int(move/5) +5
-    print(percent/100)
+    # print(percent/100)
 
     L = mapping.bsDeMap(percent/100)
 
