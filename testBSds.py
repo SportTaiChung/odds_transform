@@ -10,7 +10,7 @@ def calBSds(line,over,under):
         under = float('0')
 
     oneWater = 1/abs(under-over)
-    print(oneWater)
+    # print(oneWater)
     water = abs((over + under)/2-over)*(100/oneWater*100)
     move = int(water)
     # print(water)
@@ -81,9 +81,9 @@ def calBSds(line,over,under):
     L = newKey+newValue
     return L 
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
 
-    line= "7.5"
-    over= "1.91"
-    under= "1.97"
-    print(calBSds(line,over,under))
+#     line= "7.5"
+#     over= "1.91"
+#     under= "1.97"
+#     print(calBSds(line,over,under))
