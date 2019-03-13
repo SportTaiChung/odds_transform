@@ -14,12 +14,12 @@ def calBSzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe):
     else :
         homeDe = float('0')
         awayDe = float('0')
-    
+    # print(homeO,awayO,homeDe,awayDe)
     if homeO == 0.0 or homeDe == 0.0 :
         h = '0+0'
         a = '0+0'
-        # print(h)
-        # print(a)
+        # print(h,a, homeO ,awayO ,homeDe ,awayDe)
+        
     else :
         limit1 = (awayDe*(100 -((100-(100*awayDe))/(awayO-awayDe))))-(100-(100*awayDe))/(awayO-awayDe)
         limit2 = ((homeO*(100-(100*homeDe))/(homeO-homeDe))-(100 -((100-(100*homeDe))/(homeO-homeDe))))*-1
@@ -52,15 +52,16 @@ def calBSzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe):
         # print(L)
         h = hL + L
         a = aL + L
-        return h ,a , homeO ,awayO ,homeDe ,awayDe
-        # print(h ,a , homeO ,awayO ,homeDe ,awayDe)
+    # print(h ,a , homeO ,awayO ,homeDe ,awayDe)
+    return h ,a , str(homeDe),str(awayDe),str(homeO),str(awayO)
+        
 # if __name__ == '__main__':
 #     gameType ='full'
-#     homeL = '-1.5'
-#     awayL = '+1.5'
-#     homeO = '2.14'
-#     awayO = '1.793'
-#     homeDe = '1.427'
-#     awayDe = '3.09'
+#     homeL = '0'
+#     awayL = '0'
+#     homeO = '0'
+#     awayO = '0'
+#     homeDe = '1.93'
+#     awayDe = '1.95'
 #     calBSzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe)
  
