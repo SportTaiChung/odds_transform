@@ -1,4 +1,4 @@
-syntax = "proto3"; 
+syntax = "proto3";
 package protobuf;
 
 option java_package = "jst.java.mservice.catcher.protobuf";
