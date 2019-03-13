@@ -96,17 +96,21 @@ def calBKzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe):
         hL = homeL[0]
         aL = awayL[0]
         
+
     ## 沒有 0+35
-    if '+' in newValue :
-        if newKey == '0' :
-            if newKey+newValue != '0+0':
-                newKey = '1'
-                newValue = newValue.replace('+','-')
+    if '+' in newValue and newKey == '0' :
+        if newKey+newValue != '0+0':
+            newValue = newValue.replace('+','-')
+        
+
+    # print(hL + newKey+newValue)
+    # print(aL + newKey+newValue)
+
     ## 全場沒有 0-
     if 'full' in gameType :
         if '-' in newValue and newKey == '0' :
             newKey = '1'
-            newValue = newValue.replace('+','-')
+            newValue = '+' + str(int(newValue) + 100)
 
     try :
         h = hL + newKey+newValue

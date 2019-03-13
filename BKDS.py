@@ -74,9 +74,9 @@ def calBKds(line,over,under):
     return L 
 
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
 
-    line= "58"
-    over= "2.00"
-    under= "1.84"
-    calBKds(line,over,under)
+#     line= "58"
+#     over= "2.00"
+#     under= "1.84"
+#     calBKds(line,over,under)
