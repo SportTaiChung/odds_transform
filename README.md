@@ -35,19 +35,26 @@ Api (解析 .轉換 .轉成protobuf .傳到MQ)
 ----|----
 [APHDC.proto]|protobuf格式
 [APHDC_pb2]|protoc --python_out=. APHDC.proto  產生
-[beforeSeason.py]|專用賽季前棒球
-[bsFunctionP.py]|棒球
-[bskFunctionP.py]|籃球
-[hcFunctionP.py]|冰球
-[couOneP.py]|美盤減一
-[testBKds.py]|籃球大小func
-[testBKzf.py]|籃球讓分func
-[testBSds.py]|棒球冰球大小func
-[testBSde.py]|專用棒球用獨贏算讓分func
-[testBSzf.py]|專用美棒全場讓分func
-[testHCzf.py]|冰球讓分func
-[BKDS.py]|改寫目前線上版本(誤差較小但不是盤室要的)
-[BKZF.py]|改寫目前線上版本(誤差較小但不是盤室要的)
+[bskFunctionP.py]|籃球（已未使用）
+[BKDS.py]|籃球大小Func(已未使用)
+[BKZF.py]|籃球讓分Func(已未使用)
+[couOneP.py]|美盤減一（已未使用）
+[bsFunctionP.py]|冰球執行檔（線上使用）
+[testBeforeSeason.py]|專用賽季前美棒執行檔（線上使用）
+[testBSde.py]|專用棒球用獨贏算讓分Func（線上使用）
+[testBskFunctionP.py]|籃球執行檔（線上使用）
+[testBKds.py]|籃球大小Func（線上使用）
+[testBKzf.py]|籃球讓分Func（線上使用）
+[testCouOneP.py]|美盤減一（線上使用）
+[testBsFunctionP.py]|美棒讓分（待測試）
+[testBSzf.py]|專用美棒全場讓分Func（待測試）
+[hcFunctionP.py]|冰球（待測試）
+[testHCzf.py]|冰球讓分func（待測試）
+[testBSds.py]|棒球冰球大小Func（待測試）
+[gun.conf]| gevent 設定檔
 [mapping.py]|mapping
-[sendMQ].py]|sendMQfunction
+[sendMQ.py]|sendMQfunction
+[toTWhandiApi.py]|Main Api
+
+
 - - - - - -
