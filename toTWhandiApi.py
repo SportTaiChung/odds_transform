@@ -7,6 +7,7 @@ import requests
 import sendMQ
 import testHcFunctionP
 import testBskFunctionP
+import testBsFunctionP
 import testCutOneP
 import testBeforeSeason
  
@@ -46,8 +47,8 @@ def func3():
             out = testCutOneP.justCutOne_fun(Data)   
         elif 'hockey'  in game :
             out = testHcFunctionP.hockey(Data)
-        elif 'mlb' or 'npb' or 'cpbl' or  'kbo' in game :
-            out = testBeforeSeason.seasonMLB(Data)    
+        elif 'mlb' in game :
+            out = testBsFunctionP.baseball(Data)
             
     ## 正式用     
     else :
@@ -57,7 +58,8 @@ def func3():
         elif 'football' in game :
             out = testCutOneP.justCutOne_fun(Data) 
         elif 'hockey'  in game :
-            out = bsFunctionP.baseball_fun(Data)
+            out = testHcFunctionP.hockey(Data)
+            # out = bsFunctionP.baseball_fun(Data)
         elif 'mlb'  in game :
             out = testBeforeSeason.seasonMLB(Data) 
         # elif 'mlb' or 'npb' or 'cpbl' or  'kbo' or 'hockey' in game :
@@ -96,14 +98,14 @@ def func3():
         elif 'test' in ous :
             que = 'Apple'
         
-    sendMQ.send_MQ(out,que,'rabbit.avia520.com','AE86', '200p')
-    # sendMQ.send_MQ(out,que,'10.0.1.198','GTR', '565p')
+    # sendMQ.send_MQ(out,'Apple','rabbit.avia520.com','AE86', '200p')
+    sendMQ.send_MQ(out,que,'10.0.1.198','GTR', '565p')
     return out
 
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=5004, debug=True ,threaded=True)
-    # app.run(host='0.0.0.0', port=5004, debug=True ,threaded=True)
+    # app.run(host='127.0.0.1', port=5004, debug=True ,threaded=True)
+    app.run(host='0.0.0.0', port=5004, debug=True ,threaded=True)
 
 
    
