@@ -9,7 +9,7 @@ def calBSds(line,over,under):
         over = float('0')
         under = float('0')
 
-    oneWater = 1/abs(under-over)
+    oneWater = 1/abs(under-abs((over+under)/2))
     # print(oneWater)
     water = abs((over + under)/2-over)*(100/oneWater*100)
     move = int(water)
