@@ -8,6 +8,7 @@ def baseball(Data):
     sendData = []   
     for bs in Data:
         gameType = bs.game_type
+        gameClass = bs.game_class
         homeDe = bs.de.home
         awayDe = bs.de.away
         homeL = bs.usZF.homeZF.line
@@ -47,7 +48,7 @@ def baseball(Data):
         line = bs.usDS.line
         over = bs.usDS.over
         under = bs.usDS.under
-        dsBS = testBSds.calBSds(line,over,under)
+        dsBS = testBSds.calBSds(gameClass,line,over,under)
         bs.twDS.line=dsBS
         if over ==  '0' or over ==  "0.0" :
             bs.twDS.over="0"
