@@ -37,8 +37,10 @@ def justCutOne_fun(Data):
                 cut.twZF.awayZF.line='0+0'
                 cut.twZF.homeZF.odds='0'
                 cut.twZF.awayZF.odds='0'
-       
+        except :
+            pass
 
+        try :
             dsline = cut.usDS.line 
             over = cut.usDS.over 
             under = cut.usDS.under
@@ -54,15 +56,19 @@ def justCutOne_fun(Data):
                 cut.twDS.line='0+0'
                 cut.twDS.over='0'
                 cut.twDS.under='0'
-     
+        except :
+            pass
 
+        try :
             dehome = cut.de.home
             deaway = cut.de.away
             de = cutOne(dehome,deaway)
             cut.de.home = de[0]
             cut.de.away = de[1]
-     
+        except :
+            pass
 
+        try:
             sdhome = cut.sd.home
             sdaway = cut.sd.away
             sd = cutOne(sdhome,sdaway)
@@ -70,7 +76,8 @@ def justCutOne_fun(Data):
             cut.sd.away = sd[1]
         except :
             pass
-
+        
+        
         sendData.append(copy.deepcopy(cut))
         
         datas = APHDC_pb2.ApHdcArr()
@@ -81,19 +88,10 @@ def justCutOne_fun(Data):
 
 
 
+
+
 # enData = APHDC_pb2.ApHdcArr()
 # enData.ParseFromString(f)
 # Data = enData.aphdc
 # justCutOne_fun(Data)
 
-# import requests
-# enData = APHDC_pb2.ApHdcArr()
-# enData.ParseFromString(f)
-# Data = enData.aphdc
-# print(justCutOne_fun(Data))
-# headers = {
-#     'content-type': "text/html;charset=utf-8",
-#     'cache-control': "no-cache",
-#     }
-# url = "http://jvapi.iq168.net:56788/asia"
-# res = requests.post(url, headers=headers, data=justCutOne_fun(Data))
