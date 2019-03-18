@@ -2,7 +2,7 @@ import cutOneP
 
 
 def calBKzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe):
-        
+    
     if homeO == '0.0' or homeO =='0' :
         homeL = '0.0'
         awayL = '0.0'
@@ -102,6 +102,7 @@ def calBKzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe):
     else :
         newValue = '+' +  str(newValue)
     
+        
     if homeDe != 0.0 :
         if homeDe < awayDe :
             hL = '-'
@@ -116,17 +117,6 @@ def calBKzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe):
         if homeO != 0.0 :
             hL = homeL[0]
             aL = awayL[0] 
-    # else :
-    #     if homeO != 0.0 :
-    #         if homeO < awayO :
-    #             hL = '-'
-    #             aL = '+'
-    #         elif homeO > awayO :
-    #             hL = '+'
-    #             aL = '-'
-    #         else :
-    #             hL = homeL[0]
-    #             aL = awayL[0]
 
     # print(newKey+newValue)
     # print(hL + newKey+newValue)
@@ -170,10 +160,10 @@ def calBKzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe):
 # if __name__ == '__main__':
 
 #     gameType ='full'
-#     homeL = '-8.0'
-#     awayL = '+8.0'
-#     homeO = '1.94'
-#     awayO = '1.96'
+#     homeL = '-7.5'
+#     awayL = '+7.5'
+#     homeO = '2.08'
+#     awayO = '1.78'
 #     homeDe = '0'
 #     awayDe = '0'
 #     print(calBKzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe))
