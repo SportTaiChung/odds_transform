@@ -3,9 +3,11 @@
 
 def calBSds(gameClass,line,over,under):
     if over != '0' :
+        line = str(float(line))
         over = round((float(over)-1),2)
         under = round((float(under)-1),2)
     else :
+        line = str(float('0'))
         over = float('0')
         under = float('0')
 
