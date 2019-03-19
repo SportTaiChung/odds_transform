@@ -24,11 +24,12 @@ def justCutOne_fun(Data):
             awayodds = cut.usZF.awayZF.odds
             if homeodds != "0" :
                 if cut.game_class == 'soccer' or cut.game_class == 'hockey':
-                    cut.twZF.homeZF.line=mapping.scMap(homeline[1:])
-                    cut.twZF.awayZF.line=mapping.scMap(awayline[1:])
+                    cut.twZF.homeZF.line=homeline[0]+mapping.scMap(homeline[1:])
+                    cut.twZF.awayZF.line=awayline[0]+mapping.scMap(awayline[1:])
                 else :
                     cut.twZF.homeZF.line=homeline
                     cut.twZF.awayZF.line=awayline
+                # print(cut)
                 zf = cutOne(homeodds,awayodds)
                 cut.twZF.homeZF.odds=zf[0]
                 cut.twZF.awayZF.odds=zf[1]
@@ -46,7 +47,8 @@ def justCutOne_fun(Data):
             under = cut.usDS.under
             if over != "0" :
                 if cut.game_class == 'soccer' or cut.game_class == 'hockey':
-                    cut.twDS.line=mapping.scMap(dsline[1:])
+                    cut.twDS.line=mapping.scMap(dsline)
+                    # print(dsline)
                 else :
                     cut.twDS.line=dsline
                 ds = cutOne(over,under)
@@ -79,7 +81,7 @@ def justCutOne_fun(Data):
         
         
         sendData.append(copy.deepcopy(cut))
-        
+        # print(cut)
         datas = APHDC_pb2.ApHdcArr()
         datas.aphdc.extend(sendData)
         data = datas.SerializeToString()  #變成byte
