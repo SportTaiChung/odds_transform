@@ -3,12 +3,7 @@ from sendMQ import telegramBot
 
 ## 冰球棒球都是用亞洲賠率(不加本金)計算 
 def calBSzf(gameClass,gameType,homeL,awayL,homeO,awayO,homeDe,awayDe):
-    # if gameClass == 'mlb' :
-    #     homeO = float(homeO)
-    #     awayO = float(awayO)
-    #     homeDe = float(homeDe)
-    #     awayDe = float(awayDe)
-    # elif gameClass == 'hockey':
+
     if homeO != '0' :
         homeO = round((float(homeO)-1),2)
         awayO = round((float(awayO)-1),2)
@@ -25,9 +20,6 @@ def calBSzf(gameClass,gameType,homeL,awayL,homeO,awayO,homeDe,awayDe):
     limit1=(awayDe*(100-((100-(100*awayDe))/(awayO-awayDe))))-((100-(100*awayDe))/(awayO-awayDe))
     limit2=((homeO*((100-(100*homeDe))/(homeO-homeDe)))-(100-((100-(100*homeDe))/(homeO-homeDe))))*-1
     water = (limit1+limit2)/2
-
-    # print(limit1)
-    # print(limit2)
     # print(water)
 
     if water == 0 :
@@ -54,28 +46,9 @@ def calBSzf(gameClass,gameType,homeL,awayL,homeO,awayO,homeDe,awayDe):
     ## 如果沒有mapping到就關盤
     try :
         L = mapping.bsMap(percent/100)
-        # print(L)
         h = hL + L
         a = aL + L
 
-        # if gameClass == 'mlb' :
-        #     if homeO != '0' :
-        #         homeO = round((float(homeO)-1),2)
-        #         awayO = round((float(awayO)-1),2)
-        #     else :
-        #         homeO = "0"
-        #         awayO = "0"
-        #     if homeDe != '0' :
-        #         homeDe = round((float(homeDe)-1),2)
-        #         awayDe = round((float(awayDe)-1),2)
-        #     else :
-        #         homeDe = "0"
-        #         awayDe = "0"
-        # elif gameClass == 'hockey' :
-        #     homeO = homeO
-        #     awayO = awayO
-        #     homeDe = homeDe
-        #     awayDe = awayDe
     except :
         telegramBot("BSzfMapping錯誤"+","+str(gameType)+","+str(homeDe)+","+str(awayDe)+","+str(homeO)+","+str(awayO))
         h = '0+0'
