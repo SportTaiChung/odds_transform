@@ -44,9 +44,10 @@ def hockey(Data):
             awayO = hc.usZF.awayZF.odds
             homeDe = hc.de.home
             awayDe = hc.de.away
+            
             # zfBS = testHCzf.calBSzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe)
             if 'full' in gameType :
-                zfBS = testBSzf.calBSzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe)
+                zfBS = testBSzf.calBSzf(gameClass,gameType,homeL,awayL,homeO,awayO,homeDe,awayDe)
                 hc.twZF.homeZF.line=zfBS[0]
                 hc.twZF.awayZF.line=zfBS[1]
                 
