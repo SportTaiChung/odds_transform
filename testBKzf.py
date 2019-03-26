@@ -1,25 +1,29 @@
 import cutOneP
-
+from sendMQ import telegramBot
 
 def calBKzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe):
-    
-    if homeO == '0.0' or homeO =='0' :
-        homeL = '0.0'
-        awayL = '0.0'
-        homeO = float('0.0')
-        awayO = float('0.0')
-    else :
-        homeO = round((float(homeO)-1),2)
-        awayO = round((float(awayO)-1),2)
+    try :
+        if homeO == '0'  :
+            homeL = '0.0'
+            awayL = '0.0'
+            homeO = float('0.0')
+            awayO = float('0.0')
+        else :
+            homeO = round((float(homeO)-1),2)
+            awayO = round((float(awayO)-1),2)
 
-
-    if homeDe == '0.0' or homeDe == '0' :
-        homeDe = float('0.0')
-        awayDe = float('0.0')
-    else :
-        homeDe = round((float(homeDe)-1),2)
-        awayDe = round((float(awayDe)-1),2)
-
+        try :
+            if  homeDe == '0' :
+                homeDe = float('0.0')
+                awayDe = float('0.0')
+            else :
+                homeDe = round((float(homeDe)-1),2)
+                awayDe = round((float(awayDe)-1),2)
+        except :
+            homeDe = float('0.0')
+            awayDe = float('0.0')
+    except Exception as e:
+        telegramBot("BKzf錯誤"+","+str(gameType)+","+str(homeDe)+","+str(awayDe)+","+str(homeO)+","+str(awayO)+","+str(e))
     # print(homeDe)
 
     water = abs((homeO + awayO)/2-homeO)*(100/8*100)
@@ -59,9 +63,14 @@ def calBKzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe):
         else :
             ans = value+percent
     # print(ans)
-    
+
+
     if value == 0:
-        if 300 <= ans <= 475:
+        ## 待確認
+        if 500 <= ans < 675 :
+            newKey = str(abs(int(key) - 2))
+            newValue = ans -600
+        elif 300 <= ans <= 475:
             newKey = str(abs(int(key) - 2))
             newValue = ans -400
         elif 100 <= ans <300:
@@ -86,7 +95,7 @@ def calBKzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe):
         elif 0 < ans < 200 :
             newKey = key
             newValue = ans -100
-        elif -100 <= ans < 200 :
+        elif -100 <= ans <=  0 :
             newKey = key
             newValue = ans 
         elif -300 <= ans < -100 :
@@ -95,13 +104,22 @@ def calBKzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe):
         elif -500 <= ans < -300 :
             newKey = str(int(key)+2)
             newValue = 400 +ans 
+        elif -700 <= ans < -500 :
+            newKey = str(int(key)+3)
+            newValue = 600 +ans
+        elif -800 <= ans < -700 :
+            newKey = str(int(key)+4)
+            newValue = 800 +ans
     
-    
-    if '-' in str(newValue) :
-        newValue = str(newValue)
-    else :
-        newValue = '+' +  str(newValue)
-    
+    try :
+        if '-' in str(newValue) :
+            newValue = str(newValue)
+        else :
+            newValue = '+' +  str(newValue)
+    except :
+        telegramBot("BKzf Mapping錯誤"+","+str(gameType)+","+str(homeDe)+","+str(awayDe)+","+str(homeL)+","+str(awayL)+","+str(homeO)+","+str(awayO))
+
+    # print(newValue)
         
     if homeDe != 0.0 :
         if homeDe < awayDe :
@@ -160,10 +178,10 @@ def calBKzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe):
 # if __name__ == '__main__':
 
 #     gameType ='full'
-#     homeL = '-7.5'
-#     awayL = '+7.5'
-#     homeO = '2.08'
-#     awayO = '1.78'
+#     homeL = '-14.5'
+#     awayL = '+14.5'
+#     homeO = '1.5'
+#     awayO = '2.51'
 #     homeDe = '0'
 #     awayDe = '0'
-#     print(calBKzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe))
+#     calBKzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe)
