@@ -46,9 +46,8 @@ Api (解析 .轉換 .轉成protobuf .傳到MQ)
 [testCouOneP.py]|美盤減一（線上使用）
 [testHcFunctionP.py]|冰球執行檔（線上使用）
 [testBSzf.py]|美棒冰球讓分Func（線上使用）
-[testBSds.py]|美球冰球大小Func（線上使用）
-[testBsFunctionP.py]|美棒執行檔（未測試）
-[testHCzf.py]|冰球讓分func（未測試）
+[testBSds.py]|美棒大小Func（線上使用）
+[testBsMixFunctionP.py]|美棒執行檔 (線上使用)
 [bsFunctionP.py]|冰球執行檔（已未使用）
 [bskFunctionP.py]|籃球執行檔（已未使用）
 [BKDS.py]|籃球大小Func(已未使用)
