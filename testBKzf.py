@@ -68,7 +68,7 @@ def calBKzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe):
     if value == 0:
         ## 待確認
         if 500 <= ans < 675 :
-            newKey = str(abs(int(key) - 2))
+            newKey = str(abs(int(key) - 3))
             newValue = ans -600
         elif 300 <= ans <= 475:
             newKey = str(abs(int(key) - 2))
@@ -173,15 +173,15 @@ def calBKzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe):
         a = '0+0'
     # print(h,a)
     # print(h , a ,str(homeDe) ,str(awayDe))
-    return  h , a ,str(homeDe) ,str(awayDe)
+    return  str(h) , str(a) ,str(homeDe) ,str(awayDe)
 
 # if __name__ == '__main__':
 
 #     gameType ='full'
-#     homeL = '-14.5'
-#     awayL = '+14.5'
-#     homeO = '1.5'
-#     awayO = '2.51'
+#     homeL = '-0.0'
+#     awayL = '+0.0'
+#     homeO = '1.95'
+#     awayO = '1.95'
 #     homeDe = '0'
 #     awayDe = '0'
 #     calBKzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe)

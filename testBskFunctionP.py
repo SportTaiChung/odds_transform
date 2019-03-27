@@ -53,7 +53,7 @@ def basketball(Data):
         if homeDe == '0' or homeDe == '0.0'  : 
             bsk.de.home='0'
             bsk.de.away='0'  
-            if homeO == '0'  or  homeO == '0.0': 
+            if homeO == '0'  or  homeO == '0.0' or zfBK[0]== '0+0': 
                 bsk.twZF.homeZF.odds="0"
                 bsk.twZF.awayZF.odds="0"  
             else :
@@ -71,7 +71,7 @@ def basketball(Data):
         
         dsBK = testBKds.calBKds(dsline,over,under)
         bsk.twDS.line=dsBK
-        if over ==  '0' or over ==  "0.0" :
+        if over ==  '0' or over ==  "0.0" or '0+0' == dsBK :
             bsk.twDS.over="0"
             bsk.twDS.under="0"
         else :

@@ -1,5 +1,4 @@
-
-
+from sendMQ import telegramBot
 
 def calBSds(gameClass,line,over,under):
     if over != '0' :
@@ -82,13 +81,16 @@ def calBSds(gameClass,line,over,under):
             newKey = str(int(key)+2)
             newValue = 400 +ans                                                 
     elif value == -100 :
-        if 200 <= ans <= 375 :
+        if 375 < ans <= 575 :
+            newKey = str(abs(int(key) - 2))
+            newValue = ans -500
+        elif 200 <= ans <= 375 :
             newKey = str(abs(int(key) - 1))
             newValue = ans -300
         elif 0 < ans < 200 :
             newKey = key
             newValue = ans -100
-        elif -100 <= ans < 200 :
+        elif -100 <= ans <=  0 :
             newKey = key
             newValue = ans 
         elif -300 <= ans < -100 :
@@ -114,18 +116,23 @@ def calBSds(gameClass,line,over,under):
             newKey = str(int(key)+2)
             newValue = 400 +ans                                                             
 
+    try :
+        if '-' in str(newValue) :
+            newValue = str(newValue)
+        else :
+            newValue = '+' +  str(newValue)
+        L = newKey+newValue
+    except :
+        telegramBot("BSds Mapping錯誤"+","+str(line)+","+str(over)+","+str(under))
+        L = '0+0'
 
-    if '-' in str(newValue) :
-        newValue = str(newValue)
-    else :
-        newValue = '+' +  str(newValue)
     # print(newKey+newValue)
-    L = newKey+newValue
-    return L 
+        
+    return str(L) 
 
 # if __name__ == '__main__':
-#     gameClass = 'hockey'
-#     line= "7.0"
-#     over= "1.724"
-#     under= "2.21"
-#     print(calBSds(gameClass,line,over,under))
+#     gameClass = 'mlb'
+#     line= "12.5"
+#     over= "4.61"
+#     under= "1.217"
+#     calBSds(gameClass,line,over,under)

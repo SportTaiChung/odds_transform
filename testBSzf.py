@@ -57,10 +57,10 @@ def calBSzf(gameClass,gameType,homeL,awayL,homeO,awayO,homeDe,awayDe):
         awayO = 0
 
     # print(h ,a , homeO ,awayO ,homeDe ,awayDe)
-    return h ,a ,str(homeDe),str(awayDe), str(homeO),str(awayO)
+    return str(h) ,str(a) ,str(homeDe),str(awayDe), str(homeO),str(awayO)
         
 # if __name__ == '__main__':
-#     gameClass ='mlb'
+#     gameClass ='hockey'
 #     gameType ='full'
 #     homeL = '+1.5'
 #     awayL = '-1.5'

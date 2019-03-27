@@ -26,7 +26,7 @@ def baseballMix(Data):
         # print(line,over,under)
         dsBS = testBSds.calBSds(gameClass,line,over,under)
         bs.twDS.line=dsBS
-        if over ==  '0' or over ==  "0.0" :
+        if over ==  '0' or over ==  "0.0" or dsBS=='0+0':
             bs.twDS.over="0"
             bs.twDS.under="0"
         else :
@@ -42,7 +42,7 @@ def baseballMix(Data):
                 zfBS1 = testBSde.calBSde(gameType,homeDe,awayDe)
                 bs.twZF.homeZF.line=zfBS1[0]
                 bs.twZF.awayZF.line=zfBS1[1]
-                if homeDe == '0' : 
+                if homeDe == '0'  or zfBS1[0] == '0+0':
                     bs.twZF.homeZF.odds="0"
                     bs.twZF.awayZF.odds="0" 
                     bs.de.home='0'

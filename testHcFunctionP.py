@@ -7,7 +7,6 @@ import numpy as np
 import json  
 import copy
 # sys.stdout=io.TextIOWrapper(sys.stdout.buffer,encoding='utf8')
-import testHCzf
 import testBSzf
 import testBSds
 
@@ -52,7 +51,7 @@ def hockey(Data):
                 hc.twZF.awayZF.line=zfBS[1]
                 
                 ## 如果獨贏為0 讓分獨贏都關 因為算是需要讓分及獨贏缺一不可
-                if homeDe == '0' : 
+                if homeDe == '0' or zfBS[0] == '0+0' : 
                     hc.twZF.homeZF.odds="0"
                     hc.twZF.awayZF.odds="0" 
                     hc.de.home='0'

@@ -60,7 +60,7 @@ def calBSde(gameType,homeDe,awayDe):
         telegramBot("BSdeMapping錯誤"+","+str(gameType)+","+str(homeDe)+","+str(awayDe))
 
     # print(h,a,str(homeDe),str(awayDe))
-    return h, a, str(homeDe), str(awayDe)
+    return str(h), str(a), str(homeDe), str(awayDe)
 
 # if __name__ == '__main__':
 #     gameType ='full'

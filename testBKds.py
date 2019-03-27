@@ -1,5 +1,4 @@
-
-
+from sendMQ import telegramBot
 
 def calBKds(line,over,under):
     
@@ -36,7 +35,7 @@ def calBKds(line,over,under):
             percent = 25 * int(move/25) +25
     # print(percent)
 
-   
+    # print(value,percent)
     if over < under :
         ans = value-percent 
     else :
@@ -45,7 +44,10 @@ def calBKds(line,over,under):
 
 
     if value == 0:
-        if 300 <= ans <= 475:
+        if 500 <= ans < 675 :
+            newKey = str(abs(int(key) - 3))
+            newValue = ans -600
+        elif 300 <= ans <= 475:
             newKey = str(abs(int(key) - 2))
             newValue = ans -400
         elif 100 <= ans <300:
@@ -61,13 +63,16 @@ def calBKds(line,over,under):
             newKey = str(int(key)+2)
             newValue = 400 +ans 
     else :
-        if 200 <= ans <= 375 :
+        if 375 < ans <= 575 :
+            newKey = str(abs(int(key) - 2))
+            newValue = ans -500
+        elif 200 <= ans <= 375 :
             newKey = str(abs(int(key) - 1))
             newValue = ans -300
         elif 0 < ans < 200 :
             newKey = key
             newValue = ans -100
-        elif -100 <= ans < 200 :
+        elif -100 <= ans <= 0 :
             newKey = key
             newValue = ans 
         elif -300 <= ans < -100 :
@@ -76,20 +81,31 @@ def calBKds(line,over,under):
         elif -500 <= ans < -300 :
             newKey = str(int(key)+2)
             newValue = 400 +ans 
-     
-    if '-' in str(newValue) :
-        newValue = str(newValue)
-    else :
-        newValue = '+' +  str(newValue)
+        elif -700 <= ans < -500 :
+            newKey = str(int(key)+3)
+            newValue = 600 +ans
+        elif -800 <= ans < -700 :
+            newKey = str(int(key)+4)
+            newValue = 800 +ans     
+    try :        
+        if '-' in str(newValue) :
+            newValue = str(newValue)
+        else :
+            newValue = '+' +  str(newValue)
+        L = newKey+newValue
+    except :
+        telegramBot("BKds Mapping錯誤"+","+str(line)+","+str(over)+","+str(under))
+        L = '0+0'
+
     # print(newKey+newValue)
     # print(hL + newKey+newValue)
     # print(aL + newKey+newValue)
-    L = newKey+newValue
-    return L 
+
+    return str(L) 
 
 # if __name__ == '__main__':
 
-#     line= "230.5"
-#     over= "2.11"
-#     under= "1.78"
-#     print(calBKds(line,over,under))
+#     line= "226.5"
+#     over= "1.97"
+#     under= "1.917"
+#     calBKds(line,over,under)
