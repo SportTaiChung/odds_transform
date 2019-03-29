@@ -60,13 +60,13 @@ def calBSzf(gameClass,gameType,homeL,awayL,homeO,awayO,homeDe,awayDe):
     return str(h) ,str(a) ,str(homeDe),str(awayDe), str(homeO),str(awayO)
         
 # if __name__ == '__main__':
-#     gameClass ='hockey'
+#     gameClass ='mlb'
 #     gameType ='full'
 #     homeL = '+1.5'
 #     awayL = '-1.5'
-#     homeO = '3.1'
-#     awayO = '1.425'
-#     homeDe = '2.13'
-#     awayDe = '1.819'
+#     homeO = '1.55'
+#     awayO = '2.62'
+#     homeDe = '1.27'
+#     awayDe = '4.21'
 #     calBSzf(gameClass,gameType,homeL,awayL,homeO,awayO,homeDe,awayDe)
  

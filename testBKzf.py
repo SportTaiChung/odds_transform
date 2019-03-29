@@ -116,59 +116,61 @@ def calBKzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe):
             newValue = str(newValue)
         else :
             newValue = '+' +  str(newValue)
-    except :
-        telegramBot("BKzf Mapping錯誤"+","+str(gameType)+","+str(homeDe)+","+str(awayDe)+","+str(homeL)+","+str(awayL)+","+str(homeO)+","+str(awayO))
 
-    # print(newValue)
-        
-    if homeDe != 0.0 :
-        if homeDe < awayDe :
-            hL = '-'
-            aL = '+'
-        elif homeDe > awayDe :
-            hL = '+'
-            aL = '-'
+        # print(newValue)
+            
+        if homeDe != 0.0 :
+            if homeDe < awayDe :
+                hL = '-'
+                aL = '+'
+            elif homeDe > awayDe :
+                hL = '+'
+                aL = '-'
+            else :
+                hL = homeL[0]
+                aL = awayL[0]
         else :
-            hL = homeL[0]
-            aL = awayL[0]
-    else :
-        if homeO != 0.0 :
-            hL = homeL[0]
-            aL = awayL[0] 
+            if homeO != 0.0 :
+                hL = homeL[0]
+                aL = awayL[0] 
 
-    # print(newKey+newValue)
-    # print(hL + newKey+newValue)
-    # print(aL + newKey+newValue)
+        # print(newKey+newValue)
+        # print(hL + newKey+newValue)
+        # print(aL + newKey+newValue)
 
 
-    ## 沒有 0+35
-    if '+' in newValue and newKey == '0' :
-        if newKey+newValue != '0+0':
-            newValue = newValue.replace('+','-')
-        
-
-    # print(hL + newKey+newValue)
-    # print(aL + newKey+newValue)
-
-    ## 全場沒有 0-
-    if 'full' in gameType :
-        if '-' in newValue and newKey == '0' :
-            newKey = '1'
-            newValue = '+' + str(int(newValue) + 100)
+        ## 沒有 0+35
+        if '+' in newValue and newKey == '0' :
+            if newKey+newValue != '0+0':
+                newValue = newValue.replace('+','-')
             
 
-    # print(newKey+newValue)
-    # print(hL + newKey+newValue)
-    # print(aL + newKey+newValue)
-    # L = newKey+newValue
+        # print(hL + newKey+newValue)
+        # print(aL + newKey+newValue)
 
-    try :
-        h = hL + newKey+newValue
-        a = aL + newKey+newValue
+        ## 全場沒有 0-
+        if 'full' in gameType :
+            if '-' in newValue and newKey == '0' :
+                newKey = '1'
+                newValue = '+' + str(int(newValue) + 100)
+                
+
+        # print(newKey+newValue)
+        # print(hL + newKey+newValue)
+        # print(aL + newKey+newValue)
+        # L = newKey+newValue
+
+        try :
+            h = hL + newKey+newValue
+            a = aL + newKey+newValue
+        except :
+            h = '0+0'
+            a = '0+0'
+        if (newKey+newValue) == '+0':
+            h = '0+0'
+            a = '0+0'
     except :
-        h = '0+0'
-        a = '0+0'
-    if (newKey+newValue) == '+0':
+        telegramBot("BKzf Mapping錯誤"+","+str(gameType)+","+str(homeDe)+","+str(awayDe)+","+str(homeL)+","+str(awayL)+","+str(homeO)+","+str(awayO))
         h = '0+0'
         a = '0+0'
     # print(h,a)
@@ -180,8 +182,8 @@ def calBKzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe):
 #     gameType ='full'
 #     homeL = '-0.0'
 #     awayL = '+0.0'
-#     homeO = '1.95'
-#     awayO = '1.95'
+#     homeO = '1.21'
+#     awayO = '2.85'
 #     homeDe = '0'
 #     awayDe = '0'
 #     calBKzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe)

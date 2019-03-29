@@ -71,7 +71,7 @@ def basketball(Data):
         
         dsBK = testBKds.calBKds(dsline,over,under)
         bsk.twDS.line=dsBK
-        if over ==  '0' or over ==  "0.0" or '0+0' == dsBK :
+        if over ==  '0' or over ==  "0.0" or  dsBK == '0+0' :
             bsk.twDS.over="0"
             bsk.twDS.under="0"
         else :
@@ -86,6 +86,7 @@ def basketball(Data):
     data = datas.SerializeToString()  #變成byte
     return data
     
+
 
 
 

@@ -2,13 +2,19 @@ import mapping
 from sendMQ import telegramBot
 def calBSde(gameType,homeDe,awayDe):
 
-    if homeDe != '0' :
-        homeDe = round((float(homeDe)-1),2)
-        awayDe = round((float(awayDe)-1),2)
-    else :
+    try :
+        if homeDe != '0' :
+            homeDe = round((float(homeDe)-1),2)
+            awayDe = round((float(awayDe)-1),2)
+        else :
+            homeDe = float('0')
+            awayDe = float('0')
+    except :
         homeDe = float('0')
         awayDe = float('0')
     
+
+        
     # 較小的獨贏 為smallDe
     if homeDe < awayDe :
         smallDe = homeDe 
