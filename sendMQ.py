@@ -20,11 +20,11 @@ def telegramBot(message):
     bot.send_message(chat_id=id, text=message) 
 
 # 傳送資料到ＭＱ
-def send_MQ(DATA,que,host,user,ps):     #資料送rabbitMQ
+def send_MQ(DATA,que,host,user,pw):     #資料送rabbitMQ
 
     # cred = pika.PlainCredentials('AE86', '200p')
     # cred = pika.PlainCredentials('GTR', '565p')  #正式
-    cred = pika.PlainCredentials(user,ps)
+    cred = pika.PlainCredentials(user,pw)
     params = pika.ConnectionParameters(
         # host='10.0.1.198',
         # host='rmq.nba1688.net',
@@ -40,8 +40,24 @@ def send_MQ(DATA,que,host,user,ps):     #資料送rabbitMQ
                           routing_key='',
                           body=DATA
                           )
-    # print("sent")
-
     connection.close()
 
 
+# 本機傳到正式ＭＱ
+def hkMQ(DATA,que,host,user,pw,port):     #資料送rabbitMQ
+
+    cred = pika.PlainCredentials(user,pw)
+    params = pika.ConnectionParameters(
+        port =port,
+        host = host,
+        virtual_host='/',
+        credentials=cred,
+        socket_timeout=3
+    )
+    connection = pika.BlockingConnection(params)
+    channel = connection.channel()
+    channel.basic_publish(exchange='',
+                          routing_key=que,
+                          body=DATA
+                          )
+    connection.close()
