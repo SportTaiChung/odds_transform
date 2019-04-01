@@ -48,11 +48,6 @@ Api (解析 .轉換 .轉成protobuf .傳到MQ)
 [testBSzf.py]|美棒冰球讓分Func（線上使用）
 [testBSds.py]|美棒大小Func（線上使用）
 [testBsMixFunctionP.py]|美棒執行檔 (線上使用)
-[bsFunctionP.py]|冰球執行檔（已未使用）
-[bskFunctionP.py]|籃球執行檔（已未使用）
-[BKDS.py]|籃球大小Func(已未使用)
-[BKZF.py]|籃球讓分Func(已未使用)
-[couOneP.py]|美盤減一（已未使用）
 [gun.conf]| gevent 設定檔
 [mapping.py]|mapping
 [sendMQ.py]|sendMQfunction
