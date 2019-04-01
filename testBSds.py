@@ -10,10 +10,10 @@ def calBSds(gameClass,line,over,under):
         over = float('0')
         under = float('0')
 
-    if gameClass == 'mlb' :
-        w = 30
-    elif gameClass == 'hockey' :
+    if gameClass == 'hockey' :
         w = 25
+    else :
+        w = 30
     water = abs((over + under)/2-over)*(100/w*100)
     move = int(water)
     # print(water)
@@ -126,13 +126,13 @@ def calBSds(gameClass,line,over,under):
         telegramBot("BSds Mapping錯誤"+","+str(line)+","+str(over)+","+str(under))
         L = '0+0'
 
-    # print(newKey+newValue)
+   
         
     return str(L) 
 
 # if __name__ == '__main__':
 #     gameClass = 'mlb'
-#     line= "12.5"
-#     over= "4.61"
-#     under= "1.217"
+#     line= "10.5"
+#     over= "6.02"
+#     under= "1.05"
 #     calBSds(gameClass,line,over,under)

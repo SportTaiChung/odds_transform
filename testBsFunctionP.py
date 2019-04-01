@@ -18,7 +18,7 @@ def baseball(Data):
 
 
         ## 讓分
-        zfBS = testBSzf.calBSzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe)
+        zfBS = testBSzf.calBSzf(gameClass,gameType,homeL,awayL,homeO,awayO,homeDe,awayDe)
         bs.twZF.homeZF.line=zfBS[0]
         bs.twZF.awayZF.line=zfBS[1]
         ## 如果獨贏為0 讓分獨贏都關 因為算是需要讓分及獨贏缺一不可

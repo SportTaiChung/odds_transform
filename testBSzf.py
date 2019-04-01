@@ -1,4 +1,5 @@
 import mapping
+import testBSde
 from sendMQ import telegramBot
 
 ## 冰球棒球都是用亞洲賠率(不加本金)計算 
@@ -50,23 +51,26 @@ def calBSzf(gameClass,gameType,homeL,awayL,homeO,awayO,homeDe,awayDe):
         a = aL + L
 
     except :
-        telegramBot("BSzfMapping錯誤"+","+str(gameType)+","+str(homeDe)+","+str(awayDe)+","+str(homeO)+","+str(awayO))
-        h = '0+0'
-        a = '0+0'
-        homeO = 0
-        awayO = 0
+        # print('no')
+        telegramBot("BSzfMapping錯誤"+","+str(gameType)+","+str(homeL)+","+str(awayL)+","+str(homeO)+","+str(awayO)+","+str(homeDe)+","+str(awayDe))
+        deCalzf = testBSde.calBSde(gameClass,gameType,homeDe+1,awayDe+1)
+        h = deCalzf[0]
+        a = deCalzf[0]
+  
 
     # print(h ,a , homeO ,awayO ,homeDe ,awayDe)
     return str(h) ,str(a) ,str(homeDe),str(awayDe), str(homeO),str(awayO)
         
 # if __name__ == '__main__':
-#     gameClass ='mlb'
+#     gameClass ='hockey'
 #     gameType ='full'
-#     homeL = '+1.5'
-#     awayL = '-1.5'
-#     homeO = '1.55'
-#     awayO = '2.62'
-#     homeDe = '1.27'
-#     awayDe = '4.21'
+#     homeL = '-1.5'
+#     awayL = '+1.5'
+#     homeO = '3.14'
+#     awayO = '1.42'
+#     homeDe = '2.09'
+#     awayDe = '1.85'
 #     calBSzf(gameClass,gameType,homeL,awayL,homeO,awayO,homeDe,awayDe)
  
+
+# 1.09,0.85,2.14,0.42

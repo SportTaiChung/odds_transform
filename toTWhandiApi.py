@@ -42,10 +42,9 @@ def trans():
             out = testCutOneP.justCutOne_fun(Data)
         elif 'hockey'  in game : 
             out = testHcFunctionP.hockey(Data)
-        elif 'mlb'  in game :
+        elif 'mlb' or 'npb'  or  'kbo' in game :
             out = testBsMixFunction.baseballMix(Data)
-        # elif 'mlb' or 'npb' or 'cpbl' or  'kbo' or 'hockey' in game :
-        #     out = bsFunctionP.baseball_fun(Data)
+ 
 
         
         outData = APHDC_pb2.ApHdcArr()
@@ -65,7 +64,7 @@ def trans():
                     que = 'test_'+ous+'_FB'
                 elif 'basketball' in ouc :
                     que = 'test_'+ous+'_BK'
-                elif 'mlb' in ouc:
+                elif 'mlb' or 'npb'  or  'kbo'in ouc:
                     que = 'test_'+ous+'_BS'
                 elif 'soccer' == ouc :
                     que = 'test_'+ous+'_SC'            
@@ -82,14 +81,17 @@ def trans():
                     que = ous+'_SC'
 
 
-        # sendMQ.send_MQ(out,'Apple','rabbit.avia520.com','AE86', '200p')
-        sendMQ.send_MQ(out,que,'10.0.1.198','GTR', '565p')
-        return out
+        sendMQ.hkMQ(out,'test_PS38_BS','rmq.nba1688.net','GTR', '565p','5673')
+        # sendMQ.send_MQ(out,que,'10.0.1.198','GTR', '565p')
+        return out        
+        
+            
     except Exception as e :
-        telegramBot("傳送MQ錯誤"+","+str(e))
+        telegramBot(str(e))
 
 
+    
 if __name__ == '__main__':
-    # app.run(host='127.0.0.1', port=5004, debug=True ,threaded=True)
-    app.run(host='0.0.0.0', port=5004, debug=True ,threaded=True)
+    app.run(host='127.0.0.1', port=5004, debug=True ,threaded=True)
+    # app.run(host='0.0.0.0', port=5004, debug=True ,threaded=True)
 

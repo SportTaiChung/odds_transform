@@ -100,12 +100,12 @@ def calBKds(line,over,under):
     # print(newKey+newValue)
     # print(hL + newKey+newValue)
     # print(aL + newKey+newValue)
-
+    # print(L)
     return str(L) 
 
 # if __name__ == '__main__':
 
 #     line= "226.5"
-#     over= "1.97"
-#     under= "1.917"
+#     over= "3.02"
+#     under= "1.9"
 #     calBKds(line,over,under)

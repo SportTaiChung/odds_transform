@@ -1,4 +1,3 @@
-import cutOneP
 from sendMQ import telegramBot
 
 def calBKzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe):
@@ -182,8 +181,8 @@ def calBKzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe):
 #     gameType ='full'
 #     homeL = '-0.0'
 #     awayL = '+0.0'
-#     homeO = '1.21'
-#     awayO = '2.85'
+#     homeO = '2.66'
+#     awayO = '1.46'
 #     homeDe = '0'
 #     awayDe = '0'
 #     calBKzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe)

@@ -23,7 +23,6 @@ def hockey(Data):
             notNHLData = enData.aphdc
             for no in notNHLData :
                 no
-            # sendData.append(copy.deepcopy(no))
         elif '總得分' in hc.information.league :
             # print(hc.information.league)
             notNHL.append(hc)
@@ -33,7 +32,6 @@ def hockey(Data):
             notNHLData = enData.aphdc
             for no in notNHLData :
                 no
-            # sendData.append(copy.deepcopy(no))
         else:
             gameType = hc.game_type
             gameClass = hc.game_class
@@ -41,9 +39,16 @@ def hockey(Data):
             awayL = hc.usZF.awayZF.line
             homeO = hc.usZF.homeZF.odds
             awayO = hc.usZF.awayZF.odds
-            homeDe = hc.de.home
-            awayDe = hc.de.away
-            
+            try :
+                homeDe = hc.de.home
+                awayDe = hc.de.away
+                if homeDe =='0.0' or homeDe == '':
+                    homeDe ='0'
+                    awayDe ='0'       
+            except :
+                    homeDe ='0'
+                    awayDe ='0'                 
+                    
             # zfBS = testHCzf.calBSzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe)
             if 'full' in gameType :
                 zfBS = testBSzf.calBSzf(gameClass,gameType,homeL,awayL,homeO,awayO,homeDe,awayDe)
@@ -51,7 +56,7 @@ def hockey(Data):
                 hc.twZF.awayZF.line=zfBS[1]
                 
                 ## 如果獨贏為0 讓分獨贏都關 因為算是需要讓分及獨贏缺一不可
-                if homeDe == '0' or zfBS[0] == '0+0' : 
+                if homeDe == '0'  or zfBS[0] == '0+0' : 
                     hc.twZF.homeZF.odds="0"
                     hc.twZF.awayZF.odds="0" 
                     hc.de.home='0'
@@ -77,7 +82,7 @@ def hockey(Data):
                 line = hc.usDS.line
                 over = hc.usDS.over
                 under = hc.usDS.under
-                if over == "0" or over == "0.0":
+                if float(over) == "0.0":
                     hc.twDS.line= '0+0'
                     hc.twDS.over= '0'
                     hc.twDS.under= '0'
@@ -90,10 +95,6 @@ def hockey(Data):
                     hc.twDS.line= line
                     hc.twDS.over= dsBS[0]
                     hc.twDS.under= dsBS[1]
-                # dsBS = testBSds.calBSds(gameClass,line,over,under)
-                # hc.twDS.line= dsBS
-                # hc.twDS.over= '0.94'
-                # hc.twDS.under= '0.94'
        
         sendData.append(copy.deepcopy(hc))                
 
