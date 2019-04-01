@@ -2,13 +2,9 @@
 美盤轉台盤 API
 
 * 籃球 : testBskFunctionP.py
-* 籃球 (多玩法) : testCutOneP.py
-* 棒球 : testBeforeSeason.py(賽季前)
-* 棒球大小 : testBSds.py (未上線)
+* 棒球 : testBsMixFunction.py
+* 冰球 : testHcFunctionP.py
 * 美足 : testCutOneP.py
-* 冰球 (含加時): testBSzf.py
-* 冰球 : testCutOneP.py
-* 冰球大小 : testBSds.py
 * 足球 : testCutOneP.py
 
 Mehtod: POST
@@ -22,7 +18,7 @@ API URL: http://txpywapi.nice666.net:5004/transWithProtobuf
 cd toTwP
 python toTWhandiApi.py & >/dev/null 2>&1
 或是 (目前使用↓)
-gunicorn -w 2 -k gevent -b 0.0.0.0:5004 toTWhandiApi:app & >/dev/null 2>&1
+gunicorn -w 3 -k gevent -b 0.0.0.0:5004 toTWhandiApi:app & >/dev/null 2>&1
 
 ```
 ## 內容
@@ -52,6 +48,5 @@ Api (解析 .轉換 .轉成protobuf .傳到MQ)
 [mapping.py]|mapping
 [sendMQ.py]|sendMQfunction
 [toTWhandiApi.py]|Main Api
-
 
 - - - - - -
