@@ -9,7 +9,7 @@ def seasonMLB(Data):
         gameType = mlb.game_type
         homeDe = mlb.de.home
         awayDe = mlb.de.away
-        zfMLB = testBSde.calBSde(gameType,homeDe,awayDe)
+        zfMLB = testBSde.calBSde(gameClass,gameType,homeDe,awayDe)
         mlb.twZF.homeZF.line=zfMLB[0]
         mlb.twZF.awayZF.line=zfMLB[1]
         if homeDe == '0' : 
