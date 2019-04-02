@@ -11,7 +11,6 @@ import testHcFunctionP
 import testBskFunctionP
 import testBsFunctionP
 import testCutOneP
-import testBeforeSeason
 import testBsMixFunction
 
 
@@ -64,10 +63,10 @@ def trans():
                     que = 'test_'+ous+'_FB'
                 elif 'basketball' in ouc :
                     que = 'test_'+ous+'_BK'
+                elif 'soccer' == ouc :
+                    que = 'test_'+ous+'_SC'                   
                 elif 'mlb' or 'npb'  or  'kbo'in ouc:
                     que = 'test_'+ous+'_BS'
-                elif 'soccer' == ouc :
-                    que = 'test_'+ous+'_SC'            
             else:
                 if 'hockey' == ouc:
                     que = ous+'_HC'
@@ -75,14 +74,15 @@ def trans():
                     que = ous+'_FB'
                 elif 'basketball' in ouc :
                     que = ous+'_BK'
-                elif 'mlb' in ouc:
-                    que = ous+'_BS'
                 elif 'soccer' == ouc :
-                    que = ous+'_SC'
+                    que = ous+'_SC'                
+                elif 'mlb'  or 'npb'  or  'kbo' in ouc:
+                    que = ous+'_BS'
 
 
-        sendMQ.hkMQ(out,'test_PS38_BS','rmq.nba1688.net','GTR', '565p','5673')
-        # sendMQ.send_MQ(out,que,'10.0.1.198','GTR', '565p')
+
+        # sendMQ.hkMQ(out,'test_PS38_BS','rmq.nba1688.net','GTR', '565p','5673')
+        sendMQ.send_MQ(out,que,'10.0.1.198','GTR', '565p')
         return out        
         
             
@@ -92,6 +92,6 @@ def trans():
 
     
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=5004, debug=True ,threaded=True)
-    # app.run(host='0.0.0.0', port=5004, debug=True ,threaded=True)
+    # app.run(host='127.0.0.1', port=5004, debug=True ,threaded=True)
+    app.run(host='0.0.0.0', port=5004, debug=True ,threaded=True)
 
