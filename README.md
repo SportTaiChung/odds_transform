@@ -34,7 +34,6 @@ Api (解析 .轉換 .轉成protobuf .傳到MQ)
 ----|----
 [APHDC.proto]|protobuf格式
 [APHDC_pb2]|protoc --python_out=. APHDC.proto  產生
-[testBeforeSeason.py]|專用賽季前美棒執行檔（線上使用）
 [testBSde.py]|專用棒球用獨贏算讓分Func（線上使用）
 [testBskFunctionP.py]|籃球執行檔（線上使用）
 [testBKds.py]|籃球大小Func（線上使用）
