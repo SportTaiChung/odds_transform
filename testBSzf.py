@@ -46,30 +46,34 @@ def calBSzf(gameClass,gameType,homeL,awayL,homeO,awayO,homeDe,awayDe):
         aL = '-'
     ## 如果沒有mapping到就關盤
     try :
-        L = mapping.bsMap(percent/100)
-        h = hL + L
-        a = aL + L
+        try :
+            L = mapping.bsMap(percent/100)
+            h = hL + L
+            a = aL + L
 
+        except :
+            # print('no')
+            deCalzf = testBSde.calBSde(gameClass,gameType,homeDe+1,awayDe+1)
+            h = deCalzf[0]
+            a = deCalzf[1]
     except :
-        # print('no')
         telegramBot("BSzfMapping錯誤"+","+str(gameType)+","+str(homeL)+","+str(awayL)+","+str(homeO)+","+str(awayO)+","+str(homeDe)+","+str(awayDe))
-        deCalzf = testBSde.calBSde(gameClass,gameType,homeDe+1,awayDe+1)
-        h = deCalzf[0]
-        a = deCalzf[0]
+        h = '0+0'
+        a = '0+0'
   
 
     # print(h ,a , homeO ,awayO ,homeDe ,awayDe)
     return str(h) ,str(a) ,str(homeDe),str(awayDe), str(homeO),str(awayO)
         
 # if __name__ == '__main__':
-#     gameClass ='hockey'
+#     gameClass ='mlb'
 #     gameType ='full'
 #     homeL = '-1.5'
 #     awayL = '+1.5'
-#     homeO = '3.14'
-#     awayO = '1.42'
-#     homeDe = '2.09'
-#     awayDe = '1.85'
+#     homeO = '2.6'
+#     awayO = '1.564'
+#     homeDe = '1.97'
+#     awayDe = '1.95'
 #     calBSzf(gameClass,gameType,homeL,awayL,homeO,awayO,homeDe,awayDe)
  
 
