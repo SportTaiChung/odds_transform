@@ -49,3 +49,8 @@ Api (解析 .轉換 .轉成protobuf .傳到MQ)
 [toTWhandiApi.py]|Main Api
 
 - - - - - -
+
+
+
+## 流程圖
+![image](api.png)
