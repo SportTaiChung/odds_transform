@@ -12,6 +12,8 @@ def calBSds(gameClass,line,over,under):
 
     if gameClass == 'hockey' :
         w = 25
+    elif gameClass == 'mlb' :
+        w = 16
     else :
         w = 30
     water = abs((over + under)/2-over)*(100/w*100)
