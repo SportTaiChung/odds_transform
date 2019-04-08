@@ -9,14 +9,16 @@ def calBSzf(gameClass,gameType,homeL,awayL,homeO,awayO,homeDe,awayDe):
         homeO = round((float(homeO)-1),2)
         awayO = round((float(awayO)-1),2)
     else :
-        homeO = "0"
-        awayO = "0"
+        homeO = 0
+        awayO = 0
     if homeDe != '0' :
         homeDe = round((float(homeDe)-1),2)
         awayDe = round((float(awayDe)-1),2)
     else :
-        homeDe = "0"
-        awayDe = "0"
+        homeDe = 0
+        awayDe = 0
+
+
 
     limit1=(awayDe*(100-((100-(100*awayDe))/(awayO-awayDe))))-((100-(100*awayDe))/(awayO-awayDe))
     limit2=((homeO*((100-(100*homeDe))/(homeO-homeDe)))-(100-((100-(100*homeDe))/(homeO-homeDe))))*-1
@@ -52,7 +54,6 @@ def calBSzf(gameClass,gameType,homeL,awayL,homeO,awayO,homeDe,awayDe):
             a = aL + L
 
         except :
-            # print('no')
             deCalzf = testBSde.calBSde(gameClass,gameType,homeDe+1,awayDe+1)
             h = deCalzf[0]
             a = deCalzf[1]
@@ -68,12 +69,12 @@ def calBSzf(gameClass,gameType,homeL,awayL,homeO,awayO,homeDe,awayDe):
 # if __name__ == '__main__':
 #     gameClass ='mlb'
 #     gameType ='full'
-#     homeL = '-1.5'
-#     awayL = '+1.5'
-#     homeO = '2.6'
-#     awayO = '1.564'
-#     homeDe = '1.97'
-#     awayDe = '1.95'
+#     homeL = '+1.5'
+#     awayL = '-1.5'
+#     homeO = '1.724'
+#     awayO = '2.25'
+#     homeDe = '1.471'
+#     awayDe = '2.94'
 #     calBSzf(gameClass,gameType,homeL,awayL,homeO,awayO,homeDe,awayDe)
  
 
