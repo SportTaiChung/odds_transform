@@ -62,7 +62,7 @@ def basketball(Data):
         else :
             bsk.de.home=zfBK[2]
             bsk.de.away=zfBK[3]
-            if homeO == '0' or  homeO == '0.0': 
+            if homeO == '0' or  homeO == '0.0' or zfBK[0]== '0+0': 
                 bsk.twZF.homeZF.odds='0'
                 bsk.twZF.awayZF.odds='0' 
             else :
