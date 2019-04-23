@@ -12,7 +12,7 @@ def calBKzf(source,gameType,homeL,awayL,homeO,awayO,homeDe,awayDe):
             awayO = round((float(awayO)-1),2)
 
         try :
-            if  homeDe == '0' or '' :
+            if  homeDe == '0' or homeDe == '' :
                 homeDe = float('0.0')
                 awayDe = float('0.0')
             else :
