@@ -9,7 +9,6 @@ import sendMQ
 import APHDC_pb2
 import testHcFunctionP
 import testBskFunctionP
-import testBsFunctionP
 import testCutOneP
 import testBsMixFunction
 
@@ -29,21 +28,23 @@ def trans():
         enData = APHDC_pb2.ApHdcArr()
         enData.ParseFromString(data)
         Data = enData.aphdc
-        ## 球賽對應function
-        for en in Data :
-            game = en.game_class
+        try :
+            ## 球賽對應function
+            for en in Data :
+                game = en.game_class
 
-        if 'basketball' in game :
-            out = testBskFunctionP.basketball(Data)
-        elif 'football' in game :
-            out = testCutOneP.justCutOne_fun(Data) 
-        elif 'soccer' in game :
-            out = testCutOneP.justCutOne_fun(Data)
-        elif 'hockey'  in game : 
-            out = testHcFunctionP.hockey(Data)
-        elif 'mlb' or 'npb'  or  'kbo' in game :
-            out = testBsMixFunction.baseballMix(Data)
- 
+            if 'basketball' in game :
+                out = testBskFunctionP.basketball(Data)
+            elif 'football' in game :
+                out = testCutOneP.justCutOne_fun(Data) 
+            elif 'soccer' in game :
+                out = testCutOneP.justCutOne_fun(Data)
+            elif 'hockey'  in game : 
+                out = testHcFunctionP.hockey(Data)
+            elif 'mlb' or 'npb'  or  'kbo' in game :
+                out = testBsMixFunction.baseballMix(Data)
+        except :
+            telegramBot(str(data))
 
         
         outData = APHDC_pb2.ApHdcArr()

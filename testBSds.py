@@ -1,6 +1,6 @@
 from sendMQ import telegramBot
 
-def calBSds(gameClass,line,over,under):
+def calBSds(source,gameClass,line,over,under):
     if over != '0' :
         line = str(float(line))
         over = round((float(over)-1),2)
@@ -117,24 +117,25 @@ def calBSds(gameClass,line,over,under):
         elif -500 <= ans <= -500 :
             newKey = str(int(key)+2)
             newValue = 400 +ans                                                             
-
     try :
-        if '-' in str(newValue) :
-            newValue = str(newValue)
-        else :
-            newValue = '+' +  str(newValue)
-        L = newKey+newValue
+        try :
+            if '-' in str(newValue) :
+                newValue = str(newValue)
+            else :
+                newValue = '+' +  str(newValue)
+            L = newKey+newValue
+        except :
+            L = '0+0'
     except :
-        telegramBot("BSds Mapping錯誤"+","+str(line)+","+str(over)+","+str(under))
-        L = '0+0'
+        telegramBot(source+","+"BSds Mapping錯誤"+","+str(line)+","+str(over)+","+str(under))
 
-   
         
     return str(L) 
 
 # if __name__ == '__main__':
+#     source = 'PS38'
 #     gameClass = 'mlb'
 #     line= "10.5"
 #     over= "6.02"
 #     under= "1.05"
-#     calBSds(gameClass,line,over,under)
+#     calBSds(source,gameClass,line,over,under)

@@ -1,6 +1,6 @@
 from sendMQ import telegramBot
 
-def calBKzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe):
+def calBKzf(source,gameType,homeL,awayL,homeO,awayO,homeDe,awayDe):
     try :
         if homeO == '0'  :
             homeL = '0.0'
@@ -12,7 +12,7 @@ def calBKzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe):
             awayO = round((float(awayO)-1),2)
 
         try :
-            if  homeDe == '0' :
+            if  homeDe == '0' or '' :
                 homeDe = float('0.0')
                 awayDe = float('0.0')
             else :
@@ -22,7 +22,7 @@ def calBKzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe):
             homeDe = float('0.0')
             awayDe = float('0.0')
     except Exception as e:
-        telegramBot("BKzf錯誤"+","+str(gameType)+","+str(homeDe)+","+str(awayDe)+","+str(homeO)+","+str(awayO)+","+str(e))
+        telegramBot(source+","+"BKzf錯誤"+","+str(gameType)+","+str(homeDe)+","+str(awayDe)+","+str(homeO)+","+str(awayO)+","+str(e))
     # print(homeDe)
 
     water = abs((homeO + awayO)/2-homeO)*(100/8*100)
@@ -111,73 +111,76 @@ def calBKzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe):
             newValue = 800 +ans
     
     try :
-        if '-' in str(newValue) :
-            newValue = str(newValue)
-        else :
-            newValue = '+' +  str(newValue)
-
-        # print(newValue)
-            
-        if homeDe != 0.0 :
-            if homeDe < awayDe :
-                hL = '-'
-                aL = '+'
-            elif homeDe > awayDe :
-                hL = '+'
-                aL = '-'
+        try :
+            if '-' in str(newValue) :
+                newValue = str(newValue)
             else :
-                hL = homeL[0]
-                aL = awayL[0]
-        else :
-            if homeO != 0.0 :
-                hL = homeL[0]
-                aL = awayL[0] 
+                newValue = '+' +  str(newValue)
 
-        # print(newKey+newValue)
-        # print(hL + newKey+newValue)
-        # print(aL + newKey+newValue)
+            # print(newValue)
+                
+            if homeDe != 0.0 :
+                if homeDe < awayDe :
+                    hL = '-'
+                    aL = '+'
+                elif homeDe > awayDe :
+                    hL = '+'
+                    aL = '-'
+                else :
+                    hL = homeL[0]
+                    aL = awayL[0]
+            else :
+                if homeO != 0.0 :
+                    hL = homeL[0]
+                    aL = awayL[0] 
+
+            # print(newKey+newValue)
+            # print(hL + newKey+newValue)
+            # print(aL + newKey+newValue)
 
 
-        ## 沒有 0+35
-        if '+' in newValue and newKey == '0' :
-            if newKey+newValue != '0+0':
-                newValue = newValue.replace('+','-')
-            
-
-        # print(hL + newKey+newValue)
-        # print(aL + newKey+newValue)
-
-        ## 全場沒有 0-
-        if 'full' in gameType :
-            if '-' in newValue and newKey == '0' :
-                newKey = '1'
-                newValue = '+' + str(int(newValue) + 100)
+            ## 沒有 0+35
+            if '+' in newValue and newKey == '0' :
+                if newKey+newValue != '0+0':
+                    newValue = newValue.replace('+','-')
                 
 
-        # print(newKey+newValue)
-        # print(hL + newKey+newValue)
-        # print(aL + newKey+newValue)
-        # L = newKey+newValue
+            # print(hL + newKey+newValue)
+            # print(aL + newKey+newValue)
 
-        try :
-            h = hL + newKey+newValue
-            a = aL + newKey+newValue
+            ## 全場沒有 0-
+            if 'full' in gameType :
+                if '-' in newValue and newKey == '0' :
+                    newKey = '1'
+                    newValue = '+' + str(int(newValue) + 100)
+                    
+
+            # print(newKey+newValue)
+            # print(hL + newKey+newValue)
+            # print(aL + newKey+newValue)
+            # L = newKey+newValue
+
+            try :
+                h = hL + newKey+newValue
+                a = aL + newKey+newValue
+            except :
+                h = '0+0'
+                a = '0+0'
+            if (newKey+newValue) == '+0':
+                h = '0+0'
+                a = '0+0'
         except :
             h = '0+0'
             a = '0+0'
-        if (newKey+newValue) == '+0':
-            h = '0+0'
-            a = '0+0'
     except :
-        telegramBot("BKzf Mapping錯誤"+","+str(gameType)+","+str(homeDe)+","+str(awayDe)+","+str(homeL)+","+str(awayL)+","+str(homeO)+","+str(awayO))
-        h = '0+0'
-        a = '0+0'
+        telegramBot(source+","+"BKzf Mapping錯誤"+","+str(gameType)+","+str(homeDe)+","+str(awayDe)+","+str(homeL)+","+str(awayL)+","+str(homeO)+","+str(awayO))
+
     # print(h,a)
     # print(h , a ,str(homeDe) ,str(awayDe))
     return  str(h) , str(a) ,str(homeDe) ,str(awayDe)
 
 # if __name__ == '__main__':
-
+#     source = 'PS38'
 #     gameType ='full'
 #     homeL = '-0.0'
 #     awayL = '+0.0'
@@ -185,4 +188,4 @@ def calBKzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe):
 #     awayO = '1.46'
 #     homeDe = '0'
 #     awayDe = '0'
-#     calBKzf(gameType,homeL,awayL,homeO,awayO,homeDe,awayDe)
+#     calBKzf(source,gameType,homeL,awayL,homeO,awayO,homeDe,awayDe)

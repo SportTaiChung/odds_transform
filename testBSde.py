@@ -1,6 +1,6 @@
 import mapping
 from sendMQ import telegramBot
-def calBSde(gameClass,gameType,homeDe,awayDe):
+def calBSde(source,gameClass,gameType,homeDe,awayDe):
 
     
     if homeDe != '0' :
@@ -44,33 +44,35 @@ def calBSde(gameClass,gameType,homeDe,awayDe):
         else :
             percent = 5 * int(move/5) +5
     # print(percent/100)
-
     try :
-        # 對照表
-        L = mapping.bsDeMap(percent/100)
+        try :
+            # 對照表
+            L = mapping.bsDeMap(percent/100)
 
-        # 獨贏小的那邊為讓邊
-        if homeDe < awayDe :
-            hL = '-'
-            aL = '+'
-        else :
-            hL = '+'
-            aL = '-'
-        
-        h = hL + L
-        a = aL + L
+            # 獨贏小的那邊為讓邊
+            if homeDe < awayDe :
+                hL = '-'
+                aL = '+'
+            else :
+                hL = '+'
+                aL = '-'
+            
+            h = hL + L
+            a = aL + L
+        except :
+            h = '0+0'
+            a = '0+0'
     except :
-        h = '0+0'
-        a = '0+0'
-        telegramBot("BSdeMapping錯誤"+","+str(gameType)+","+str(homeDe)+","+str(awayDe))
+        telegramBot(source+","+"BSdeMapping錯誤"+","+str(gameType)+","+str(homeDe)+","+str(awayDe))
 
     # print(h,a,str(homeDe),str(awayDe))
     return str(h), str(a), str(homeDe), str(awayDe)
 
 
 # if __name__ == '__main__':
+#     source = 'PS38'
 #     gameClass = 'mlb'
 #     gameType ='full'
 #     homeDe = '1.95'
 #     awayDe = '1.95'
-#     calBSde(gameClass,gameType,homeDe,awayDe)
+#     calBSde(source,gameClass,gameType,homeDe,awayDe)

@@ -1,6 +1,6 @@
 from sendMQ import telegramBot
 
-def calBKds(line,over,under):
+def calBKds(source,line,over,under):
     
     if over == "0" or over =="0.0":
         line = '0.0'
@@ -88,15 +88,16 @@ def calBKds(line,over,under):
             newKey = str(int(key)+4)
             newValue = 800 +ans     
     try :        
-        if '-' in str(newValue) :
-            newValue = str(newValue)
-        else :
-            newValue = '+' +  str(newValue)
-        L = newKey+newValue
+        try :
+            if '-' in str(newValue) :
+                newValue = str(newValue)
+            else :
+                newValue = '+' +  str(newValue)
+            L = newKey+newValue
+        except :
+            L = '0+0'
     except :
-        telegramBot("BKds Mapping錯誤"+","+str(line)+","+str(over)+","+str(under))
-        L = '0+0'
-
+        telegramBot(source+","+"BKds Mapping錯誤"+","+str(line)+","+str(over)+","+str(under))
     # print(newKey+newValue)
     # print(hL + newKey+newValue)
     # print(aL + newKey+newValue)
@@ -104,8 +105,8 @@ def calBKds(line,over,under):
     return str(L) 
 
 # if __name__ == '__main__':
-
+#     source = 'PS38'
 #     line= "226.5"
 #     over= "3.02"
 #     under= "1.9"
-#     calBKds(line,over,under)
+#     calBKds(source,line,over,under)

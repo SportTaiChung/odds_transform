@@ -3,7 +3,7 @@ import testBSde
 from sendMQ import telegramBot
 
 ## 冰球棒球都是用亞洲賠率(不加本金)計算 
-def calBSzf(gameClass,gameType,homeL,awayL,homeO,awayO,homeDe,awayDe):
+def calBSzf(source,gameClass,gameType,homeL,awayL,homeO,awayO,homeDe,awayDe):
 
     if homeO != '0' :
         homeO = round((float(homeO)-1),2)
@@ -49,24 +49,27 @@ def calBSzf(gameClass,gameType,homeL,awayL,homeO,awayO,homeDe,awayDe):
     ## 如果沒有mapping到就關盤
     try :
         try :
-            L = mapping.bsMap(percent/100)
-            h = hL + L
-            a = aL + L
+            try :
+                L = mapping.bsMap(percent/100)
+                h = hL + L
+                a = aL + L
 
+            except :
+                deCalzf = testBSde.calBSde(source,gameClass,gameType,homeDe+1,awayDe+1)
+                h = deCalzf[0]
+                a = deCalzf[1]
         except :
-            deCalzf = testBSde.calBSde(gameClass,gameType,homeDe+1,awayDe+1)
-            h = deCalzf[0]
-            a = deCalzf[1]
+            h = '0+0'
+            a = '0+0'
     except :
-        telegramBot("BSzfMapping錯誤"+","+str(gameType)+","+str(homeL)+","+str(awayL)+","+str(homeO)+","+str(awayO)+","+str(homeDe)+","+str(awayDe))
-        h = '0+0'
-        a = '0+0'
-  
+        telegramBot(source+","+"BSzfMapping錯誤"+","+str(gameType)+","+str(homeL)+","+str(awayL)+","+str(homeO)+","+str(awayO)+","+str(homeDe)+","+str(awayDe))
 
+  
     # print(h ,a , homeO ,awayO ,homeDe ,awayDe)
     return str(h) ,str(a) ,str(homeDe),str(awayDe), str(homeO),str(awayO)
         
 # if __name__ == '__main__':
+#     source = 'PS38'
 #     gameClass ='mlb'
 #     gameType ='full'
 #     homeL = '+1.5'
@@ -75,7 +78,7 @@ def calBSzf(gameClass,gameType,homeL,awayL,homeO,awayO,homeDe,awayDe):
 #     awayO = '2.25'
 #     homeDe = '1.471'
 #     awayDe = '2.94'
-#     calBSzf(gameClass,gameType,homeL,awayL,homeO,awayO,homeDe,awayDe)
+#     calBSzf(source,gameClass,gameType,homeL,awayL,homeO,awayO,homeDe,awayDe)
  
 
 # 1.09,0.85,2.14,0.42
