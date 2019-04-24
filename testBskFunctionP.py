@@ -32,7 +32,7 @@ def basketball(Data):
             dsline = bsk.usDS.line
             over = bsk.usDS.over
             under = bsk.usDS.under
-
+           
             if '_' in league :
                 noCalList.append(bsk)
                 noCal = testCutOneP.justCutOne_fun(noCalList)
@@ -40,7 +40,7 @@ def basketball(Data):
                 enData.ParseFromString(noCal)
                 noCalData = enData.aphdc
                 for no in noCalData :
-                    no
+                    no      
             else :            
                 try :
                     sdA = bsk.sd.home
@@ -58,7 +58,7 @@ def basketball(Data):
                 bsk.twZF.awayZF.line=zfBK[1]
                 
 
-                if homeDe == '0' or homeDe == '0.0'  : 
+                if homeDe == '0' or homeDe == '0.0'  or homeDe =='': 
                     bsk.de.home='0'
                     bsk.de.away='0'  
                     if homeO == '0'  or  homeO == '0.0' or zfBK[0]== '0+0': 
@@ -86,10 +86,10 @@ def basketball(Data):
                     bsk.twDS.over="0.94"
                     bsk.twDS.under="0.94"
                 
-                sendData.append(copy.deepcopy(bsk))            
+            sendData.append(copy.deepcopy(bsk))            
         except :
-            telegramBot(source+","+"BSK錯誤"+","+gameType+","+homeL+","+awayL+","+homeO+","+awayO+","+homeDe+","+awayDe)
-
+            telegramBot("BSK錯誤")
+            telegramBot(str(Data))
     # print(sendData)
     datas = APHDC_pb2.ApHdcArr()
     datas.aphdc.extend(sendData)
