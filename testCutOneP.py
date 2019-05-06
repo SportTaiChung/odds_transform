@@ -1,91 +1,87 @@
 # -*- coding:utf-8 -*-
-import numpy as np
-import APHDC_pb2
-import json
 import copy
+import APHDC_pb2
 import mapping
 
-def cutOne(home,away):
-    if home != '0' :
-        hO = str(round((float(home) -1),2))
-        aO = str(round((float(away) -1),2))
-    else :
+def cutOne(home, away):
+    if home != '0':
+        hO = str(round((float(home) -1), 2))
+        aO = str(round((float(away) -1), 2))
+    else:
         hO = str(home)
         aO = str(away)
-    return str(hO),str(aO)
+    return str(hO), str(aO)
 
 def justCutOne_fun(Data):
-    sendData =[]
+    sendData = []
     for cut in Data:
-        try :
+        try:
             homeline = cut.usZF.homeZF.line
             awayline = cut.usZF.awayZF.line
             homeodds = cut.usZF.homeZF.odds
             awayodds = cut.usZF.awayZF.odds
-            if homeodds != "0" :
+            if homeodds != "0":
                 if cut.game_class == 'soccer' or cut.game_class == 'hockey':
-                    cut.twZF.homeZF.line=homeline[0]+mapping.scMap(homeline[1:])
-                    cut.twZF.awayZF.line=awayline[0]+mapping.scMap(awayline[1:])
-                else :
-                    cut.twZF.homeZF.line=homeline
-                    cut.twZF.awayZF.line=awayline
-                # print(cut)
-                zf = cutOne(homeodds,awayodds)
-                cut.twZF.homeZF.odds=zf[0]
-                cut.twZF.awayZF.odds=zf[1]
+                    cut.twZF.homeZF.line = homeline[0]+mapping.scMap(homeline[1:])
+                    cut.twZF.awayZF.line = awayline[0]+mapping.scMap(awayline[1:])
+                else:
+                    cut.twZF.homeZF.line = homeline
+                    cut.twZF.awayZF.line = awayline
+
+                zf = cutOne(homeodds, awayodds)
+                cut.twZF.homeZF.odds = zf[0]
+                cut.twZF.awayZF.odds = zf[1]
             else:
-                cut.twZF.homeZF.line='0+0'
-                cut.twZF.awayZF.line='0+0'
-                cut.twZF.homeZF.odds='0'
-                cut.twZF.awayZF.odds='0'
-        except :
+                cut.twZF.homeZF.line = '0+0'
+                cut.twZF.awayZF.line = '0+0'
+                cut.twZF.homeZF.odds = '0'
+                cut.twZF.awayZF.odds = '0'
+        except:
             pass
 
-        try :
-            dsline = cut.usDS.line 
-            over = cut.usDS.over 
+        try:
+            dsline = cut.usDS.line
+            over = cut.usDS.over
             under = cut.usDS.under
-            if over != "0" :
+            if over != "0":
                 if cut.game_class == 'soccer' or cut.game_class == 'hockey':
-                    cut.twDS.line=mapping.scMap(dsline)
-                    # print(dsline)
-                else :
-                    cut.twDS.line=dsline
-                ds = cutOne(over,under)
-                cut.twDS.over=ds[0]
-                cut.twDS.under=ds[1]
+                    cut.twDS.line = mapping.scMap(dsline)
+                else:
+                    cut.twDS.line = dsline
+
+                ds = cutOne(over, under)
+                cut.twDS.over = ds[0]
+                cut.twDS.under = ds[1]
             else:
-                cut.twDS.line='0+0'
-                cut.twDS.over='0'
-                cut.twDS.under='0'
-        except :
+                cut.twDS.line = '0+0'
+                cut.twDS.over = '0'
+                cut.twDS.under = '0'
+        except:
             pass
 
-        try :
+        try:
             dehome = cut.de.home
             deaway = cut.de.away
-            de = cutOne(dehome,deaway)
+            de = cutOne(dehome, deaway)
             cut.de.home = de[0]
             cut.de.away = de[1]
-        except :
+        except:
             pass
 
         try:
             sdhome = cut.sd.home
             sdaway = cut.sd.away
-            sd = cutOne(sdhome,sdaway)
+            sd = cutOne(sdhome, sdaway)
             cut.sd.home = sd[0]
             cut.sd.away = sd[1]
-        except :
+        except:
             pass
-        
-        
+
         sendData.append(copy.deepcopy(cut))
-        # print(cut)
         datas = APHDC_pb2.ApHdcArr()
         datas.aphdc.extend(sendData)
         data = datas.SerializeToString()  #變成byte
-        
+
     return data
 
 
@@ -95,5 +91,4 @@ def justCutOne_fun(Data):
 # enData = APHDC_pb2.ApHdcArr()
 # enData.ParseFromString(f)
 # Data = enData.aphdc
-# justCutOne_fun(Data)
-
+# testCutOneP_fun(Data)
