@@ -29,7 +29,6 @@ def calBSzf(source, gameClass, gameType, homeL, awayL, homeO, awayO, homeDe, awa
         limit1 = (awayDe*(100-((100-(100*awayDe))/(awayO-awayDe))))-((100-(100*awayDe))/(awayO-awayDe))
         limit2 = ((homeO*((100-(100*homeDe))/(homeO-homeDe)))-(100-((100-(100*homeDe))/(homeO-homeDe))))*-1
         water = (limit1+limit2)/2
-        # print(water)
     
         #棒球級距為5 Ex : 1+5 1+10
         if water == 0:
@@ -45,7 +44,6 @@ def calBSzf(source, gameClass, gameType, homeL, awayL, homeO, awayO, homeDe, awa
                 percent = 5 *int(water/5) -5
             else:
                 percent = 5 *int(water/5)
-        # print(percent)
 
     #獨贏低水邊為讓邊
     if homeDe != 0:
@@ -68,16 +66,18 @@ def calBSzf(source, gameClass, gameType, homeL, awayL, homeO, awayO, homeDe, awa
                     L = mapping.bshalf0(percent)
                     # print(L)
                 elif '0.5' == homeL[1:]:
-                    L = mapping.bshalf05(percent)
+                    L = mapping.bshalf05(percent)       
+                h = hL + L
+                a = aL + L
             else :
                 try :
                     L = mapping.bsMap(percent/100)
+                    h = hL + L
+                    a = aL + L
                 except:
                     deCalzf = testBSde.calBSde(source, gameClass, gameType, homeDe+1, awayDe+1)
                     h = deCalzf[0]
                     a = deCalzf[1]
-            h = hL + L
-            a = aL + L
         except:
             h = '0+0'
             a = '0+0'
@@ -90,11 +90,11 @@ def calBSzf(source, gameClass, gameType, homeL, awayL, homeO, awayO, homeDe, awa
 # if __name__ == '__main__':
 #     source = 'PS38'
 #     gameClass ='mlb'
-#     gameType ='1st half'
-#     homeL = '+0.0'
-#     awayL = '-0.0'
-#     homeO = '1.374'
-#     awayO = '3.32'
-#     homeDe = '0'
-#     awayDe = '0'
+#     gameType ='full'
+#     homeL = '-1.5'
+#     awayL = '+1.5'
+#     homeO = '2.92'
+#     awayO = '1.465'
+#     homeDe = '2.0'
+#     awayDe = '1.9'
 #     calBSzf(source,gameClass,gameType,homeL,awayL,homeO,awayO,homeDe,awayDe)
