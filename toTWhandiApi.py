@@ -1,10 +1,7 @@
-from sendMQ import telegramBot
 from flask_cors import CORS
-from flask import Flask, make_response
-from flask import jsonify
+from flask import Flask
 from flask import request
-import json
-import requests
+from sendMQ import telegramBot
 import sendMQ
 import APHDC_pb2
 import testHcFunctionP
@@ -23,76 +20,60 @@ def hello():
 
 @app.route('/transWithProtobuf', methods=['GET', 'POST'])
 def trans():
-    try : 
+    try:
         data = request.get_data()
         enData = APHDC_pb2.ApHdcArr()
         enData.ParseFromString(data)
         Data = enData.aphdc
-        try :
+        try:
             ## 球賽對應function
-            for en in Data :
+            for en in Data:
                 game = en.game_class
 
-            if 'basketball' in game :
+            if 'basketball' in game:
                 out = testBskFunctionP.basketball(Data)
-            elif 'football' in game :
-                out = testCutOneP.justCutOne_fun(Data) 
-            elif 'soccer' in game :
+            elif 'football' in game:
                 out = testCutOneP.justCutOne_fun(Data)
-            elif 'hockey'  in game : 
+            elif 'soccer' in game:
+                out = testCutOneP.justCutOne_fun(Data)
+            elif 'hockey'  in game:
                 out = testHcFunctionP.hockey(Data)
-            elif 'mlb' or 'npb'  or  'kbo' in game :
+            elif 'mlb' or 'npb'  or  'kbo' in game:
                 out = testBsMixFunction.baseballMix(Data)
-        except :
+        except:
             telegramBot(str(data))
 
-        
         outData = APHDC_pb2.ApHdcArr()
         outData.ParseFromString(out)
         Data = outData.aphdc
         ## 來源對應que
-        for ou in Data :
+        for ou in Data:
             ous = ou.source
             ouc = ou.game_class
-            outype = ou.game_type
-            twzf = ou.twZF.homeZF.line
-            if 'test' in ous :
-                ous=ous.replace('test','')
-                if 'hockey' == ouc:
-                    que = 'test_'+ous+'_HC'
-                elif 'football' == ouc :
-                    que = 'test_'+ous+'_FB'
-                elif 'basketball' in ouc :
-                    que = 'test_'+ous+'_BK'
-                elif 'soccer' == ouc :
-                    que = 'test_'+ous+'_SC'                   
-                elif 'mlb' or 'npb'  or  'kbo'in ouc:
-                    que = 'test_'+ous+'_BS'
+            if 'test' in ous:
+                que = 'test_CMD'
             else:
-                if 'hockey' == ouc:
+                if ouc == 'hockey':
                     que = ous+'_HC'
-                elif 'football' == ouc :
+                elif ouc == 'football':
                     que = ous+'_FB'
-                elif 'basketball' in ouc :
+                elif 'basketball' in ouc:
                     que = ous+'_BK'
-                elif 'soccer' == ouc :
-                    que = ous+'_SC'                
+                elif ouc == 'soccer':
+                    que = ous+'_SC'
                 elif 'mlb'  or 'npb'  or  'kbo' in ouc:
                     que = ous+'_BS'
 
 
+        # sendMQ.send_MQ(out, 'test_CMD', 'rabbit.avia520.com', 'AE86', '200p')
+        # sendMQ.hkMQ(out, 'test_PS38_BS', 'rmq.nba1688.net', 'GTR', '565p', '5673')
+        sendMQ.send_MQ(out, que, '10.0.1.198', 'GTR', '565p')
+        return out
 
-        # sendMQ.hkMQ(out,'test_PS38_BS','rmq.nba1688.net','GTR', '565p','5673')
-        sendMQ.send_MQ(out,que,'10.0.1.198','GTR', '565p')
-        return out        
-        
-            
-    except Exception as e :
+    except Exception as e:
         telegramBot(str(e))
 
 
-    
 if __name__ == '__main__':
-    # app.run(host='127.0.0.1', port=5004, debug=True ,threaded=True)
-    app.run(host='0.0.0.0', port=5004, debug=True ,threaded=True)
-
+    # app.run(host='127.0.0.1', port=5004, debug=True, threaded=True)
+    app.run(host='0.0.0.0', port=5004, debug=True, threaded=True)
