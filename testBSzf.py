@@ -11,26 +11,48 @@ def calBSzf(source, gameClass, gameType, homeL, awayL, homeO, awayO, homeDe, awa
     else:
         homeO = 0
         awayO = 0
-    if homeDe != '0':
+
+    if homeDe in ('0','0.0'):
+        homeDe = 0
+        awayDe = 0  
+    else:              
         homeDe = round((float(homeDe)-1), 2)
         awayDe = round((float(awayDe)-1), 2)
-    else:
-        homeDe = 0
-        awayDe = 0
 
-    #上半場公式   
-    if gameType == '1st half' :
-        water = (homeO-0.94)*30 if homeO < awayO else (awayO-0.94)*30
-        #棒球級距為5 Ex : 1+5 1+10
+
+
+    #上半場公式
+    # 當球頭0.0的時候 判斷低水邊為讓分隊
+    if '0.0' == homeL[1:]:
+        if homeO < awayO:
+            homeL = '-' + homeL[1:]
+            awayL = '+' + awayL[1:]
+        else:
+            homeL = '+' + homeL[1:]
+            awayL = '-' + awayL[1:]
+    #如果讓分隊是低水,用低水-0.94
+    #如果讓分隊是高水,用0.94-低水
+    if gameType == '1st half':
+        # 主讓
+        if '-' in homeL: 
+            # 主隊為低水邊                                   # 客隊為低水邊 
+            water = (homeO-0.94)*30 if homeO < awayO else (0.94-awayO)*30
+        # 客讓
+        else:
+            # 主隊為低水邊                                   # 客隊為低水邊
+            water = (0.94-homeO)*30 if homeO < awayO else (awayO-0.94)*30
+
+        # print(water)
+        #棒球級距為5 Ex: 1+5 1+10
         percent = round(water*2)/2
         # print(percent)
-    else :
+    else:
         #公式
         limit1 = (awayDe*(100-((100-(100*awayDe))/(awayO-awayDe))))-((100-(100*awayDe))/(awayO-awayDe))
         limit2 = ((homeO*((100-(100*homeDe))/(homeO-homeDe)))-(100-((100-(100*homeDe))/(homeO-homeDe))))*-1
         water = (limit1+limit2)/2
     
-        #棒球級距為5 Ex : 1+5 1+10
+        #棒球級距為5 Ex: 1+5 1+10
         if water == 0:
             percent = 0
         elif water > 0:
@@ -61,16 +83,17 @@ def calBSzf(source, gameClass, gameType, homeL, awayL, homeO, awayO, homeDe, awa
     
     try:
         try:
-            if gameType == '1st half' :
+            if gameType == '1st half':
                 if '0.0' == homeL[1:]:
                     L = mapping.bshalf0(percent)
-                    # print(L)
                 elif '0.5' == homeL[1:]:
-                    L = mapping.bshalf05(percent)       
+                    L = mapping.bshalf05(percent)
+                elif '1.0' == homeL[1:]:
+                    L = mapping.bshalf1(percent)
                 h = hL + L
                 a = aL + L
-            else :
-                try :
+            else:
+                try:
                     L = mapping.bsMap(percent/100)
                     h = hL + L
                     a = aL + L
@@ -90,11 +113,11 @@ def calBSzf(source, gameClass, gameType, homeL, awayL, homeO, awayO, homeDe, awa
 # if __name__ == '__main__':
 #     source = 'PS38'
 #     gameClass ='mlb'
-#     gameType ='full'
-#     homeL = '-1.5'
-#     awayL = '+1.5'
-#     homeO = '2.92'
-#     awayO = '1.465'
-#     homeDe = '2.0'
-#     awayDe = '1.9'
+#     gameType ='1st half'
+#     homeL = '+1.0'
+#     awayL = '-1.0'
+#     homeO = '1.909'
+#     awayO = '1.98'
+#     homeDe = '0.0'
+#     awayDe = '0.0'
 #     calBSzf(source,gameClass,gameType,homeL,awayL,homeO,awayO,homeDe,awayDe)
