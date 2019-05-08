@@ -39,7 +39,7 @@ def baseballMix(Data):
                 for no in noCalData:
                     no
             elif "總得分" in league:
-                dsBS = testBSds.calBSds(source, gameClass, line, over, under)
+                dsBS = testBSds.calBSds(source, gameClass, gameType, line, over, under)
                 bs.twDS.line = dsBS
                 if over == '0' or over == "0.0" or dsBS == '0+0':
                     bs.twDS.over = "0"
@@ -53,7 +53,7 @@ def baseballMix(Data):
                 bs.twZF.awayZF.odds = '0'
 
             else:
-                dsBS = testBSds.calBSds(source, gameClass, line, over, under)
+                dsBS = testBSds.calBSds(source, gameClass, gameType, line, over, under)
                 bs.twDS.line = dsBS
                 if over == '0' or over == "0.0" or dsBS == '0+0':
                     bs.twDS.over = "0"

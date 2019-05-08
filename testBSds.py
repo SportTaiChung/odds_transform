@@ -1,6 +1,6 @@
 from sendMQ import telegramBot
 
-def calBSds(source, gameClass, line, over, under):
+def calBSds(source, gameClass, gameType, line, over, under):
     if over != '0':
         line = str(float(line))
         over = round((float(over)-1), 2)
@@ -16,7 +16,10 @@ def calBSds(source, gameClass, line, over, under):
     if gameClass == 'hockey':
         w = 25
     elif gameClass == 'mlb':
-        w = 16
+        if gameType == 'full':
+            w = 16
+        elif gameType == '1st half':
+            w = 30
     else:
         w = 30
     water = abs((over + under)/2-over)*(100/w*100)
@@ -131,6 +134,7 @@ def calBSds(source, gameClass, line, over, under):
 # if __name__ == '__main__':
 #     source = 'PS38'
 #     gameClass = 'mlb'
+#     gameType = '1st half'
 #     line= "10.5"
 #     over= "6.02"
 #     under= "1.05"

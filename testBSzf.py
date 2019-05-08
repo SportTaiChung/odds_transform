@@ -22,17 +22,18 @@ def calBSzf(source, gameClass, gameType, homeL, awayL, homeO, awayO, homeDe, awa
 
 
     #上半場公式
-    # 當球頭0.0的時候 判斷低水邊為讓分隊
-    if '0.0' == homeL[1:]:
-        if homeO < awayO:
-            homeL = '-' + homeL[1:]
-            awayL = '+' + awayL[1:]
-        else:
-            homeL = '+' + homeL[1:]
-            awayL = '-' + awayL[1:]
+   
     #如果讓分隊是低水,用低水-0.94
     #如果讓分隊是高水,用0.94-低水
     if gameType == '1st half':
+        # 當球頭0.0的時候 判斷低水邊為讓分隊
+        if '0.0' == homeL[1:]:
+            if homeO < awayO:
+                homeL = '-' + homeL[1:]
+                awayL = '+' + awayL[1:]
+            else:
+                homeL = '+' + homeL[1:]
+                awayL = '-' + awayL[1:]
         # 主讓
         if '-' in homeL: 
             # 主隊為低水邊                                   # 客隊為低水邊 
