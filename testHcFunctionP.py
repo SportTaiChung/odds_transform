@@ -4,7 +4,7 @@ import APHDC_pb2
 import testCutOneP
 import testBSzf
 from sendMQ import telegramBot
-
+import datetime as dt
 
 def hockey(Data):
     try:
@@ -100,12 +100,13 @@ def hockey(Data):
         datas.aphdc.extend(sendData)
         data = datas.SerializeToString()  #變成byte
         return data
-    except:
+    except Exception as e:
         telegramBot("HC錯誤")
         datas = APHDC_pb2.ApHdcArr()
         datas.aphdc.extend(Data)
         data = datas.SerializeToString()
-        telegramBot(str(data))
+        HCfile = open('hc.log','a')
+        HCfile.write(str(data)+'\n'+str(e)+'\n'+dt.datetime.now().strftime('%Y-%m-%d %H:%M:%S')+'\n')
 
 
 

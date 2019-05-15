@@ -5,7 +5,7 @@ import testBKzf
 import testBKds
 import testCutOneP
 from sendMQ import telegramBot
-
+import datetime as dt
 
 
 def basketball(Data):
@@ -95,7 +95,8 @@ def basketball(Data):
         datas = APHDC_pb2.ApHdcArr()
         datas.aphdc.extend(Data)
         data = datas.SerializeToString()
-        telegramBot(str(data))
+        BSKfile = open('bsk.log','a')
+        BSKfile.write(str(data)+'\n'+str(e)+'\n'+dt.datetime.now().strftime('%Y-%m-%d %H:%M:%S')+'\n')
 
 
 
