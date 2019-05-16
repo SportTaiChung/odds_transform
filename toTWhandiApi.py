@@ -8,7 +8,7 @@ import testHcFunctionP
 import testBskFunctionP
 import testCutOneP
 import testBsMixFunction
-
+import newBSMixFunction
 
 app = Flask(__name__)
 CORS(app)
@@ -39,7 +39,8 @@ def trans():
             elif 'hockey'  in game:
                 out = testHcFunctionP.hockey(Data)
             elif 'mlb' or 'npb'  or  'kbo' in game:
-                out = testBsMixFunction.baseballMix(Data)
+                # out = testBsMixFunction.baseballMix(Data)
+                out = newBSMixFunction.baseballMix(Data)
         except:
             telegramBot(str(data))
 

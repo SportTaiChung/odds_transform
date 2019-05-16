@@ -91,6 +91,7 @@ def basketball(Data):
         data = datas.SerializeToString()  #變成byte
         return data
     except Exception as e:
+        pass
         telegramBot("BSK錯誤")
         datas = APHDC_pb2.ApHdcArr()
         datas.aphdc.extend(Data)
