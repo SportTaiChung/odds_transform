@@ -150,6 +150,9 @@ def baseballMix(Data):
                     bs.usDS.over = str(round((float(dsBS[2])+1),2))
                     bs.usDS.under = str(round((float(dsBS[3])+1),2))
                     if over == '0' or over == "0.0" or dsBS == '0+0':
+                        bs.usDS.line = line.split(',')[0]
+                        bs.usDS.over = over.split(',')[0]
+                        bs.usDS.under = under.split(',')[0]
                         bs.twDS.over = "0"
                         bs.twDS.under = "0"
                     else:
@@ -189,7 +192,7 @@ def baseballMix(Data):
 ## 找錯誤用 
 ## testData 後面請填入錯誤的data 執行即可印出錯誤
 
-
+# testData = 
 # enData = APHDC_pb2.ApHdcArr()
 # enData.ParseFromString(testData)
 # Data = enData.aphdc
