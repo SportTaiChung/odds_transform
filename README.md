@@ -2,7 +2,7 @@
 美盤轉台盤 API
 
 * 籃球 : testBskFunctionP.py
-* 棒球 : testBsMixFunction.py
+* 棒球 : newBSMixFunction.py
 * 冰球 : testHcFunctionP.py
 * 美足 : testCutOneP.py
 * 足球 : testCutOneP.py
@@ -32,8 +32,8 @@ Api (解析 .轉換 .轉成protobuf .傳到MQ)
 ## 程式說明
 程式|功能
 ----|----
-[APHDC.proto]|protobuf格式
-[APHDC_pb2]|protoc --python_out=. APHDC.proto  產生
+[APHDC_noDB.proto]|protobuf格式
+[APHDC_noDB_pb2]|protoc --python_out=. APHDC_noDB.proto  產生
 [testBSde.py]|專用棒球用獨贏算讓分Func（線上使用）
 [testBskFunctionP.py]|籃球執行檔（線上使用）
 [testBKds.py]|籃球大小Func（線上使用）
@@ -42,7 +42,7 @@ Api (解析 .轉換 .轉成protobuf .傳到MQ)
 [testHcFunctionP.py]|冰球執行檔（線上使用）
 [testBSzf.py]|美棒冰球讓分Func（線上使用）
 [testBSds.py]|美棒大小Func（線上使用）
-[testBsMixFunctionP.py]|美棒執行檔 (線上使用)
+[newBSMixFunctionP.py]|美棒執行檔 (線上使用)
 [gun.conf]| gevent 設定檔
 [mapping.py]|mapping
 [sendMQ.py]|sendMQfunction
@@ -50,7 +50,3 @@ Api (解析 .轉換 .轉成protobuf .傳到MQ)
 
 - - - - - -
 
-
-
-## 流程圖
-![image](api.png)
