@@ -9,45 +9,38 @@ import datetime as dt
 def hockey(Data):
     try:
         sendData = []
-        notNHL = []
         for hc in Data:
-
-            if  "NHL美國冰球聯季後賽(含加時賽)" not in hc.information.league  and hc.game_class == "hockey":
-                # print(hc.information.league)
-                notNHL.append(hc)
-                others = testCutOneP.justCutOne_fun(notNHL)
+            source = hc.source
+            league = hc.information.league
+            gameType = hc.game_type
+            gameClass = hc.game_class
+            homeL = hc.usZF.homeZF.line
+            awayL = hc.usZF.awayZF.line
+            homeO = hc.usZF.homeZF.odds
+            awayO = hc.usZF.awayZF.odds
+            line = hc.usDS.line
+            over = hc.usDS.over
+            under = hc.usDS.under
+            try:
+                homeDe = hc.de.home
+                awayDe = hc.de.away
+                if homeDe in ('0.0', ''):
+                    homeDe = '0'
+                    awayDe = '0'
+            except:
+                    homeDe = '0'
+                    awayDe = '0'
+            if  "NHL美國冰球聯季後賽(含加時賽)" not in league:
+                noCal = testCutOneP.justCutOne_fun([hc])
                 enData = APHDC_noDB_pb2.ApHdcArr()
-                enData.ParseFromString(others)
-                notNHLData = enData.aphdc
-                for no in notNHLData:
-                    no
-            elif '總得分' in hc.information.league:
-                # print(hc.information.league)
-                notNHL.append(hc)
-                others = testCutOneP.justCutOne_fun(notNHL)
+                enData.ParseFromString(noCal)
+                noCalData = enData.aphdc
+            elif '總得分' in league:
+                noCal = testCutOneP.justCutOne_fun([hc])
                 enData = APHDC_noDB_pb2.ApHdcArr()
-                enData.ParseFromString(others)
-                notNHLData = enData.aphdc
-                for no in notNHLData:
-                    no
+                enData.ParseFromString(noCal)
+                noCalData = enData.aphdc
             else:
-                source = hc.source
-                gameType = hc.game_type
-                gameClass = hc.game_class
-                homeL = hc.usZF.homeZF.line
-                awayL = hc.usZF.awayZF.line
-                homeO = hc.usZF.homeZF.odds
-                awayO = hc.usZF.awayZF.odds
-                try:
-                    homeDe = hc.de.home
-                    awayDe = hc.de.away
-                    if homeDe in ('0.0', ''):
-                        homeDe = '0'
-                        awayDe = '0'
-                except:
-                        homeDe = '0'
-                        awayDe = '0'
-
                 if 'full' in gameType:
                     zfBS = testBSzf.calBSzf(source, gameClass, gameType, homeL, awayL, homeO, awayO, homeDe, awayDe)
                     hc.twZF.homeZF.line = zfBS[0]
@@ -77,9 +70,6 @@ def hockey(Data):
                         hc.esre.away = zfBS[5]
 
                     ## 大小
-                    line = hc.usDS.line
-                    over = hc.usDS.over
-                    under = hc.usDS.under
                     if over in ('0.0', '0'):
                         hc.twDS.line = '0+0'
                         hc.twDS.over = '0'
@@ -101,7 +91,6 @@ def hockey(Data):
         data = datas.SerializeToString()  #變成byte
         return data
     except Exception as e:
-        pass
         telegramBot("HC錯誤")
         datas = APHDC_noDB_pb2.ApHdcArr()
         datas.aphdc.extend(Data)
@@ -111,7 +100,11 @@ def hockey(Data):
 
 
 
-# enData = APHDC_noDB_pb2.ApHdcArr()
-# enData.ParseFromString(f)
-# Data = enData.aphdc
+## 找錯誤用 
+## testData 後面請填入錯誤的data 執行即可印出錯誤
+
+# testData = 
+# enData = GAMEDB_pb2.GdHdcArr()
+# enData.ParseFromString(testData)
+# Data = enData.gdhdc
 # hockey(Data)

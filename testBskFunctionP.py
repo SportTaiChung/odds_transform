@@ -11,7 +11,6 @@ import datetime as dt
 def basketball(Data):
     try:
         sendData = []
-        noCalList = []
         for bsk in Data:
             source = bsk.source
             gameType = bsk.game_type
@@ -20,6 +19,19 @@ def basketball(Data):
             awayL = bsk.usZF.awayZF.line
             homeO = bsk.usZF.homeZF.odds
             awayO = bsk.usZF.awayZF.odds
+            dsline = bsk.usDS.line
+            over = bsk.usDS.over
+            under = bsk.usDS.under
+            try:
+                sdA = bsk.sd.home
+                sdH = bsk.sd.away
+                if sdA != '0':
+                    sd = testCutOneP.cutOne(sdA, sdH)
+                    bsk.sd.home = sd[0]
+                    bsk.sd.away = sd[1]
+            except:
+                sdA = '0'
+                sdH = '0'
             try:
                 homeDe = bsk.de.home
                 awayDe = bsk.de.away
@@ -27,38 +39,19 @@ def basketball(Data):
                 homeDe = '0'
                 awayDe = '0'
 
-            dsline = bsk.usDS.line
-            over = bsk.usDS.over
-            under = bsk.usDS.under
-
             if '_' in league:
-                noCalList.append(bsk)
-                noCal = testCutOneP.justCutOne_fun(noCalList)
+                noCal = testCutOneP.justCutOne_fun([bsk])
                 enData = APHDC_noDB_pb2.ApHdcArr()
                 enData.ParseFromString(noCal)
                 noCalData = enData.aphdc
-                for no in noCalData:
-                    no
             else:
-                try:
-                    sdA = bsk.sd.home
-                    sdH = bsk.sd.away
-                    if sdA != '0':
-                        sd = testCutOneP.cutOne(sdA, sdH)
-                        bsk.sd.home = sd[0]
-                        bsk.sd.away = sd[1]
-                except:
-                    sdA = '0'
-                    sdH = '0'
-
                 zfBK = testBKzf.calBKzf(source, gameType, homeL, awayL, homeO, awayO, homeDe, awayDe)
                 bsk.twZF.homeZF.line = zfBK[0]
                 bsk.twZF.awayZF.line = zfBK[1]
-
-                if homeDe == '0' or homeDe == '0.0' or homeDe == '':
+                if homeDe in('0', '0.0', ''):
                     bsk.de.home = '0'
                     bsk.de.away = '0'
-                    if homeO == '0' or homeO == '0.0' or zfBK[0] == '0+0':
+                    if homeO in ('0', '0.0') or zfBK[0] == '0+0':
                         bsk.twZF.homeZF.odds = "0"
                         bsk.twZF.awayZF.odds = "0"
                     else:
@@ -67,7 +60,7 @@ def basketball(Data):
                 else:
                     bsk.de.home = zfBK[2]
                     bsk.de.away = zfBK[3]
-                    if homeO == '0' or homeO == '0.0' or zfBK[0] == '0+0':
+                    if homeO in ('0', '0.0') or zfBK[0] == '0+0':
                         bsk.twZF.homeZF.odds = '0'
                         bsk.twZF.awayZF.odds = '0'
                     else:
@@ -76,7 +69,7 @@ def basketball(Data):
 
                 dsBK = testBKds.calBKds(source, dsline, over, under)
                 bsk.twDS.line = dsBK
-                if over == '0' or over == "0.0" or dsBK == '0+0':
+                if over in('0', "0.0") or dsBK == '0+0':
                     bsk.twDS.over = "0"
                     bsk.twDS.under = "0"
                 else:
@@ -91,7 +84,6 @@ def basketball(Data):
         data = datas.SerializeToString()  #變成byte
         return data
     except Exception as e:
-        pass
         telegramBot("BSK錯誤")
         datas = APHDC_noDB_pb2.ApHdcArr()
         datas.aphdc.extend(Data)
@@ -101,7 +93,11 @@ def basketball(Data):
 
 
 
-# enData = APHDC_noDB_pb2.ApHdcArr()
-# enData.ParseFromString(f)
-# Data = enData.aphdc
-# basketball(Data)
+## 找錯誤用 
+## testData 後面請填入錯誤的data 執行即可印出錯誤
+
+# testData = 
+# enData = GAMEDB_pb2.GdHdcArr()
+# enData.ParseFromString(testData)
+# Data = enData.gdhdc
+# hockey(Data)
