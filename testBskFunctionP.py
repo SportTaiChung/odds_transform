@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 import copy
-import APHDC_pb2
+import APHDC_noDB_pb2
 import testBKzf
 import testBKds
 import testCutOneP
@@ -34,7 +34,7 @@ def basketball(Data):
             if '_' in league:
                 noCalList.append(bsk)
                 noCal = testCutOneP.justCutOne_fun(noCalList)
-                enData = APHDC_pb2.ApHdcArr()
+                enData = APHDC_noDB_pb2.ApHdcArr()
                 enData.ParseFromString(noCal)
                 noCalData = enData.aphdc
                 for no in noCalData:
@@ -86,14 +86,14 @@ def basketball(Data):
             sendData.append(copy.deepcopy(bsk))
        
         # print(sendData)
-        datas = APHDC_pb2.ApHdcArr()
+        datas = APHDC_noDB_pb2.ApHdcArr()
         datas.aphdc.extend(sendData)
         data = datas.SerializeToString()  #變成byte
         return data
     except Exception as e:
         pass
         telegramBot("BSK錯誤")
-        datas = APHDC_pb2.ApHdcArr()
+        datas = APHDC_noDB_pb2.ApHdcArr()
         datas.aphdc.extend(Data)
         data = datas.SerializeToString()
         BSKfile = open('bsk.log','a')
@@ -101,7 +101,7 @@ def basketball(Data):
 
 
 
-# enData = APHDC_pb2.ApHdcArr()
+# enData = APHDC_noDB_pb2.ApHdcArr()
 # enData.ParseFromString(f)
 # Data = enData.aphdc
 # basketball(Data)

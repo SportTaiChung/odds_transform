@@ -1,5 +1,5 @@
 import copy
-import APHDC_pb2
+import APHDC_noDB_pb2
 import testBSzf
 import testBSds
 import testBSde
@@ -34,7 +34,7 @@ def baseballMix(Data):
             if '_' in league:
                 noCalList.append(bs)
                 noCal = testCutOneP.justCutOne_fun(noCalList)
-                enData = APHDC_pb2.ApHdcArr()
+                enData = APHDC_noDB_pb2.ApHdcArr()
                 enData.ParseFromString(noCal)
                 noCalData = enData.aphdc
                 for no in noCalData:
@@ -171,7 +171,7 @@ def baseballMix(Data):
 
             sendData.append(copy.deepcopy(bs))
         # print(sendData)
-        datas = APHDC_pb2.ApHdcArr()
+        datas = APHDC_noDB_pb2.ApHdcArr()
         datas.aphdc.extend(sendData)
         data = datas.SerializeToString()  #變成byte
         return data
@@ -180,7 +180,7 @@ def baseballMix(Data):
         # print(bs)
         pass
         telegramBot("BS錯誤")
-        datas = APHDC_pb2.ApHdcArr()
+        datas = APHDC_noDB_pb2.ApHdcArr()
         datas.aphdc.extend(Data)
         data = datas.SerializeToString()
         BSfile = open('bs.log','a')
@@ -193,7 +193,7 @@ def baseballMix(Data):
 ## testData 後面請填入錯誤的data 執行即可印出錯誤
 
 # testData = 
-# enData = APHDC_pb2.ApHdcArr()
+# enData = APHDC_noDB_pb2.ApHdcArr()
 # enData.ParseFromString(testData)
 # Data = enData.aphdc
 # baseballMix(Data)

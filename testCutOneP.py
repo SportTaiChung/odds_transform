@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 import copy
-import APHDC_pb2
+import APHDC_noDB_pb2
 import mapping
 
 def cutOne(home, away):
@@ -78,7 +78,7 @@ def justCutOne_fun(Data):
             pass
 
         sendData.append(copy.deepcopy(cut))
-        datas = APHDC_pb2.ApHdcArr()
+        datas = APHDC_noDB_pb2.ApHdcArr()
         datas.aphdc.extend(sendData)
         data = datas.SerializeToString()  #變成byte
 
@@ -88,7 +88,7 @@ def justCutOne_fun(Data):
 
 
 
-# enData = APHDC_pb2.ApHdcArr()
+# enData = APHDC_noDB_pb2.ApHdcArr()
 # enData.ParseFromString(f)
 # Data = enData.aphdc
 # testCutOneP_fun(Data)

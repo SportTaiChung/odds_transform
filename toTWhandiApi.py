@@ -3,11 +3,10 @@ from flask import Flask
 from flask import request
 from sendMQ import telegramBot
 import sendMQ
-import APHDC_pb2
+import APHDC_noDB_pb2
 import testHcFunctionP
 import testBskFunctionP
 import testCutOneP
-import testBsMixFunction
 import newBSMixFunction
 
 app = Flask(__name__)
@@ -22,7 +21,7 @@ def hello():
 def trans():
     try:
         data = request.get_data()
-        enData = APHDC_pb2.ApHdcArr()
+        enData = APHDC_noDB_pb2.ApHdcArr()
         enData.ParseFromString(data)
         Data = enData.aphdc
         try:
@@ -44,7 +43,7 @@ def trans():
         except:
             telegramBot(str(data))
 
-        outData = APHDC_pb2.ApHdcArr()
+        outData = APHDC_noDB_pb2.ApHdcArr()
         outData.ParseFromString(out)
         Data = outData.aphdc
         ## 來源對應que
@@ -66,9 +65,9 @@ def trans():
                     que = ous+'_BS'
 
 
-        # sendMQ.send_MQ(out, 'test_CMD', 'rabbit.avia520.com', 'AE86', '200p')
+        sendMQ.send_MQ(out, 'test_CMD', '10.0.1.197', 'AE86', '200p')
         # sendMQ.hkMQ(out, 'test_PS38_BS', 'rmq.nba1688.net', 'GTR', '565p', '5673')
-        sendMQ.send_MQ(out, que, '10.0.1.198', 'GTR', '565p')
+        # sendMQ.send_MQ(out, que, '10.0.1.198', 'GTR', '565p')
         return out
 
     except Exception as e:
@@ -76,5 +75,5 @@ def trans():
 
 
 if __name__ == '__main__':
-    # app.run(host='127.0.0.1', port=5004, debug=True, threaded=True)
-    app.run(host='0.0.0.0', port=5004, debug=True, threaded=True)
+    app.run(host='127.0.0.1', port=5004, debug=True, threaded=True)
+    # app.run(host='0.0.0.0', port=5004, debug=True, threaded=True)

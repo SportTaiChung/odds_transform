@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 import copy
-import APHDC_pb2
+import APHDC_noDB_pb2
 import testCutOneP
 import testBSzf
 from sendMQ import telegramBot
@@ -16,7 +16,7 @@ def hockey(Data):
                 # print(hc.information.league)
                 notNHL.append(hc)
                 others = testCutOneP.justCutOne_fun(notNHL)
-                enData = APHDC_pb2.ApHdcArr()
+                enData = APHDC_noDB_pb2.ApHdcArr()
                 enData.ParseFromString(others)
                 notNHLData = enData.aphdc
                 for no in notNHLData:
@@ -25,7 +25,7 @@ def hockey(Data):
                 # print(hc.information.league)
                 notNHL.append(hc)
                 others = testCutOneP.justCutOne_fun(notNHL)
-                enData = APHDC_pb2.ApHdcArr()
+                enData = APHDC_noDB_pb2.ApHdcArr()
                 enData.ParseFromString(others)
                 notNHLData = enData.aphdc
                 for no in notNHLData:
@@ -96,14 +96,14 @@ def hockey(Data):
             sendData.append(copy.deepcopy(hc))
 
         # print(sendData)
-        datas = APHDC_pb2.ApHdcArr()
+        datas = APHDC_noDB_pb2.ApHdcArr()
         datas.aphdc.extend(sendData)
         data = datas.SerializeToString()  #變成byte
         return data
     except Exception as e:
         pass
         telegramBot("HC錯誤")
-        datas = APHDC_pb2.ApHdcArr()
+        datas = APHDC_noDB_pb2.ApHdcArr()
         datas.aphdc.extend(Data)
         data = datas.SerializeToString()
         HCfile = open('hc.log','a')
@@ -111,7 +111,7 @@ def hockey(Data):
 
 
 
-# enData = APHDC_pb2.ApHdcArr()
+# enData = APHDC_noDB_pb2.ApHdcArr()
 # enData.ParseFromString(f)
 # Data = enData.aphdc
 # hockey(Data)
