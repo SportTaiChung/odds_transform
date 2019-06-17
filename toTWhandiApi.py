@@ -71,7 +71,7 @@ def trans():
         return out
 
     except Exception as e:
-        telegramBot(str(e))
+        str(e)
 
 
 if __name__ == '__main__':
