@@ -88,9 +88,8 @@ message information {
 	string league = 1;
 	string cn_league = 2;
 	string en_league = 3;
-	string game_title = 4;
-	infoHA home = 5;
-	infoHA away = 6;
+	infoHA home = 4;
+	infoHA away = 5;
 }
 
 message infoHA {
