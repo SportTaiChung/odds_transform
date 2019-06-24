@@ -38,7 +38,6 @@ def trans():
             elif 'hockey'  in game:
                 out = testHcFunctionP.hockey(Data)
             elif 'mlb' or 'npb'  or  'kbo' in game:
-                # out = testBsMixFunction.baseballMix(Data)
                 out = newBSMixFunction.baseballMix(Data)
         except:
             telegramBot(str(data))
@@ -65,9 +64,9 @@ def trans():
                     que = ous+'_BS'
 
 
-        sendMQ.send_MQ(out, 'test_CMD', 'rabbit.avia520.com', 'AE86', '200p')
+        # sendMQ.send_MQ(out, 'test_CMD', 'rabbit.avia520.com', 'AE86', '200p')
         # sendMQ.hkMQ(out, 'test_PS38_BS', 'rmq.nba1688.net', 'GTR', '565p', '5673')
-        # sendMQ.send_MQ(out, que, '10.0.1.198', 'GTR', '565p')
+        sendMQ.send_MQ(out, que, '10.0.1.198', 'GTR', '565p')
         return out
 
     except Exception as e:
