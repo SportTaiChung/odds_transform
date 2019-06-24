@@ -150,12 +150,7 @@ def baseballMix(Data):
 
     except Exception as e:
         telegramBot("BS錯誤")
-        datas = APHDC_noDB_pb2.ApHdcArr()
-        datas.aphdc.extend(Data)
-        data = datas.SerializeToString()
-        BSfile = open('bs.log','a')
-        BSfile.write(str(data)+'\n'+str(e)+'\n'+dt.datetime.now().strftime('%Y-%m-%d %H:%M:%S')+'\n')
-
+        
 
 
 

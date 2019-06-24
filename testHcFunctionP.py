@@ -92,13 +92,6 @@ def hockey(Data):
         return data
     except Exception as e:
         telegramBot("HC錯誤")
-        datas = APHDC_noDB_pb2.ApHdcArr()
-        datas.aphdc.extend(Data)
-        data = datas.SerializeToString()
-        HCfile = open('hc.log','a')
-        HCfile.write(str(data)+'\n'+str(e)+'\n'+dt.datetime.now().strftime('%Y-%m-%d %H:%M:%S')+'\n')
-
-
 
 ## 找錯誤用 
 ## testData 後面請填入錯誤的data 執行即可印出錯誤

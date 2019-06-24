@@ -2,6 +2,7 @@ from flask_cors import CORS
 from flask import Flask
 from flask import request
 from sendMQ import telegramBot
+import datetime
 import sendMQ
 import APHDC_noDB_pb2
 import testHcFunctionP
@@ -39,8 +40,10 @@ def trans():
                 out = testHcFunctionP.hockey(Data)
             elif 'mlb' or 'npb'  or  'kbo' in game:
                 out = newBSMixFunction.baseballMix(Data)
-        except:
-            telegramBot(str(data))
+        except Exception as e:
+            errorfile = open('error.log','a')
+            errorfile.write(str(data)+'\n'+str(e)+'\n'+datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')+'\n')
+
 
         outData = APHDC_noDB_pb2.ApHdcArr()
         outData.ParseFromString(out)
@@ -70,7 +73,7 @@ def trans():
         return out
 
     except Exception as e:
-        str(e)
+        telegramBot(str(e))
 
 
 if __name__ == '__main__':
