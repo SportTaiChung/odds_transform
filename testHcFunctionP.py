@@ -28,8 +28,8 @@ def hockey(Data):
                     homeDe = '0'
                     awayDe = '0'
             except:
-                    homeDe = '0'
-                    awayDe = '0'
+                pass
+                
             if  "NHL美國冰球聯季後賽(含加時賽)" not in league:
                 noCal = testCutOneP.justCutOne_fun([hc])
                 enData = APHDC_noDB_pb2.ApHdcArr()
@@ -50,14 +50,15 @@ def hockey(Data):
                     if homeDe == '0' or zfBS[0] == '0+0':
                         hc.twZF.homeZF.odds = "0"
                         hc.twZF.awayZF.odds = "0"
-                        hc.de.home = '0'
-                        hc.de.away = '0'
+                        # hc.de.home = '0'
+                        # hc.de.away = '0'
                     else:
                         hc.de.home = zfBS[2]
                         hc.de.away = zfBS[3]
                         if homeO == '0':
-                            hc.twZF.homeZF.odds = "0"
-                            hc.twZF.awayZF.odds = "0"
+                            pass
+                            # hc.twZF.homeZF.odds = "0"
+                            # hc.twZF.awayZF.odds = "0"
                         else:
                             hc.twZF.homeZF.odds = "0.95"
                             hc.twZF.awayZF.odds = "0.95"
@@ -71,9 +72,10 @@ def hockey(Data):
 
                     ## 大小
                     if over in ('0.0', '0'):
-                        hc.twDS.line = '0+0'
-                        hc.twDS.over = '0'
-                        hc.twDS.under = '0'
+                        pass
+                        # hc.twDS.line = '0+0'
+                        # hc.twDS.over = '0'
+                        # hc.twDS.under = '0'
                     else:
                         dsBS = testCutOneP.cutOne(over, under)
                         if '.5' in str(float(line)):

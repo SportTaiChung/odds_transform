@@ -32,10 +32,11 @@ def justCutOne_fun(Data):
                 cut.twZF.homeZF.odds = zf[0]
                 cut.twZF.awayZF.odds = zf[1]
             else:
-                cut.twZF.homeZF.line = '0+0'
-                cut.twZF.awayZF.line = '0+0'
-                cut.twZF.homeZF.odds = '0'
-                cut.twZF.awayZF.odds = '0'
+                pass
+                # cut.twZF.homeZF.line = '0+0'
+                # cut.twZF.awayZF.line = '0+0'
+                # cut.twZF.homeZF.odds = '0'
+                # cut.twZF.awayZF.odds = '0'
         except:
             pass
 
@@ -53,9 +54,10 @@ def justCutOne_fun(Data):
                 cut.twDS.over = ds[0]
                 cut.twDS.under = ds[1]
             else:
-                cut.twDS.line = '0+0'
-                cut.twDS.over = '0'
-                cut.twDS.under = '0'
+                pass
+                # cut.twDS.line = '0+0'
+                # cut.twDS.over = '0'
+                # cut.twDS.under = '0'
         except:
             pass
 
