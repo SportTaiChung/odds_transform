@@ -68,8 +68,8 @@ def trans():
 
 
         # sendMQ.send_MQ(out, 'test_CMD', 'rabbit.avia520.com', 'AE86', '200p')
-        # sendMQ.hkMQ(out, 'test_CMD', 'rmq.nba1688.net', 'GTR', '565p', '5673')
-        sendMQ.send_MQ(out, 'test_CMD', '10.0.1.198', 'GTR', '565p')
+        sendMQ.hkMQ(out, 'test_CMD', 'rmq.nba1688.net', 'GTR', '565p', '5673')
+        # sendMQ.send_MQ(out, 'test_CMD', '10.0.1.198', 'GTR', '565p')
         return out
 
     except Exception as e:
