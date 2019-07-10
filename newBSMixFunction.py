@@ -83,17 +83,16 @@ def baseballMix(Data):
                     # 讓分單一盤口
                     else:
                         # 若 沒讓分 有獨贏 用獨贏算讓分的算法
-                        if homeDe != '0':
+                        if homeDe not in ('0.0', '', '0') :
                             if homeO in ('0', '', '0.0'): #沒讓分有獨贏
                                 zfBSde = testBSde.calBSde(source, gameClass, gameType, homeDe, awayDe)
                                 bs.twZF.homeZF.line = zfBSde[0]
                                 bs.twZF.awayZF.line = zfBSde[1]
                                 if  float(zfBSde[3]) <= 0.0 or homeDe == '0' or zfBSde[0] == '0+0':
-                                    pass
-                                    # bs.twZF.homeZF.line = '0+0'
-                                    # bs.twZF.awayZF.line = '0+0'
-                                    # bs.twZF.homeZF.odds = "0"
-                                    # bs.twZF.awayZF.odds = "0"
+                                    bs.twZF.homeZF.line = '0+0'
+                                    bs.twZF.awayZF.line = '0+0'
+                                    bs.twZF.homeZF.odds = "0"
+                                    bs.twZF.awayZF.odds = "0"
                                     # bs.de.home = '0'
                                     # bs.de.away = '0'
                                 else:
@@ -108,10 +107,9 @@ def baseballMix(Data):
                                 bs.de.away = zfBS[3]
                                 bs.twZF.homeZF.line = zfBS[0]
                                 bs.twZF.awayZF.line = zfBS[1]
-                                if homeO == '0' or zfBS[0] == '0+0' :
-                                    pass
-                                    # bs.twZF.homeZF.odds = "0"
-                                    # bs.twZF.awayZF.odds = "0"
+                                if homeO == '0' or zfBS[0] == '0+0':
+                                    bs.twZF.homeZF.odds = "0"
+                                    bs.twZF.awayZF.odds = "0"
                                 else:
                                     bs.twZF.homeZF.odds = "0.95"
                                     bs.twZF.awayZF.odds = "0.95"
@@ -131,8 +129,8 @@ def baseballMix(Data):
                         bs.usDS.line = line.split(',')[0]
                         bs.usDS.over = over.split(',')[0]
                         bs.usDS.under = under.split(',')[0]
-                        # bs.twDS.over = "0"
-                        # bs.twDS.under = "0"
+                        bs.twDS.over = "0"
+                        bs.twDS.under = "0"
                     else:
                         bs.twDS.over = "0.94"
                         bs.twDS.under = "0.94"
@@ -141,9 +139,8 @@ def baseballMix(Data):
                     dsBS = testBSds.calBSds(source, gameClass, gameType, line, over, under)
                     bs.twDS.line = dsBS
                     if over in ('0', '0.0') or dsBS == '0+0':
-                        pass
-                        # bs.twDS.over = "0"
-                        # bs.twDS.under = "0"
+                        bs.twDS.over = "0"
+                        bs.twDS.under = "0"
                     else:
                         bs.twDS.over = "0.94"
                         bs.twDS.under = "0.94"

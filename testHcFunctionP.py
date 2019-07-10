@@ -48,18 +48,16 @@ def hockey(Data):
 
                     ## 如果獨贏為0 讓分獨贏都關 因為算是需要讓分及獨贏缺一不可
                     if homeDe == '0' or zfBS[0] == '0+0':
-                        pass
-                        # hc.twZF.homeZF.odds = "0"
-                        # hc.twZF.awayZF.odds = "0"
+                        hc.twZF.homeZF.odds = "0"
+                        hc.twZF.awayZF.odds = "0"
                         # hc.de.home = '0'
                         # hc.de.away = '0'
                     else:
                         hc.de.home = zfBS[2]
                         hc.de.away = zfBS[3]
                         if homeO == '0':
-                            pass
-                            # hc.twZF.homeZF.odds = "0"
-                            # hc.twZF.awayZF.odds = "0"
+                            hc.twZF.homeZF.odds = "0"
+                            hc.twZF.awayZF.odds = "0"
                         else:
                             hc.twZF.homeZF.odds = "0.95"
                             hc.twZF.awayZF.odds = "0.95"
@@ -73,10 +71,9 @@ def hockey(Data):
 
                     ## 大小
                     if over in ('0.0', '0'):
-                        pass
-                        # hc.twDS.line = '0+0'
-                        # hc.twDS.over = '0'
-                        # hc.twDS.under = '0'
+                        hc.twDS.line = '0+0'
+                        hc.twDS.over = '0'
+                        hc.twDS.under = '0'
                     else:
                         dsBS = testCutOneP.cutOne(over, under)
                         if '.5' in str(float(line)):
