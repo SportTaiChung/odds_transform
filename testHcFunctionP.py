@@ -29,7 +29,7 @@ def hockey(Data):
                     awayDe = '0'
             except:
                 pass
-                
+
             if  "NHL美國冰球聯季後賽(含加時賽)" not in league:
                 noCal = testCutOneP.justCutOne_fun([hc])
                 enData = APHDC_noDB_pb2.ApHdcArr()
@@ -48,8 +48,9 @@ def hockey(Data):
 
                     ## 如果獨贏為0 讓分獨贏都關 因為算是需要讓分及獨贏缺一不可
                     if homeDe == '0' or zfBS[0] == '0+0':
-                        hc.twZF.homeZF.odds = "0"
-                        hc.twZF.awayZF.odds = "0"
+                        pass
+                        # hc.twZF.homeZF.odds = "0"
+                        # hc.twZF.awayZF.odds = "0"
                         # hc.de.home = '0'
                         # hc.de.away = '0'
                     else:

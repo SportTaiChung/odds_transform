@@ -157,8 +157,11 @@ def baseballMix(Data):
 ## 找錯誤用 
 ## testData 後面請填入錯誤的data 執行即可印出錯誤
 
-# testData = 
+# testData =
 # enData = APHDC_noDB_pb2.ApHdcArr()
 # enData.ParseFromString(testData)
 # Data = enData.aphdc
 # baseballMix(Data)
+
+# f = open('baseball_early.bin','rb')
+# print(f.read())
