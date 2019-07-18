@@ -14,7 +14,25 @@ def hockey(Data):
             league = hc.information.league
             gameType = hc.game_type
             gameClass = hc.game_class
+<<<<<<< HEAD
 
+=======
+            homeL = hc.usZF.homeZF.line
+            awayL = hc.usZF.awayZF.line
+            homeO = hc.usZF.homeZF.odds
+            awayO = hc.usZF.awayZF.odds
+            line = hc.usDS.line
+            over = hc.usDS.over
+            under = hc.usDS.under
+            try:
+                homeDe = hc.de.home
+                awayDe = hc.de.away
+                if homeDe in ('0.0', ''):
+                    homeDe = '0'
+                    awayDe = '0'
+            except:
+                pass
+>>>>>>> 5e03a538acddc71e24d57275273e6c3be14560b2
 
             if  "NHL美國冰球聯季後賽(含加時賽)" not in league:
                 noCal = testCutOneP.justCutOne_fun([hc])
@@ -46,8 +64,21 @@ def hockey(Data):
                         hc.twZF.homeZF.line = zfBS[0]
                         hc.twZF.awayZF.line = zfBS[1]
 
+<<<<<<< HEAD
                         ## 如果獨贏為0 讓分獨贏都關 因為算是需要讓分及獨贏缺一不可
                         if homeDe == '0' or zfBS[0] == '0+0':
+=======
+                    ## 如果獨贏為0 讓分獨贏都關 因為算是需要讓分及獨贏缺一不可
+                    if homeDe == '0' or zfBS[0] == '0+0':
+                        hc.twZF.homeZF.odds = "0"
+                        hc.twZF.awayZF.odds = "0"
+                        # hc.de.home = '0'
+                        # hc.de.away = '0'
+                    else:
+                        hc.de.home = zfBS[2]
+                        hc.de.away = zfBS[3]
+                        if homeO == '0':
+>>>>>>> 5e03a538acddc71e24d57275273e6c3be14560b2
                             hc.twZF.homeZF.odds = "0"
                             hc.twZF.awayZF.odds = "0"
                             hc.de.home = '0'

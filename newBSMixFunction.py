@@ -17,6 +17,21 @@ def baseballMix(Data):
             league = bs.information.league
             gameType = bs.game_type
             gameClass = bs.game_class
+<<<<<<< HEAD
+=======
+            homeDe = bs.de.home
+            awayDe = bs.de.away
+            # if homeDe in ('0.0', ''):
+            #     homeDe = '0'
+            #     awayDe = '0'
+            homeL = bs.usZF.homeZF.line
+            awayL = bs.usZF.awayZF.line
+            homeO = bs.usZF.homeZF.odds
+            awayO = bs.usZF.awayZF.odds
+            line = bs.usDS.line
+            over = bs.usDS.over
+            under = bs.usDS.under
+>>>>>>> 5e03a538acddc71e24d57275273e6c3be14560b2
 
             if '_' in league:
                 noCal = testCutOneP.justCutOne_fun([bs])
@@ -32,6 +47,7 @@ def baseballMix(Data):
                 awayO = bs.usZF.awayZF.odds
                 #上半場讓分
                 if gameType == '1st half':
+<<<<<<< HEAD
                     if homeO in (''):
                         # 讓分空不理
                         pass
@@ -39,6 +55,18 @@ def baseballMix(Data):
                         # 讓分要給0
                         bs.twZF.homeZF.line = "0"
                         bs.twZF.awayZF.line = "0"
+=======
+                    zfBShalf = testBSzf.calBSzf(source, gameClass, gameType, homeL, awayL, homeO, awayO, homeDe, awayDe)
+                    try:
+                        homeDe
+                        bs.de.home = zfBShalf[2]
+                        bs.de.away = zfBShalf[3]
+                    except:
+                        pass
+                    bs.twZF.homeZF.line = zfBShalf[0]
+                    bs.twZF.awayZF.line = zfBShalf[1]
+                    if homeO in ('0', '', '0.0') or zfBShalf[0] == '0+0':
+>>>>>>> 5e03a538acddc71e24d57275273e6c3be14560b2
                         bs.twZF.homeZF.odds = "0"
                         bs.twZF.awayZF.odds = "0"
                     else:
@@ -105,6 +133,7 @@ def baseballMix(Data):
                         bs.esre.away = zfBStwo[3]
                     # 讓分單一盤口
                     else:
+<<<<<<< HEAD
                         if homeDe in ('', '0', '0.0'):
                             if homeO in (''):
                                 pass
@@ -118,6 +147,11 @@ def baseballMix(Data):
                         else:
                             if homeO in ('', '0', '0.0'):
                                 # 有獨贏沒讓分 用 獨贏 算讓分的算法
+=======
+                        # 若 沒讓分 有獨贏 用獨贏算讓分的算法
+                        if homeDe not in ('0.0', '', '0') :
+                            if homeO in ('0', '', '0.0'): #沒讓分有獨贏
+>>>>>>> 5e03a538acddc71e24d57275273e6c3be14560b2
                                 zfBSde = testBSde.calBSde(source, gameClass, gameType, homeDe, awayDe)
                                 bs.twZF.homeZF.line = zfBSde[0]
                                 bs.twZF.awayZF.line = zfBSde[1]
@@ -127,8 +161,13 @@ def baseballMix(Data):
                                     bs.twZF.awayZF.line = '0+0'
                                     bs.twZF.homeZF.odds = "0"
                                     bs.twZF.awayZF.odds = "0"
+<<<<<<< HEAD
                                     bs.de.home = zfBSde[2]
                                     bs.de.away = zfBSde[3]
+=======
+                                    # bs.de.home = '0'
+                                    # bs.de.away = '0'
+>>>>>>> 5e03a538acddc71e24d57275273e6c3be14560b2
                                 else:
                                     # 讓分正確給0.95
                                     bs.twZF.homeZF.odds = "0.95"
@@ -142,7 +181,11 @@ def baseballMix(Data):
                                 bs.de.away = zfBS[3]
                                 bs.twZF.homeZF.line = zfBS[0]
                                 bs.twZF.awayZF.line = zfBS[1]
+<<<<<<< HEAD
                                 if zfBS[0] == '0+0':
+=======
+                                if homeO == '0' or zfBS[0] == '0+0':
+>>>>>>> 5e03a538acddc71e24d57275273e6c3be14560b2
                                     bs.twZF.homeZF.odds = "0"
                                     bs.twZF.awayZF.odds = "0"
                                 else:
@@ -273,6 +316,7 @@ def baseballMix(Data):
 ## 找錯誤用 
 ## testData 後面請填入錯誤的data 執行即可印出錯誤
 
+<<<<<<< HEAD
 
 # f = open('basball_today.bin', 'rb')
 # testData = f.read()
@@ -281,3 +325,13 @@ def baseballMix(Data):
 # Data = enData.aphdc
 # # print(Data)
 # baseballMix(Data) 
+=======
+# testData =
+# enData = APHDC_noDB_pb2.ApHdcArr()
+# enData.ParseFromString(testData)
+# Data = enData.aphdc
+# baseballMix(Data)
+
+# f = open('baseball_early.bin','rb')
+# print(f.read())
+>>>>>>> 5e03a538acddc71e24d57275273e6c3be14560b2

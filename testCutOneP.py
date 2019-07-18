@@ -31,6 +31,7 @@ def justCutOne_fun(Data):
                 cut.twZF.homeZF.line = homeline[0]+mapping.scMap(homeline[1:])
                 cut.twZF.awayZF.line = awayline[0]+mapping.scMap(awayline[1:])
             else:
+<<<<<<< HEAD
                 cut.twZF.homeZF.line = homeline
                 cut.twZF.awayZF.line = awayline
             zf = cutOne(homeodds, awayodds)
@@ -42,6 +43,14 @@ def justCutOne_fun(Data):
         over = cut.usDS.over
         under = cut.usDS.under
         if over in (''):
+=======
+                pass
+                # cut.twZF.homeZF.line = '0+0'
+                # cut.twZF.awayZF.line = '0+0'
+                # cut.twZF.homeZF.odds = '0'
+                # cut.twZF.awayZF.odds = '0'
+        except:
+>>>>>>> 5e03a538acddc71e24d57275273e6c3be14560b2
             pass
         elif over in ('0', '0.0'):
             cut.twDS.line = '0'
@@ -57,9 +66,21 @@ def justCutOne_fun(Data):
             cut.twDS.under = ds[1]
 
 
+<<<<<<< HEAD
         dehome = cut.de.home
         deaway = cut.de.away
         if dehome in ('', '0', '0.0'):
+=======
+                ds = cutOne(over, under)
+                cut.twDS.over = ds[0]
+                cut.twDS.under = ds[1]
+            else:
+                pass
+                # cut.twDS.line = '0+0'
+                # cut.twDS.over = '0'
+                # cut.twDS.under = '0'
+        except:
+>>>>>>> 5e03a538acddc71e24d57275273e6c3be14560b2
             pass
         else:
             de = cutOne(dehome, deaway)
