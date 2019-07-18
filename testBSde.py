@@ -4,12 +4,12 @@ from sendMQ import telegramBot
 
 def calBSde(source, gameClass, gameType, homeDe, awayDe):
 
-    if homeDe != '0':
-        homeDe = round((float(homeDe)-1), 2)
-        awayDe = round((float(awayDe)-1), 2)
-    else:
+    if homeDe in ('', '0', '0.0'):
         homeDe = float('0')
         awayDe = float('0')
+    else:    
+        homeDe = round((float(homeDe)-1), 2)
+        awayDe = round((float(awayDe)-1), 2)
 
     # 較小的獨贏 為smallDe
     if homeDe < awayDe:

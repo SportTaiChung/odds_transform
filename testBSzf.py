@@ -5,17 +5,18 @@ from sendMQ import telegramBot
 ## 冰球棒球都是用亞洲賠率(不加本金)計算
 def calBSzf(source, gameClass, gameType, homeL, awayL, homeO, awayO, homeDe, awayDe):
 
-    if homeO != '0':
-        homeO = round((float(homeO)-1), 2)
-        awayO = round((float(awayO)-1), 2)
-    else:
+    if homeO in ('', '0', '0.0'):
         homeO = 0
         awayO = 0
+    else:
+        homeO = round((float(homeO)-1), 2)
+        awayO = round((float(awayO)-1), 2)
 
-    if homeDe in ('0','0.0'):
+
+    if homeDe in ('', '0', '0.0'):
         homeDe = 0
-        awayDe = 0  
-    else:              
+        awayDe = 0
+    else:
         homeDe = round((float(homeDe)-1), 2)
         awayDe = round((float(awayDe)-1), 2)
 

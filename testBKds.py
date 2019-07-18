@@ -2,14 +2,10 @@ from sendMQ import telegramBot
 
 def calBKds(source, line, over, under):
 
-    if over == "0" or over == "0.0":
-        line = '0.0'
-        over = float('0')
-        under = float('0')
-    else:
-        line = str(float(line))
-        over = round((float(over)-1), 2)
-        under = round((float(under)-1), 2)
+
+    line = str(float(line))
+    over = round((float(over)-1), 2)
+    under = round((float(under)-1), 2)
 
     water = abs((over + under)/2-over)*(100/7.6*100)
     move = int(water)
@@ -91,8 +87,8 @@ def calBKds(source, line, over, under):
             L = newKey+newValue
         except:
             L = '0+0'
-    except:
-        telegramBot(source+","+"BKds Mapping錯誤"+","+str(line)+","+str(over)+","+str(under))
+    except Exception as e:
+        e
     # print(newKey+newValue)
     # print(hL + newKey+newValue)
     # print(aL + newKey+newValue)

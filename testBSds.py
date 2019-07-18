@@ -1,14 +1,14 @@
 from sendMQ import telegramBot
 
 def calBSds(source, gameClass, gameType, line, over, under):
-    if over != '0':
-        line = str(float(line))
-        over = round((float(over)-1), 2)
-        under = round((float(under)-1), 2)
-    else:
+    if over in ('', '0', '0.0'):
         line = str(float('0'))
         over = float('0')
         under = float('0')
+    else:
+        line = str(float(line))
+        over = round((float(over)-1), 2)
+        under = round((float(under)-1), 2)
 
     #冰球水位 25 100%
     #美棒水位 16 100%
