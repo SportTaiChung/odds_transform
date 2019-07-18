@@ -68,13 +68,8 @@ def trans():
 
 
         sendMQ.send_MQ(out, 'test_CMD', 'rabbit.avia520.com', 'AE86', '200p')
-<<<<<<< HEAD
         # sendMQ.hkMQ(out, 'test_PS38_BS', 'rmq.nba1688.net', 'GTR', '565p', '5673')
         # sendMQ.send_MQ(out, que, '10.0.1.198', 'GTR', '565p')
-=======
-        # sendMQ.hkMQ(out, 'test_CMD', 'rmq.nba1688.net', 'GTR', '565p', '5673')
-        # sendMQ.send_MQ(out, 'test_CMD', '10.0.1.198', 'GTR', '565p')
->>>>>>> 5e03a538acddc71e24d57275273e6c3be14560b2
         return out
 
     except Exception as e:
