@@ -58,24 +58,6 @@ def baseballMix(Data):
                             bs.twZF.awayZF.odds = "0.95"
                 #全場讓分
                 else:
-                    # if homeO in (''):
-                    #     if homeDe in ('', '0', '0.0'):
-                    #         pass
-                    #     else:
-                    #         de = testCutOneP.cutOne(homeDe, awayDe)
-                    #         bs.de.home = de[0]
-                    #         bs.de.away = de[1]
-                    # elif homeO in ('0', '0.0'):
-                    #     bs.twZF.homeZF.line = "0"
-                    #     bs.twZF.awayZF.line = "0"
-                    #     bs.twZF.homeZF.odds = "0"
-                    #     bs.twZF.awayZF.odds = "0"
-                    #     if homeDe in ('', '0', '0.0'):
-                    #         pass
-                    #     else:
-                    #         de = testCutOneP.cutOne(homeDe, awayDe)
-                    #         bs.de.home = de[0]
-                    #         bs.de.away = de[1]
                     # 讓分兩盤口
                     if ',' in homeL:
                         zfBStwo = newBSzf.calBSzf(source, gameClass, gameType, homeL, awayL, homeO, awayO)
