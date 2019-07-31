@@ -67,9 +67,9 @@ def trans():
                     que = ous+'_BS'
 
 
-        sendMQ.send_MQ(out, 'test_CMD', 'rabbit.avia520.com', 'AE86', '200p')
+        # sendMQ.send_MQ(out, 'test_CMD', 'rabbit.avia520.com', 'AE86', '200p')
         # sendMQ.hkMQ(out, 'test_PS38_BS', 'rmq.nba1688.net', 'GTR', '565p', '5673')
-        # sendMQ.send_MQ(out, que, '10.0.1.198', 'GTR', '565p')
+        sendMQ.send_MQ(out, que, '10.0.1.198', 'GTR', '565p')
         return out
 
     except Exception as e:
@@ -77,5 +77,5 @@ def trans():
 
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=5004, debug=True, threaded=True)
-    # app.run(host='0.0.0.0', port=5004, debug=True, threaded=True)
+    # app.run(host='127.0.0.1', port=5004, debug=True, threaded=True)
+    app.run(host='0.0.0.0', port=5004, debug=True, threaded=True)
