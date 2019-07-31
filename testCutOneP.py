@@ -28,8 +28,12 @@ def justCutOne_fun(Data):
             cut.twZF.awayZF.odds = '0'
         else:
             if cut.game_class == 'soccer' or cut.game_class == 'hockey':
-                cut.twZF.homeZF.line = homeline[0]+mapping.scMap(homeline[1:])
-                cut.twZF.awayZF.line = awayline[0]+mapping.scMap(awayline[1:])
+                try:
+                    cut.twZF.homeZF.line = homeline[0]+mapping.scMap(homeline[1:])
+                    cut.twZF.awayZF.line = awayline[0]+mapping.scMap(awayline[1:])
+                except:
+                    cut.twZF.homeZF.line = homeline
+                    cut.twZF.awayZF.line = awayline
             else:
                 cut.twZF.homeZF.line = homeline
                 cut.twZF.awayZF.line = awayline
@@ -48,7 +52,10 @@ def justCutOne_fun(Data):
             cut.twDS.under = '0'
         else:
             if cut.game_class == 'soccer' or cut.game_class == 'hockey':
-                cut.twDS.line = mapping.scMap(dsline)
+                try:
+                    cut.twDS.line = mapping.scMap(dsline)
+                except:
+                    cut.twDS.line = dsline
             else:
                 cut.twDS.line = dsline
             ds = cutOne(over, under)
@@ -82,3 +89,8 @@ def justCutOne_fun(Data):
     return data
 
 
+
+# enData = APHDC_noDB_pb2.ApHdcArr()
+# enData.ParseFromString(testData)
+# Data = enData.aphdc
+# justCutOne_fun(Data)
