@@ -17,7 +17,6 @@ def telegramBot(message):
     token = conf["telegram"]['token']
     id = conf['telegram']['chat_id']
     bot = telegram.Bot(token=token)
-    message = message
     bot.send_message(chat_id=id, text=message)
 
 # 傳送資料到ＭＱ的交換機

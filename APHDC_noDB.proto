@@ -2,6 +2,7 @@ syntax = "proto3";
 package protobuf;
 
 option java_package = "jst.java.mservice.catcher.protobuf";
+option java_outer_classname = "APHDC";
 
 message ApHdcArr {
 	repeated ApHdc aphdc = 1;
@@ -20,15 +21,18 @@ message ApHdc {
 	string live_time = 10; //走地時間 (1-100)或以上的分數
 	information information = 11; //球賽資訊
 	score score = 12; // 比分
-	usZF usZF = 13; //美盤讓分
-	typeDS usDS = 14; //美盤大小
-	twZF twZF = 15; //台盤讓分（音譯）
-	typeDS twDS = 16; //台盤大小（音譯）
-	onetwo de = 17; //獨贏盤（音譯）
-	onetwo sd = 18; //單雙盤（single double）
-	Esre esre = 19; //一輸二贏盤（音譯）
-	string draw = 20; //
-	string multi = 21; //波膽
+	redcard redcard = 13; // 紅牌
+	yellowcard yellowcard = 14; // 黃牌
+	conner conner = 15; // 角球
+	usZF usZF = 16; //美盤讓分
+	typeDS usDS = 17; //美盤大小
+	twZF twZF = 18; //台盤讓分（音譯）
+	typeDS twDS = 19; //台盤大小（音譯）
+	onetwo de = 20; //獨贏盤（音譯）
+	onetwo sd = 21; //單雙盤（single double）
+	Esre esre = 22; //一輸二贏盤（音譯）
+	string draw = 23; //
+	string multi = 24; //波膽
 }
 
 //一輸二贏
@@ -83,6 +87,23 @@ message score {
 	string away = 2;
 }
 
+//紅牌
+message redcard {
+	string home = 1;
+	string away = 2;
+}
+
+//黃牌
+message yellowcard {
+	string home = 1;
+	string away = 2;
+}
+
+//角球
+message conner {
+	string home = 1;
+	string away = 2;
+}
 
 message information {
 	string league = 1;
