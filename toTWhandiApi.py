@@ -43,7 +43,7 @@ def trans():
         except Exception as e:
             errorfile = open('error.log','a')
             errorfile.write(str(data)+'\n'+str(e)+'\n'+datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')+'\n')
-
+            errorfile.close()
 
         outData = APHDC_noDB_pb2.ApHdcArr()
         outData.ParseFromString(out)

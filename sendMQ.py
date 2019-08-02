@@ -32,7 +32,7 @@ def send_MQ(DATA, que, host, user, pw):     #資料送rabbitMQ
         host=host,
         virtual_host='/',
         credentials=cred,
-        socket_timeout=3
+        socket_timeout=6
     )
     connection = pika.BlockingConnection(params)
     channel = connection.channel()
