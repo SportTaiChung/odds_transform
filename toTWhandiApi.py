@@ -68,7 +68,7 @@ def trans():
 
 
         # sendMQ.send_MQ(out, 'test_CMD', 'rabbit.avia520.com', 'AE86', '200p', 5672)
-        sendMQ.send_MQ(out, que, 'rtmcq.nba1688.net', 'GTR', '565p', 5672)
+        sendMQ.send_MQ(out, que, '192.168.1.201', 'GTR', '565p', 5672)
         return out
 
     except Exception as e:
