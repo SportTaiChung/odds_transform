@@ -4,18 +4,18 @@ pipeline {
     stage('Build') {
       steps {
         sh '''pipenv install --dev'''
-        // telegramSend '🍎vbetGameResult -- Build'
+        telegramSend '🍎newToTWApi -- Build'
       }
     }
     // stage('Test') {
     //   steps {
-    //     telegramSend '🍎vbetGameResult -- Test'
+    //     telegramSend '🍎newToTWApi -- Test'
     //   sh '''pipenv run pytest -vv'''
     //   }
     // }
     stage('Deploy') {
       steps {
-        // telegramSend '🍎vbetGameResult -- Deploy'
+        telegramSend '🍎newToTWApi -- Deploy'
         ansiblePlaybook(
           playbook: 'deploy.yml',
           inventory: 'hosts',
