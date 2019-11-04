@@ -9,7 +9,7 @@ def calBKds(source, line, over, under):
 
     water = abs((over + under)/2-over)*(100/7.6*100)
     move = int(water)
-
+    # print(move)
     #以小數點後面數字來判斷 Ex: 0.5 >> 0-100 [.5 == -100]
     testmap = {
         '0':{'key':line.split('.')[0], 'value':+0},
@@ -33,7 +33,6 @@ def calBKds(source, line, over, under):
     else:
         ans = value+percent
     # print(ans)
-
     if value == 0:
         if 500 <= ans < 675:
             newKey = str(abs(int(key) - 3))
@@ -60,10 +59,10 @@ def calBKds(source, line, over, under):
         elif 200 <= ans <= 375:
             newKey = str(abs(int(key) - 1))
             newValue = ans -300
-        elif 0 < ans < 200:
+        elif 100 <= ans < 200:
             newKey = key
             newValue = ans -100
-        elif -100 <= ans <= 0:
+        elif -100 <= ans < 100:
             newKey = key
             newValue = ans
         elif -300 <= ans < -100:
@@ -88,16 +87,13 @@ def calBKds(source, line, over, under):
         except:
             L = '0+0'
     except Exception as e:
-        e
-    # print(newKey+newValue)
-    # print(hL + newKey+newValue)
-    # print(aL + newKey+newValue)
+        print(str(e))
     # print(L)
     return str(L)
 
 # if __name__ == '__main__':
 #     source = 'PS38'
-#     line= "226.5"
-#     over= "3.02"
-#     under= "1.9"
-#     calBKds(source, line, over, under)
+#     line= "110.5"
+#     over= "2.02"
+#     under= "1.84"
+#     print(calBKds(source, line, over, under))
