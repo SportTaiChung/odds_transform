@@ -2,12 +2,12 @@ from flask_cors import CORS
 from flask import Flask
 from flask import request
 from sendMQ import telegramBot
+import datetime
 import sendMQ
-import APHDC_pb2
+import APHDC_noDB_pb2
 import testHcFunctionP
 import testBskFunctionP
 import testCutOneP
-import testBsMixFunction
 import newBSMixFunction
 
 app = Flask(__name__)
@@ -22,7 +22,7 @@ def hello():
 def trans():
     try:
         data = request.get_data()
-        enData = APHDC_pb2.ApHdcArr()
+        enData = APHDC_noDB_pb2.ApHdcArr()
         enData.ParseFromString(data)
         Data = enData.aphdc
         try:
@@ -39,12 +39,13 @@ def trans():
             elif 'hockey'  in game:
                 out = testHcFunctionP.hockey(Data)
             elif 'mlb' or 'npb'  or  'kbo' in game:
-                # out = testBsMixFunction.baseballMix(Data)
                 out = newBSMixFunction.baseballMix(Data)
-        except:
-            telegramBot(str(data))
+        except Exception as e:
+            errorfile = open('error.log','a')
+            errorfile.write(str(data)+'\n'+str(e)+'\n'+datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')+'\n')
+            errorfile.close()
 
-        outData = APHDC_pb2.ApHdcArr()
+        outData = APHDC_noDB_pb2.ApHdcArr()
         outData.ParseFromString(out)
         Data = outData.aphdc
         ## 來源對應que
@@ -66,9 +67,8 @@ def trans():
                     que = ous+'_BS'
 
 
-        # sendMQ.send_MQ(out, 'test_CMD', 'rabbit.avia520.com', 'AE86', '200p')
-        # sendMQ.hkMQ(out, 'test_PS38_BS', 'rmq.nba1688.net', 'GTR', '565p', '5673')
-        sendMQ.send_MQ(out, que, '10.0.1.198', 'GTR', '565p')
+        # sendMQ.send_MQ(out, 'test_CMD', 'rabbit.avia520.com', 'AE86', '200p', 5672)
+        sendMQ.send_MQ(out, que, '192.168.1.201', 'GTR', '565p', 5672)
         return out
 
     except Exception as e:

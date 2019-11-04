@@ -1,35 +1,20 @@
 from sendMQ import telegramBot
 
 def calBKzf(source, gameType, homeL, awayL, homeO, awayO, homeDe, awayDe):
-    try:
-        if homeO == '0':
-            homeL = '0.0'
-            awayL = '0.0'
-            homeO = float('0.0')
-            awayO = float('0.0')
-        else:
-            homeO = round((float(homeO)-1), 2)
-            awayO = round((float(awayO)-1), 2)
+    
+    homeO = round((float(homeO)-1), 2)
+    awayO = round((float(awayO)-1), 2)
 
-        try:
-            if  homeDe == '0' or homeDe == '':
-                homeDe = float('0.0')
-                awayDe = float('0.0')
-            else:
-                homeDe = round((float(homeDe)-1), 2)
-                awayDe = round((float(awayDe)-1), 2)
-        except:
-            homeDe = float('0.0')
-            awayDe = float('0.0')
-    except Exception as e:
-        telegramBot(source+","+"BKzf錯誤"+","+str(gameType)+","+str(homeDe)+","+str(awayDe)+","+str(homeO)+","+str(awayO)+","+str(e))
-    # print(homeDe)
+    if  homeDe in ('0', '0.0', ''):
+        homeDe = float('0.0')
+        awayDe = float('0.0')
+    else:
+        homeDe = round((float(homeDe)-1), 2)
+        awayDe = round((float(awayDe)-1), 2)
 
     water = abs((homeO + awayO)/2-homeO)*(100/8*100)
     move = int(water)
-    # print((homeO + awayO)/2-homeO)
-    # print(water)
-    # print(move)
+
 
     #以小數點後面數字來判斷 Ex: 0.5 >> 0-100 [.5 == -100]
     testmap = {
@@ -38,7 +23,6 @@ def calBKzf(source, gameType, homeL, awayL, homeO, awayO, homeDe, awayDe):
         }
     key = testmap[homeL.split('.')[1]]['key'][1:]
     value = testmap[homeL.split('.')[1]]['value']
-    # print(key,value)
 
     #籃球級距為25 Ex: 1+25 1+50
     if move == 0:
@@ -48,7 +32,6 @@ def calBKzf(source, gameType, homeL, awayL, homeO, awayO, homeDe, awayDe):
             percent = 25 * int(move/25)
         else:
             percent = 25 * int(move/25) +25
-    # print(percent)
 
     ## 主讓
     if '-' in homeL:
@@ -62,8 +45,6 @@ def calBKzf(source, gameType, homeL, awayL, homeO, awayO, homeDe, awayDe):
             percent = value-percent
         else:
             percent = value+percent
-    # print(percent)
-
 
     if value == 0:
         if 500 <= percent < 675:
@@ -134,19 +115,11 @@ def calBKzf(source, gameType, homeL, awayL, homeO, awayO, homeDe, awayDe):
                     hL = homeL[0]
                     aL = awayL[0]
 
-            # print(newKey+newValue)
-            # print(hL + newKey+newValue)
-            # print(aL + newKey+newValue)
-
 
             ## 沒有 0+
             if '+' in newValue and newKey == '0':
                 if newKey+newValue != '0+0':
                     newValue = newValue.replace('+', '-')
-
-
-            # print(hL + newKey+newValue)
-            # print(aL + newKey+newValue)
 
             ## 全場沒有 0-
             if 'full' in gameType:
@@ -154,11 +127,6 @@ def calBKzf(source, gameType, homeL, awayL, homeO, awayO, homeDe, awayDe):
                     newKey = '1'
                     newValue = '+' + str(int(newValue) + 100)
 
-
-            # print(newKey+newValue)
-            # print(hL + newKey+newValue)
-            # print(aL + newKey+newValue)
-            # L = newKey+newValue
 
             try:
                 h = hL + newKey+newValue
@@ -172,8 +140,8 @@ def calBKzf(source, gameType, homeL, awayL, homeO, awayO, homeDe, awayDe):
         except:
             h = '0+0'
             a = '0+0'
-    except:
-        telegramBot(source+","+"BKzf Mapping錯誤"+","+str(gameType)+","+str(homeDe)+","+str(awayDe)+","+str(homeL)+","+str(awayL)+","+str(homeO)+","+str(awayO))
+    except Exception as e:
+        print(str(e))
 
     # print(h,a)
     # print(h , a ,str(homeDe) ,str(awayDe))

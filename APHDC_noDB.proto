@@ -2,6 +2,7 @@ syntax = "proto3";
 package protobuf;
 
 option java_package = "jst.java.mservice.catcher.protobuf";
+option java_outer_classname = "APHDC";
 
 message ApHdcArr {
 	repeated ApHdc aphdc = 1;
@@ -17,16 +18,21 @@ message ApHdc {
 	string event_time = 7; //賽事時間，台灣時間為主（GMT +8）
 	string source_updatetime = 8; //更新時間（抓取資料時間）
 	string live = 9; //是否為走地、滾球
-	information information = 10; //球賽資訊
-	score score = 11; // 比分
-	usZF usZF = 12; //美盤讓分
-	typeDS usDS = 13; //美盤大小
-	twZF twZF = 14; //台盤讓分（音譯）
-	typeDS twDS = 15; //台盤大小（音譯）
-	onetwo de = 16; //獨贏盤（音譯）
-	onetwo sd = 17; //單雙盤（single double）
-	Esre esre = 18; //一輸二贏盤（音譯）
-	string draw = 19; //和局
+	string live_time = 10; //走地時間 (1-100)或以上的分數
+	information information = 11; //球賽資訊
+	score score = 12; // 比分
+	redcard redcard = 13; // 紅牌
+	yellowcard yellowcard = 14; // 黃牌
+	conner conner = 15; // 角球
+	usZF usZF = 16; //美盤讓分
+	typeDS usDS = 17; //美盤大小
+	twZF twZF = 18; //台盤讓分（音譯）
+	typeDS twDS = 19; //台盤大小（音譯）
+	onetwo de = 20; //獨贏盤（音譯）
+	onetwo sd = 21; //單雙盤（single double）
+	Esre esre = 22; //一輸二贏盤（音譯）
+	string draw = 23; //
+	string multi = 24; //波膽
 }
 
 //一輸二贏
@@ -81,17 +87,37 @@ message score {
 	string away = 2;
 }
 
+//紅牌
+message redcard {
+	string home = 1;
+	string away = 2;
+}
+
+//黃牌
+message yellowcard {
+	string home = 1;
+	string away = 2;
+}
+
+//角球
+message conner {
+	string home = 1;
+	string away = 2;
+}
 
 message information {
 	string league = 1;
-	string game_title = 2;
-	infoHA home = 3;
-	infoHA away = 4;
+	string cn_league = 2;
+	string en_league = 3;
+	infoHA home = 4;
+	infoHA away = 5;
 }
 
 message infoHA {
 	string team_name = 1;
 	string pitcher = 2;
+	string cn_name = 3;
+	string en_name = 4;
 }
 
 
