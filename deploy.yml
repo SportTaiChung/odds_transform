@@ -1,0 +1,32 @@
+# ---
+# - hosts: appleBastionHost236
+#   vars:
+#     project: newToTWApi
+#   tasks:
+#     - stat:
+#         path: ~/{{ project }}
+#       register: project_home
+#     - name: Update Project Code
+#       git:
+#           repo: git@git.sp168.cc:apple/newToTWApi.git
+#           key_file: ~/.ssh/ansible
+#           dest: ~/{{ project }}
+#     - name: update python package
+#       shell: |
+#         pipenv update
+#         pipenv clean
+
+
+# 測試
+---
+- hosts: appleBastionHost
+  tasks:
+    # task 1
+    - name: test connection
+      ping:
+      register: message
+
+    # task 2
+    - name: print debug message
+      debug:
+        msg: "{{ message }}"
