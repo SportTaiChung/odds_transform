@@ -16,6 +16,7 @@ def basketball(Data):
             gameId = bsk.game_id
             source = bsk.source
             gameType = bsk.game_type
+            gameClass = bsk.game_class
             league = bsk.information.league
             sdA = bsk.sd.home
             sdH = bsk.sd.away
@@ -38,7 +39,7 @@ def basketball(Data):
                 dsline = bsk.usDS.line
                 over = bsk.usDS.over
                 under = bsk.usDS.under
-                if gameId[-1] == '*':
+                if gameId[-1] == '*' or gameClass == 'otherbasketball':
                     bsk.game_id = gameId.replace('*', '')
                     # print(bsk)
                     if homeO == '':
