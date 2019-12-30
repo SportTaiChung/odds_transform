@@ -98,20 +98,20 @@ def basketball(Data):
                         else:# 大小正確給0.95
                             bsk.twDS.over = "0.94"
                             bsk.twDS.under = "0.94"
-                else: ## 不需計算的NBA多盤口
-                    # print(gameId,over,under)
-                    if homeO not in ('0','0.0',''):
-                        bsk.twZF.homeZF.line = homeL.replace('.0','+0')
-                        bsk.twZF.awayZF.line = awayL.replace('.0','+0')
-                        bsk.twZF.homeZF.odds = str(round(float(homeO)-1, 3))
-                        bsk.twZF.awayZF.odds = str(round(float(awayO)-1, 3))
-                    if over not in ('0','0.0',''):
-                        bsk.twDS.line = dsline.replace('.0','+0')
-                        bsk.twDS.over = str(round(float(over)-1, 3))
-                        bsk.twDS.under = str(round(float(under)-1, 3))
-                    if homeDe not in ('0','0.0',''):
-                        bsk.de.home = str(round(float(homeDe)-1, 3))
-                        bsk.de.away = str(round(float(awayDe)-1, 3))
+                # else: ## 不需計算的NBA多盤口
+                #     # print(gameId,over,under)
+                #     if homeO not in ('0','0.0',''):
+                #         bsk.twZF.homeZF.line = homeL.replace('.0','+0')
+                #         bsk.twZF.awayZF.line = awayL.replace('.0','+0')
+                #         bsk.twZF.homeZF.odds = str(round(float(homeO)-1, 3))
+                #         bsk.twZF.awayZF.odds = str(round(float(awayO)-1, 3))
+                #     if over not in ('0','0.0',''):
+                #         bsk.twDS.line = dsline.replace('.0','+0')
+                #         bsk.twDS.over = str(round(float(over)-1, 3))
+                #         bsk.twDS.under = str(round(float(under)-1, 3))
+                #     if homeDe not in ('0','0.0',''):
+                #         bsk.de.home = str(round(float(homeDe)-1, 3))
+                #         bsk.de.away = str(round(float(awayDe)-1, 3))
 
 
             sendData.append(copy.deepcopy(bsk))
