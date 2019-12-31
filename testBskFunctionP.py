@@ -39,7 +39,7 @@ def basketball(Data):
                 dsline = bsk.usDS.line
                 over = bsk.usDS.over
                 under = bsk.usDS.under
-                if gameId[-1] == '*' or gameClass == 'otherbasketball':
+                if gameId[-1] == '*' or gameClass == 'otherbasketball' or gameType in('2nd half', '1st half'):
                     bsk.game_id = gameId.replace('*', '')
                     # print(bsk)
                     if homeO == '':
