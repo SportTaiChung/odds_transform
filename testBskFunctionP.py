@@ -39,7 +39,7 @@ def basketball(Data):
                 dsline = bsk.usDS.line
                 over = bsk.usDS.over
                 under = bsk.usDS.under
-                if gameId[-1] == '*' or gameClass == 'otherbasketball':
+                if gameId[-1] == '*' or gameClass == 'otherbasketball' or gameType in('2nd half', '1st half') :
                     bsk.game_id = gameId.replace('*', '')
                     # print(bsk)
                     if homeO == '':
@@ -129,7 +129,7 @@ def basketball(Data):
 ## 找錯誤用 
 ## testData 後面請填入錯誤的data 執行即可印出錯誤
 
-# with open('ps38_basketball_today.bin','rb') as f:
+# with open('ps38_basketball_team_totals.bin','rb') as f:
 #     testData = f.read()
 # enData = APHDC_noDB_pb2.ApHdcArr()
 # enData.ParseFromString(testData)
