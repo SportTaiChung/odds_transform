@@ -53,7 +53,7 @@ def trans():
             ous = ou.source
             ouc = ou.game_class
             if 'test' in ous:
-                que = 'test_CMD'
+                que = 'test_PS38'
             else:
                 if ouc == 'hockey':
                     que = ous+'_HC'
@@ -66,10 +66,10 @@ def trans():
                 elif 'mlb'  or 'npb'  or  'kbo' in ouc:
                     que = ous+'_BS'
 
-
-        # sendMQ.send_MQ(out, 'test_CMD', 'rabbit.avia520.com', 'AE86', '200p', 5672)
-        sendMQ.send_MQ(out, que, '192.168.1.201', 'GTR', '565p', 5672)
-        return out
+        if out:
+            # sendMQ.send_MQ(out, 'test_CMD', 'rabbit.avia520.com', 'AE86', '200p', 5672)
+            sendMQ.send_MQ(out, que, '192.168.1.201', 'GTR', '565p', 5672)
+            return out
 
     except Exception as e:
         telegramBot(str(e))
