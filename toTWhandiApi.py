@@ -45,6 +45,16 @@ def trans():
             errorfile.write(str(data)+'\n'+str(e)+'\n'+datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')+'\n')
             errorfile.close()
 
+        sportMap ={
+            'mlb':'_BS',
+            'npb':'_BS',
+            'kbo':'_BS',
+            'hockey':'_HC',
+            'football':'_FB',
+            'basketball':'_BK',
+            'otherbasketball':'_OBK',
+            'soccer':'_SC'
+        }
         outData = APHDC_noDB_pb2.ApHdcArr()
         outData.ParseFromString(out)
         Data = outData.aphdc
@@ -52,24 +62,12 @@ def trans():
         for ou in Data:
             ous = ou.source
             ouc = ou.game_class
-            if 'test' in ous:
-                que = 'test_PS38'
-            else:
-                if ouc == 'hockey':
-                    que = ous+'_HC'
-                elif ouc == 'football':
-                    que = ous+'_FB'
-                elif 'basketball' in ouc:
-                    que = ous+'_BK'
-                elif ouc == 'soccer':
-                    que = ous+'_SC'
-                elif 'mlb'  or 'npb'  or  'kbo' in ouc:
-                    que = ous+'_BS'
-
+            que = ous + sportMap.get(ouc)
         if out:
             # sendMQ.send_MQ(out, 'test_CMD', 'rabbit.avia520.com', 'AE86', '200p', 5672)
             sendMQ.send_MQ(out, que, '192.168.1.201', 'GTR', '565p', 5672)
             return out
+
 
     except Exception as e:
         telegramBot(str(e))
