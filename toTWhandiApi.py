@@ -17,7 +17,6 @@ CORS(app)
 def hello():
     return 'Start to Trans ! '
 
-
 @app.route('/transWithProtobuf', methods=['GET', 'POST'])
 def trans():
     try:
@@ -46,27 +45,27 @@ def trans():
             errorfile.close()
 
 
-        # sportMap ={
-        #     'mlb':'_BS',
-        #     'npb':'_BS',
-        #     'kbo':'_BS',
-        #     'hockey':'_HC',
-        #     'football':'_FB',
-        #     'basketball':'_BK',
-        #     'otherbasketball':'_OBK',
-        #     'soccer':'_SC'
-        # }
-        # outData = APHDC_noDB_pb2.ApHdcArr()
-        # outData.ParseFromString(out)
-        # Data = outData.aphdc
-        # ## 來源對應que
-        # for ou in Data:
-        #     ous = ou.source
-        #     ouc = ou.game_class
-        #     que = ous + sportMap.get(ouc)
+        sportMap ={
+            'mlb':'_BS',
+            'npb':'_BS',
+            'kbo':'_BS',
+            'hockey':'_HC',
+            'football':'_FB',
+            'basketball':'_BK',
+            'otherbasketball':'_OBK',
+            'soccer':'_SC'
+        }
+        outData = APHDC_noDB_pb2.ApHdcArr()
+        outData.ParseFromString(out)
+        Data = outData.aphdc
+        ## 來源對應que
+        for ou in Data:
+            ous = ou.source
+            ouc = ou.game_class
+            que = ous + sportMap.get(ouc)
     
         # sendMQ.send_MQ(out, 'test_CMD', 'rabbit.avia520.com', 'AE86', '200p', 5672)
-        sendMQ.send_MQ(out, 'test_PS38', '192.168.1.201', 'GTR', '565p', 5672)
+        sendMQ.send_MQ(out, 'test_PS38', 'rtmcq.nba1688.net', 'GTR', '565p', 5672)
         return out
 
 
