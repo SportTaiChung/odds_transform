@@ -45,6 +45,7 @@ def trans():
             errorfile.write(str(data)+'\n'+str(e)+'\n'+datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')+'\n')
             errorfile.close()
 
+
         # sportMap ={
         #     'mlb':'_BS',
         #     'npb':'_BS',
@@ -67,6 +68,7 @@ def trans():
         # sendMQ.send_MQ(out, 'test_CMD', 'rabbit.avia520.com', 'AE86', '200p', 5672)
         sendMQ.send_MQ(out, 'test_PS38', '192.168.1.201', 'GTR', '565p', 5672)
         return out
+
 
     except Exception as e:
         print(str(e))
