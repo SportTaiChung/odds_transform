@@ -15,8 +15,19 @@ def hockey(Data):
             gameType = hc.game_type
             gameClass = hc.game_class
 
-            if league in ('NHL OT Included', 'NHL美國冰球聯季後賽(含加時賽)'): # 此聯盟全場賽事需換算
-                if 'full' in gameType:
+
+            if '總得分' in league:  # 其他冰球賽事皆不用換算 只需減掉本金
+                noCal = testCutOneP.justCutOne_fun([hc])
+                enData = APHDC_noDB_pb2.ApHdcArr()
+                enData.ParseFromString(noCal)
+                noCalData = enData.aphdc
+            elif league not in ('NHL OT Included', 'NHL美國冰球聯季後賽(含加時賽)'): # 此聯盟全場賽事需換算
+                noCal = testCutOneP.justCutOne_fun([hc])
+                enData = APHDC_noDB_pb2.ApHdcArr()
+                enData.ParseFromString(noCal)
+                noCalData = enData.aphdc
+            else:
+                if 'full' in gameType and '1.5' in hc.usZF.homeZF.line:
                     try:
                         homeL = hc.usZF.homeZF.line
                         awayL = hc.usZF.awayZF.line
@@ -78,12 +89,10 @@ def hockey(Data):
                     except:
                         pass
                 else:
-                    pass
-            else:  # 其他冰球賽事皆不用換算 只需減掉本金
-                noCal = testCutOneP.justCutOne_fun([hc])
-                enData = APHDC_noDB_pb2.ApHdcArr()
-                enData.ParseFromString(noCal)
-                noCalData = enData.aphdc
+                    noCal = testCutOneP.justCutOne_fun([hc])
+                    enData = APHDC_noDB_pb2.ApHdcArr()
+                    enData.ParseFromString(noCal)
+                    noCalData = enData.aphdc
 
             sendData.append(copy.deepcopy(hc))
         # print(sendData)
