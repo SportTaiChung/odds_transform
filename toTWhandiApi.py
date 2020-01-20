@@ -28,6 +28,7 @@ def trans():
             ## 球賽對應function
             for en in Data:
                 game = en.game_class
+                gameId = en.game_id
 
             if 'basketball' in game:
                 out = testBskFunctionP.basketball(Data)
@@ -66,11 +67,11 @@ def trans():
             errorfile = open('error.log', 'a')
             errorfile.write(str(data)+'\n'+str(e)+'\n'+datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')+'\n')
             errorfile.close()
-            return 'Error !!'
+            return 'Error !!' +'\n'+ 'gameId: ' + gameId
 
     except Exception as e:
         print(str(e))
-        return 'Error !!'
+        
 
 if __name__ == '__main__':
     # app.run(host='127.0.0.1', port=5004, debug=True, threaded=True)
