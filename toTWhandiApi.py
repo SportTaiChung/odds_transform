@@ -35,6 +35,8 @@ def trans():
                 out = testCutOneP.justCutOne_fun(Data)
             elif 'soccer' in game:
                 out = testCutOneP.justCutOne_fun(Data)
+            elif 'tennis' in game:
+                out = testCutOneP.justCutOne_fun(Data)
             elif 'hockey'  in game:
                 out = testHcFunctionP.hockey(Data)
             elif 'mlb' or 'npb'  or  'kbo' in game:
