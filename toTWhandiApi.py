@@ -32,7 +32,7 @@ def trans():
 
             if 'basketball' in game:
                 out = testBskFunctionP.basketball(Data)
-            elif 'hockey'  in game:
+            elif 'hockey' in game:
                 out = testHcFunctionP.hockey(Data)
             elif game in ('football', 'soccer', 'tennis'):
                 out = testCutOneP.justCutOne_fun(Data)
@@ -40,33 +40,31 @@ def trans():
                 out = newBSMixFunction.baseballMix(Data)
 
 
-            # sportMap ={
-            #     'mlb':'_BS',
-            #     'npb':'_BS',
-            #     'kbo':'_BS',
-            #     'hockey':'_HC',
-            #     'football':'_FB',
-            #     'basketball':'_BK',
-            #     'otherbasketball':'_OBK',
-            #     'soccer':'_SC',
-            #     'tennis':'_TN'
-            # }
-            # outData = APHDC_noDB_pb2.ApHdcArr()
-            # outData.ParseFromString(out)
-            # Data = outData.aphdc
-            # ## 來源對應que
-            # for ou in Data:
-            #     ous = ou.source
-            #     ouc = ou.game_class
-            #     que = ous + sportMap.get(ouc)
-        
-            # sendMQ.send_MQ(out, 'test_CMD', 'rabbit.avia520.com', 'AE86', '200p', 5672)
+            sportMap ={
+                'mlb':'_BS',
+                'npb':'_BS',
+                'kbo':'_BS',
+                'hockey':'_HC',
+                'football':'_FB',
+                'basketball':'_BK',
+                'otherbasketball':'_OBK',
+                'soccer':'_SC',
+                'tennis':'_TN'
+            }
+            outData = APHDC_noDB_pb2.ApHdcArr()
+            outData.ParseFromString(out)
+            Data = outData.aphdc
+            ## 來源對應que
+            for ou in Data:
+                ous = ou.source
+                ouc = ou.game_class
+                que = ous + sportMap.get(ouc)
+
             sendMQ.send_MQ(out, 'test_PS38', 'rtmcq.nba1688.net', 'GTR', '565p', 5672)
             return 'Success !!'
         except Exception as e:
-            errorfile = open('error.log', 'a')
-            errorfile.write(str(data)+'\n'+str(e)+'\n'+datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')+'\n')
-            errorfile.close()
+            with open('Log/'+game+'.log', 'a') as errorfile:
+                errorfile.write(str(data)+'\n'+str(e)+'\n'+datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')+'\n')
             return 'Error !!' +'\n'+ 'gameId: ' + gameId
 
     except Exception as e:
