@@ -65,7 +65,8 @@ def trans():
                     que = ous+'_SC'
                 elif 'mlb'  or 'npb'  or  'kbo' in ouc:
                     que = ous+'_BS'
-
+                else:
+                    que = ous+'_TN'
 
         # sendMQ.send_MQ(out, 'test_CMD', 'rabbit.avia520.com', 'AE86', '200p', 5672)
         sendMQ.send_MQ(out, que, '192.168.1.201', 'GTR', '565p', 5672)
