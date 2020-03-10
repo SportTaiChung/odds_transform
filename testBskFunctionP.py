@@ -110,8 +110,8 @@ def basketball(Data):
         data = datas.SerializeToString()  #變成byte
         return data
     except Exception as e:
-        # print(str(e))
-        telegramBot("BSK錯誤")
+        print(str(e))
+        # telegramBot("BSK錯誤")
 
 
 ## 找錯誤用 
@@ -122,5 +122,4 @@ def basketball(Data):
 # enData.ParseFromString(testData)
 # Data = enData.aphdc
 # out = basketball(Data)
-
 

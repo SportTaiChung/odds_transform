@@ -17,7 +17,6 @@ CORS(app)
 def hello():
     return 'Start to Trans ! '
 
-
 @app.route('/transWithProtobuf', methods=['GET', 'POST'])
 def trans():
     try:
@@ -29,52 +28,46 @@ def trans():
             ## 球賽對應function
             for en in Data:
                 game = en.game_class
+                gameId = en.game_id
 
             if 'basketball' in game:
                 out = testBskFunctionP.basketball(Data)
-            elif 'football' in game:
-                out = testCutOneP.justCutOne_fun(Data)
-            elif 'soccer' in game:
-                out = testCutOneP.justCutOne_fun(Data)
-            elif 'hockey'  in game:
+            elif 'hockey' in game:
                 out = testHcFunctionP.hockey(Data)
-            elif 'mlb' or 'npb'  or  'kbo' in game:
+            elif game in ('football', 'soccer', 'tennis'):
+                out = testCutOneP.justCutOne_fun(Data)
+            elif game in ('mlb', 'npb', 'kbo'):
                 out = newBSMixFunction.baseballMix(Data)
+            sportMap ={
+                'mlb':'_BS',
+                'npb':'_BS',
+                'kbo':'_BS',
+                'hockey':'_HC',
+                'football':'_FB',
+                'basketball':'_BK',
+                'otherbasketball':'_BK',
+                'soccer':'_SC',
+                'tennis':'_TN'
+            }
+            outData = APHDC_noDB_pb2.ApHdcArr()
+            outData.ParseFromString(out)
+            Data = outData.aphdc
+            ## 來源對應que
+            for ou in Data:
+                ous = ou.source
+                ouc = ou.game_class
+                que = ous + sportMap.get(ouc)
+
+            sendMQ.send_MQ(out, que, '192.168.1.201', 'GTR', '565p', 5672)
+            return 'Success !!'
         except Exception as e:
-            errorfile = open('error.log','a')
-            errorfile.write(str(data)+'\n'+str(e)+'\n'+datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')+'\n')
-            errorfile.close()
-
-        outData = APHDC_noDB_pb2.ApHdcArr()
-        outData.ParseFromString(out)
-        Data = outData.aphdc
-        ## 來源對應que
-        for ou in Data:
-            ous = ou.source
-            ouc = ou.game_class
-            if 'test' in ous:
-                que = 'test_CMD'
-            else:
-                if ouc == 'hockey':
-                    que = ous+'_HC'
-                elif ouc == 'football':
-                    que = ous+'_FB'
-                elif 'basketball' in ouc:
-                    que = ous+'_BK'
-                elif ouc == 'soccer':
-                    que = ous+'_SC'
-                elif 'mlb'  or 'npb'  or  'kbo' in ouc:
-                    que = ous+'_BS'
-                else:
-                    que = ous+'_TN'
-
-        # sendMQ.send_MQ(out, 'test_CMD', 'rabbit.avia520.com', 'AE86', '200p', 5672)
-        sendMQ.send_MQ(out, que, '192.168.1.201', 'GTR', '565p', 5672)
-        return out
+            with open('Log/'+game+'.log', 'a') as errorfile:
+                errorfile.write(str(data)+'\n'+str(e)+'\n'+datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')+'\n')
+            return 'Error !!' +'\n'+ 'gameId: ' + gameId
 
     except Exception as e:
-        telegramBot(str(e))
-
+        print(str(e))
+        
 
 if __name__ == '__main__':
     # app.run(host='127.0.0.1', port=5004, debug=True, threaded=True)
