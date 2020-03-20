@@ -34,7 +34,7 @@ def trans():
                 out = testBskFunctionP.basketball(Data)
             elif 'hockey' in game:
                 out = testHcFunctionP.hockey(Data)
-            elif game in ('football', 'soccer', 'tennis', 'esport'):
+            elif game in ('football', 'soccer', 'tennis', 'eSport'):
                 out = testCutOneP.justCutOne_fun(Data)
             elif game in ('mlb', 'npb', 'kbo'):
                 out = newBSMixFunction.baseballMix(Data)
@@ -48,7 +48,7 @@ def trans():
                 'otherbasketball':'_BK',
                 'soccer':'_SC',
                 'tennis':'_TN',
-                'esport':'_ES'
+                'eSport':'_ES'
             }
             outData = APHDC_noDB_pb2.ApHdcArr()
             outData.ParseFromString(out)
