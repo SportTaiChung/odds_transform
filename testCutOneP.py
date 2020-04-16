@@ -72,6 +72,11 @@ def justCutOne_fun(Data):
             cut.de.home = de[0]
             cut.de.away = de[1]
 
+        draw = cut.draw
+        if draw in ('', '0', '0.0'):
+            pass
+        else:
+            cut.draw = str(round((float(draw) -1), 2))
 
         sdhome = cut.sd.home
         sdaway = cut.sd.away
@@ -81,7 +86,7 @@ def justCutOne_fun(Data):
             sd = cutOne(sdhome, sdaway)
             cut.sd.home = sd[0]
             cut.sd.away = sd[1]
-  
+
         sendData.append(copy.deepcopy(cut))
         datas = APHDC_noDB_pb2.ApHdcArr()
         datas.aphdc.extend(sendData)
