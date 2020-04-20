@@ -72,6 +72,11 @@ def justCutOne_fun(Data):
             cut.de.home = de[0]
             cut.de.away = de[1]
 
+        draw = cut.draw
+        if draw in ('', '0', '0.0'):
+            pass
+        else:
+            cut.draw = str(round((float(draw) -1), 2))
 
         sdhome = cut.sd.home
         sdaway = cut.sd.away
