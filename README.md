@@ -2,16 +2,15 @@
 
 ## API
 ```
-223API URL: http://txpywapi.nice666.net:5004/transWithProtobuf
-237API URL: http://ptcy.nba1688.net:5004/transWithProtobuf
+236API URL: http://ptcy.nba1688.net:5004/transWithProtobuf
 ```
 ## 啟動服務
 ```
-機器 237
+機器 236
 cd newToTWApi
 python toTWhandiApi.py & >/dev/null 2>&1
 或是 (目前使用↓)
-gunicorn -w 5 -k gevent -b 0.0.0.0:5004 toTWhandiApi:app & >/dev/null 2>&1
+gunicorn -w 9 -k gevent -b 0.0.0.0:5004 toTWhandiApi:app & >/dev/null 2>&1
 
 ```
 ## 重啟
