@@ -28,7 +28,7 @@ def basketball(Data):
             under = bsk.usDS.under
 
             if deH in ('0', '0.0', ''):
-                print(bsk.game_id )
+#                print(bsk.game_id )
                 if homeL not in ('0', '0.0', ''):
                     bsk.twZF.homeZF.line = homeL.replace('.0','+0').replace('.5','-100')
                     bsk.twZF.awayZF.line = awayL.replace('.0','+0').replace('.5','-100')
