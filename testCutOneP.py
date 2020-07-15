@@ -27,7 +27,7 @@ def justCutOne_fun(Data):
             cut.twZF.homeZF.odds = '0'
             cut.twZF.awayZF.odds = '0'
         else:
-            if cut.game_class == 'soccer' or cut.game_class == 'hockey':
+            if cut.game_class in ('UCL', 'soccer', 'hockey'):
                 try:
                     cut.twZF.homeZF.line = homeline[0]+mapping.scMap(homeline[1:])
                     cut.twZF.awayZF.line = awayline[0]+mapping.scMap(awayline[1:])
@@ -51,7 +51,7 @@ def justCutOne_fun(Data):
             cut.twDS.over = '0'
             cut.twDS.under = '0'
         else:
-            if cut.game_class == 'soccer' or cut.game_class == 'hockey':
+            if cut.game_class in ('UCL', 'soccer', 'hockey'):
                 try:
                     cut.twDS.line = mapping.scMap(dsline)
                 except:
