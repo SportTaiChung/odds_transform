@@ -34,7 +34,7 @@ def trans():
                 out = testBskFunctionP.basketball(Data)
             elif 'hockey' in game:
                 out = testHcFunctionP.hockey(Data)
-            elif game in ('football', 'soccer', 'tennis', 'eSport'):
+            elif game in ('UCL', 'football', 'soccer', 'tennis', 'eSport'):
                 out = testCutOneP.justCutOne_fun(Data)
             elif game in ('mlb', 'npb', 'kbo'):
                 out = newBSMixFunction.baseballMix(Data)

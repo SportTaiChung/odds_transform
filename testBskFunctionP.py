@@ -15,6 +15,7 @@ def basketball(Data):
             source = bsk.source
             gameType = bsk.game_type
             league = bsk.information.league
+            gameID = bsk.game_id
             sdH = bsk.sd.home
             sdA = bsk.sd.away
             deH = bsk.de.home
@@ -27,17 +28,7 @@ def basketball(Data):
             over = bsk.usDS.over
             under = bsk.usDS.under
 
-            if deH in ('0', '0.0', ''):
-                #print(bsk.game_id )
-                if homeL not in ('0', '0.0', ''):
-                    bsk.twZF.homeZF.line = homeL.replace('.0','+0').replace('.5','-100')
-                    bsk.twZF.awayZF.line = awayL.replace('.0','+0').replace('.5','-100')
-                    zfCutOne = testCutOneP.cutOne(homeO,awayO)
-                    bsk.twZF.homeZF.odds, bsk.twZF.awayZF.odds = zfCutOne
-                    bsk.twDS.line = dsline.replace('.0','+0').replace('.5','-100')
-                    bsCutOne = testCutOneP.cutOne(over,under)
-                    bsk.twDS.over, bsk.twDS.under = bsCutOne
-            else:
+            if (gameType == 'full' and gameID[-1] == '0') or (gameType=='1st half' and gameID[-2] == '0'):
                 if sdH not in ('0', '0.0', ''):
                     sd = testCutOneP.cutOne(sdH, sdA)
                     bsk.sd.home = sd[0]
@@ -113,6 +104,15 @@ def basketball(Data):
                             # 大小正確給0.95
                             bsk.twDS.over = "0.94"
                             bsk.twDS.under = "0.94"
+            else:
+                if homeL not in ('0', '0.0', ''):
+                    bsk.twZF.homeZF.line = homeL.replace('.0','+0').replace('.5','-100')
+                    bsk.twZF.awayZF.line = awayL.replace('.0','+0').replace('.5','-100')
+                    zfCutOne = testCutOneP.cutOne(homeO,awayO)
+                    bsk.twZF.homeZF.odds, bsk.twZF.awayZF.odds = zfCutOne
+                    bsk.twDS.line = dsline.replace('.0','+0').replace('.5','-100')
+                    bsCutOne = testCutOneP.cutOne(over,under)
+                    bsk.twDS.over, bsk.twDS.under = bsCutOne
 
             sendData.append(copy.deepcopy(bsk))
         
