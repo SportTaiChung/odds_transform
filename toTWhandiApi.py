@@ -47,6 +47,7 @@ def trans():
                 'basketball':'_BK',
                 'otherbasketball':'_BK',
                 'soccer':'_SC',
+                'UCL':'_SC',
                 'tennis':'_TN',
                 'eSport':'_ES'
             }
