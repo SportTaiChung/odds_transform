@@ -783,7 +783,7 @@ def bshalf1(value):
 
 def twoHandiBsZf(value):
     oddsmap = {
-        1: "(1-100)",
+        1: "1-100",
         0.95: "2+95",
         0.9: "2+90",
         0.85: "2+85",

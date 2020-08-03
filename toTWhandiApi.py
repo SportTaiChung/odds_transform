@@ -60,7 +60,7 @@ def trans():
                 ouc = ou.game_class
                 que = ous + sportMap.get(ouc)
 
-            sendMQ.send_MQ(out, 'test_PS38', '192.168.1.201', 'GTR', '565p', 5672)
+            sendMQ.send_MQ(out, que, '192.168.1.201', 'GTR', '565p', 5672)
             return 'Success !!'
         except Exception as e:
             with open('Log/'+game+'.log', 'a') as errorfile:
@@ -73,4 +73,4 @@ def trans():
 
 if __name__ == '__main__':
     # app.run(host='127.0.0.1', port=5004, debug=True, threaded=True)
-    app.run(host='0.0.0.0', port=5005, debug=True, threaded=True)
+    app.run(host='0.0.0.0', port=5004, debug=True, threaded=True)
