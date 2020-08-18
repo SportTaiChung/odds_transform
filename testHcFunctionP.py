@@ -21,7 +21,7 @@ def hockey(Data):
                 enData = APHDC_noDB_pb2.ApHdcArr()
                 enData.ParseFromString(noCal)
                 noCalData = enData.aphdc
-            elif league not in ('NHL OT Included', 'NHL美國冰球聯季後賽(含加時賽)'): # 此聯盟全場賽事需換算
+            elif league not in ('NHL OT Included', 'NHL美國冰球聯季後賽(含加時賽)', '國家冰球聯盟包括加時'): # 此聯盟全場賽事需換算
                 noCal = testCutOneP.justCutOne_fun([hc])
                 enData = APHDC_noDB_pb2.ApHdcArr()
                 enData.ParseFromString(noCal)
@@ -103,11 +103,10 @@ def hockey(Data):
     except Exception as e:
         telegramBot("HC錯誤")
 
-## 找錯誤用 
-## testData 後面請填入錯誤的data 執行即可印出錯誤
 
-# testData = 
-# enData = APHDC_noDB_pb2.ApHdcArr()
-# enData.ParseFromString(testData)
-# Data = enData.aphdc
-# hockey(Data)
+# if __name__ == "__main__":
+    # testData = 
+    # enData = APHDC_noDB_pb2.ApHdcArr()
+    # enData.ParseFromString(testData)
+    # Data = enData.aphdc
+    # hockey(Data)
