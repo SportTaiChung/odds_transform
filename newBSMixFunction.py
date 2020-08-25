@@ -6,7 +6,6 @@ import testBSde
 import testCutOneP
 import newBSds
 import newBSzf
-from sendMQ import telegramBot
 import datetime as dt
 
 def baseballMix(Data):
@@ -49,8 +48,8 @@ def baseballMix(Data):
                         bs.twZF.homeZF.line = zfBShalf[0]
                         bs.twZF.awayZF.line = zfBShalf[1]
                         if zfBShalf[0] == '0+0':
-                            # 讓分錯誤關盤
-                            bs.twZF.homeZF.odds = "0"
+                            # 讓分算不出關盤
+                            bs.twZF.homeZF.odds = "false"
                             bs.twZF.awayZF.odds = "0"
                         else:
                             # 讓分正確給0.95
@@ -64,12 +63,12 @@ def baseballMix(Data):
                         bs.twZF.homeZF.line = zfBStwo[0]
                         bs.twZF.awayZF.line = zfBStwo[1]
                         if zfBStwo[0] == '0+0':
-                            # 讓分錯誤關盤
+                            # 讓分算不出關盤
                             bs.usZF.homeZF.line = homeL.split(',')[0]
                             bs.usZF.awayZF.line = awayL.split(',')[0]
                             bs.usZF.homeZF.odds = homeO.split(',')[0]
                             bs.usZF.awayZF.odds = awayO.split(',')[0]
-                            bs.twZF.homeZF.odds = "0"
+                            bs.twZF.homeZF.odds = "false"
                             bs.twZF.awayZF.odds = "0"
                         else:
                             # 讓分正確給0.95
@@ -104,10 +103,10 @@ def baseballMix(Data):
                                 bs.twZF.homeZF.line = zfBSde[0]
                                 bs.twZF.awayZF.line = zfBSde[1]
                                 if zfBSde[0] == '0+0':
-                                    # 讓分錯誤關盤
+                                    # 讓分算不出關盤
                                     bs.twZF.homeZF.line = '0+0'
                                     bs.twZF.awayZF.line = '0+0'
-                                    bs.twZF.homeZF.odds = "0"
+                                    bs.twZF.homeZF.odds = "false"
                                     bs.twZF.awayZF.odds = "0"
                                     bs.de.home = zfBSde[2]
                                     bs.de.away = zfBSde[3]
@@ -125,8 +124,8 @@ def baseballMix(Data):
                                 bs.de.away = zfBS[3]
                                 bs.twZF.homeZF.line = zfBS[0]
                                 bs.twZF.awayZF.line = zfBS[1]
-                                if zfBS[0] == '0+0':
-                                    bs.twZF.homeZF.odds = "0"
+                                if zfBS[0] == '0+0': ## 讓分算不出
+                                    bs.twZF.homeZF.odds = "false"
                                     bs.twZF.awayZF.odds = "0"
                                 else:
                                     bs.twZF.homeZF.odds = "0.95"
@@ -154,11 +153,11 @@ def baseballMix(Data):
                     bs.usDS.line = dsBS[1]
                     bs.usDS.over = str(round((float(dsBS[2])+1), 2))
                     bs.usDS.under = str(round((float(dsBS[3])+1), 2))
-                    if dsBS == '0+0':
+                    if dsBS == '0+0': ## 大小算不出
                         bs.usDS.line = line.split(',')[0]
                         bs.usDS.over = over.split(',')[0]
                         bs.usDS.under = under.split(',')[0]
-                        bs.twDS.over = "0"
+                        bs.twDS.over = "false"
                         bs.twDS.under = "0"
                     else:
                         bs.twDS.over = "0.94"
@@ -167,8 +166,8 @@ def baseballMix(Data):
                 else :
                     dsBS = testBSds.calBSds(source, gameClass, gameType, line, over, under)
                     bs.twDS.line = dsBS
-                    if dsBS == '0+0':
-                        bs.twDS.over = "0"
+                    if dsBS == '0+0': ## 大小算不出
+                        bs.twDS.over = "false"
                         bs.twDS.under = "0"
                     else:
                         bs.twDS.over = "0.94"
@@ -182,19 +181,14 @@ def baseballMix(Data):
 
     except Exception as e:
         print(str(e))
-        # telegramBot("BS錯誤")
         
 
-
-
-## 找錯誤用 
-## testData 後面請填入錯誤的data 執行即可印出錯誤
-
-# f = open('basball_today.bin', 'rb')
-# testData = f.read()
-# enData = APHDC_noDB_pb2.ApHdcArr()
-# enData.ParseFromString(testData)
-# Data = enData.aphdc
-# # print(Data)
-# baseballMix(Data) 
+if __name__ == '__main__':
+    f = open('baseball.bin', 'rb')
+    testData = f.read()
+    enData = APHDC_noDB_pb2.ApHdcArr()
+    enData.ParseFromString(testData)
+    Data = enData.event
+    print(Data)
+    # baseballMix(Data) 
 

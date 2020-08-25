@@ -64,7 +64,6 @@ def calBSzf(source, gameClass, gameType, homeL, awayL, homeO, awayO, homeDe, awa
                 percent = 5 * int(water/5) +5
         else:
             residue = water%5
-            #residue = (water/5) - int(water/5)
             if residue < -0.5:
                 percent = 5 *int(water/5) -5
             else:

@@ -4,7 +4,6 @@ import APHDC_noDB_pb2
 import testBKzf
 import testBKds
 import testCutOneP
-from sendMQ import telegramBot
 import datetime as dt
 
 
@@ -66,8 +65,8 @@ def basketball(Data):
                         if zfBK[2] == '0.0':
                             # 獨贏是0或空不理
                             if zfBK[0] == '0+0':
-                                #讓分算錯關盤
-                                bsk.twZF.homeZF.odds = "0"
+                                #讓分算不出關盤
+                                bsk.twZF.homeZF.odds = "false"
                                 bsk.twZF.awayZF.odds = "0"
                             else:
                                 #讓分正確給0.95
@@ -78,8 +77,8 @@ def basketball(Data):
                             bsk.de.home = zfBK[2]
                             bsk.de.away = zfBK[3]
                             if zfBK[0] == '0+0':
-                                #讓分算錯關盤
-                                bsk.twZF.homeZF.odds = '0'
+                                #讓分算不出關盤
+                                bsk.twZF.homeZF.odds = 'false'
                                 bsk.twZF.awayZF.odds = '0'
                             else:
                                 #讓分正確給0.95
@@ -97,8 +96,8 @@ def basketball(Data):
                         dsBK = testBKds.calBKds(source, dsline, over, under)
                         bsk.twDS.line = dsBK
                         if dsBK == '0+0':
-                            # 大小算錯觀盤
-                            bsk.twDS.over = "0"
+                            # 大小算不出關盤
+                            bsk.twDS.over = "false"
                             bsk.twDS.under = "0"
                         else:
                             # 大小正確給0.95
@@ -123,16 +122,12 @@ def basketball(Data):
         return data
     except Exception as e:
         print(str(e))
-        # telegramBot("BSK錯誤")
 
-
-## 找錯誤用 
-## testData 後面請填入錯誤的data 執行即可印出錯誤
-
-# ff = open('ps38_basketball_today.bin', 'rb')
-# testData = ff.read()
-# enData = APHDC_noDB_pb2.ApHdcArr()
-# enData.ParseFromString(testData)
-# Data = enData.aphdc
-# out = basketball(Data)
+# if __name__ == '__main__':
+    # ff = open('ps38_basketball_today.bin', 'rb')
+    # testData = ff.read()
+    # enData = APHDC_noDB_pb2.ApHdcArr()
+    # enData.ParseFromString(testData)
+    # Data = enData.aphdc
+    # out = basketball(Data)
 
