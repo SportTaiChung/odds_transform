@@ -61,11 +61,11 @@ def trans():
                 que = ous + sportMap.get(ouc)
 
             sendMQ.send_MQ(out, que, '192.168.1.201', 'GTR', '565p', 5672)
-            return 'Success !!'
+            return '200'
         except Exception as e:
             with open('Log/'+game+'.log', 'a') as errorfile:
                 errorfile.write(str(data)+'\n'+str(e)+'\n'+datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')+'\n')
-            return 'Error !!' +'\n'+ 'gameId: ' + gameId
+            return '400', gameId
 
     except Exception as e:
         print(str(e))
