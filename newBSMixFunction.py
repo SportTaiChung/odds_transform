@@ -18,7 +18,7 @@ def baseballMix(Data):
             gameClass = bs.game_class
 
 
-            if '總得分' in league and gameClass == '1' or '_' in league:
+            if '總得分' in league and gameClass == 'mlb' or '_' in league:
                 noCal = testCutOneP.justCutOne_fun([bs])
                 enData = APHDC_noDB_pb2.ApHdcArr()
                 enData.ParseFromString(noCal)
