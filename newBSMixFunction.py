@@ -17,7 +17,7 @@ def baseballMix(Data):
             gameType = bs.game_type
             gameClass = bs.game_class
 
-            if '_' in league:
+            if '_' in league or '總得分' in league:
                 noCal = testCutOneP.justCutOne_fun([bs])
                 enData = APHDC_noDB_pb2.ApHdcArr()
                 enData.ParseFromString(noCal)
@@ -42,9 +42,6 @@ def baseballMix(Data):
                         bs.twZF.awayZF.odds = "0"
                     else:
                         zfBShalf = testBSzf.calBSzf(source, gameClass, gameType, homeL, awayL, homeO, awayO, homeDe, awayDe)
-                        # 上半沒有獨贏
-                        # bs.de.home = zfBShalf[2]
-                        # bs.de.away = zfBShalf[3]
                         bs.twZF.homeZF.line = zfBShalf[0]
                         bs.twZF.awayZF.line = zfBShalf[1]
                         if zfBShalf[0] == '0+0':
