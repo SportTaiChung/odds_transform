@@ -121,6 +121,12 @@ def basketball(Data):
                     bsk.twDS.line = dsline.replace('.0','+0').replace('.5','-100')
                     bsCutOne = testCutOneP.cutOne(over,under)
                     bsk.twDS.over, bsk.twDS.under = bsCutOne
+                    if deH not in ('0', '0.0', ''):
+                        # 獨贏有值要減1
+                        de = testCutOneP.cutOne(deH, deA)
+                        bsk.de.home = de[0]
+                        bsk.de.away = de[1]
+
 
             sendData.append(copy.deepcopy(bsk))
         
