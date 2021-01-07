@@ -112,6 +112,15 @@ def basketball(Data):
                     bsk.twDS.line = dsline.replace('.0','+0').replace('.5','-100')
                     bsCutOne = testCutOneP.cutOne(over,under)
                     bsk.twDS.over, bsk.twDS.under = bsCutOne
+                # 籃球團隊總得分走地
+                elif gameType in ('live full', '2nd half'):
+                    bsk.twZF.homeZF.line = homeL.replace('.0','+0').replace('.5','-100')
+                    bsk.twZF.awayZF.line = awayL.replace('.0','+0').replace('.5','-100')
+                    zfCutOne = testCutOneP.cutOne(homeO,awayO)
+                    bsk.twZF.homeZF.odds, bsk.twZF.awayZF.odds = zfCutOne
+                    bsk.twDS.line = dsline.replace('.0','+0').replace('.5','-100')
+                    bsCutOne = testCutOneP.cutOne(over,under)
+                    bsk.twDS.over, bsk.twDS.under = bsCutOne
 
             sendData.append(copy.deepcopy(bsk))
         
