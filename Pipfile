@@ -10,6 +10,10 @@ flask = "*"
 flask-cors = "*"
 gunicorn = "*"
 protobuf = "*"
+pyyaml = "*"
+gevent = "*"
+telegram = "*"
+pika = "*"
 
 [requires]
 python_version = "3.8"
