@@ -1,2 +1,3 @@
-pkill -9 -f 'gunicorn -w 9 -b 0.0.0.0:5004 toTWhandiApi:app'
+#!/bin/bash
+pkill -9 -f 'toTWhandiApi'
 pipenv run gunicorn -c gun.py toTWhandiApi:app
