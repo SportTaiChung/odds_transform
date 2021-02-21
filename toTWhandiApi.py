@@ -49,7 +49,7 @@ def trans():
                 out = newBSMixFunction.baseballMix(data)
 
             que = source + sport_queue_postfix_map.get(sport)
-            # sendMQ.send_MQ(out, que, '192.168.1.201', 'GTR', '565p', 5672)
+            sendMQ.send_MQ(out, que, '192.168.1.201', 'GTR', '565p', 5672)
             return jsonify({'success': True})
         except Exception as e:
             with open('Log/'+sport+'.log', 'a') as errorfile:
