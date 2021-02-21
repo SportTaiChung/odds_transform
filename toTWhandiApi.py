@@ -51,9 +51,7 @@ def trans():
                 'tennis':'_TN',
                 'eSport':'_ES'
             }
-            outData = APHDC_noDB_pb2.ApHdcArr()
-            outData.ParseFromString(out)
-            Data = outData.aphdc
+            Data = out.aphdc
             ## 來源對應que
             for ou in Data:
                 ous = ou.source
