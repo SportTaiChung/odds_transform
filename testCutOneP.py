@@ -91,8 +91,7 @@ def justCutOne_fun(Data):
             sendData.append(copy.deepcopy(cut))
             datas = APHDC_noDB_pb2.ApHdcArr()
             datas.aphdc.extend(sendData)
-            data = datas.SerializeToString()  #變成byte
-        return data
+        return datas
     except Exception as e:
         print(str(e))
 

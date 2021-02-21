@@ -19,9 +19,7 @@ def baseballMix(Data):
 
             if '總得分' in league and gameClass == 'mlb' or '_' in league:
                 noCal = testCutOneP.justCutOne_fun([bs])
-                enData = APHDC_noDB_pb2.ApHdcArr()
-                enData.ParseFromString(noCal)
-                noCalData = enData.aphdc
+                noCalData = noCal.aphdc
             else:
                 homeDe = bs.de.home
                 awayDe = bs.de.away
@@ -173,8 +171,7 @@ def baseballMix(Data):
         # print(sendData) 
         datas = APHDC_noDB_pb2.ApHdcArr()
         datas.aphdc.extend(sendData)
-        data = datas.SerializeToString()  #變成byte
-        return data
+        return datas
 
     except Exception as e:
         print(str(e))

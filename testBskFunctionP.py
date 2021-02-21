@@ -34,9 +34,7 @@ def basketball(Data):
                     bsk.sd.away = sd[1]
                 if '_' in league:
                     noCal = testCutOneP.justCutOne_fun([bsk])
-                    enData = APHDC_noDB_pb2.ApHdcArr()
-                    enData.ParseFromString(noCal)
-                    noCalData = enData.aphdc
+                    noCalData = noCal.aphdc
                 else:
 
                     if homeO == '':
@@ -133,8 +131,7 @@ def basketball(Data):
         # print(sendData)
         datas = APHDC_noDB_pb2.ApHdcArr()
         datas.aphdc.extend(sendData)
-        data = datas.SerializeToString()  #變成byte
-        return data
+        return datas
     except Exception as e:
         print(str(e))
 
