@@ -13,8 +13,10 @@ def cutOne(home, away):
     return str(hO), str(aO)
 
 
-def justCutOne_fun(Data):
+def justCutOne_fun(Data, single=None):
     for cut in Data.aphdc:
+        if single:
+            cut = single
         try:
             homeline = cut.usZF.homeZF.line
             awayline = cut.usZF.awayZF.line
@@ -87,8 +89,12 @@ def justCutOne_fun(Data):
                 sd = cutOne(sdhome, sdaway)
                 cut.sd.home = sd[0]
                 cut.sd.away = sd[1]
+            if single:
+                break
         except Exception as e:
             traceback.print_exc()
+            if single:
+                break
     return Data
 
 

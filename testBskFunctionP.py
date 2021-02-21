@@ -33,9 +33,7 @@ def basketball(Data):
                     bsk.sd.home = sd[0]
                     bsk.sd.away = sd[1]
                 if '_' in league:
-                    handicaps = APHDC_noDB_pb2.ApHdcArr()
-                    handicaps.aphdc.append(bsk)
-                    noCal = testCutOneP.justCutOne_fun(handicaps)
+                    noCal = testCutOneP.justCutOne_fun(Data, bsk)
                     noCalData = noCal.aphdc
                 else:
 
