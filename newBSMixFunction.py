@@ -17,7 +17,9 @@ def baseballMix(Data):
             gameClass = bs.game_class
 
             if '總得分' in league and gameClass == 'mlb' or '_' in league:
-                noCal = testCutOneP.justCutOne_fun([bs])
+                handicaps = APHDC_noDB_pb2.ApHdcArr()
+                handicaps.aphdc.append(bs)
+                noCal = testCutOneP.justCutOne_fun(handicaps)
                 noCalData = noCal.aphdc
             else:
                 homeDe = bs.de.home

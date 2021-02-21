@@ -16,10 +16,14 @@ def hockey(Data):
 
 
             if '總得分' in league:  # 其他冰球賽事皆不用換算 只需減掉本金
-                noCal = testCutOneP.justCutOne_fun([hc])
+                handicaps = APHDC_noDB_pb2.ApHdcArr()
+                handicaps.aphdc.append(hc)
+                noCal = testCutOneP.justCutOne_fun(handicaps)
                 noCalData = noCal.aphdc
             elif league not in ('NHL OT Included', 'NHL美國冰球聯季後賽(含加時賽)', '國家冰球聯盟包括加時'): # 此聯盟全場賽事需換算
-                noCal = testCutOneP.justCutOne_fun([hc])
+                handicaps = APHDC_noDB_pb2.ApHdcArr()
+                handicaps.aphdc.append(hc)
+                noCal = testCutOneP.justCutOne_fun(handicaps)
                 noCalData = noCal.aphdc
             else:
                 if 'full' in gameType and '1.5' in hc.usZF.homeZF.line:
@@ -84,7 +88,9 @@ def hockey(Data):
                     except:
                         pass
                 else:
-                    noCal = testCutOneP.justCutOne_fun([hc])
+                    handicaps = APHDC_noDB_pb2.ApHdcArr()
+                    handicaps.aphdc.append(hc)
+                    noCal = testCutOneP.justCutOne_fun(handicaps)
                     noCalData = noCal.aphdc
         except Exception as e:
             telegramBot("HC錯誤")
