@@ -20,7 +20,7 @@ def telegramBot(message):
     bot.send_message(chat_id=id, text=message)
 
 # 傳送資料到ＭＱ的交換機
-def send_MQ(DATA, que, host, user, pw, port):     #資料送rabbitMQ
+def send_MQ(data, que, host, user, pw, port):     #資料送rabbitMQ
 
     cred = pika.PlainCredentials(user, pw)
     params = pika.ConnectionParameters(
@@ -32,9 +32,10 @@ def send_MQ(DATA, que, host, user, pw, port):     #資料送rabbitMQ
     )
     connection = pika.BlockingConnection(params)
     channel = connection.channel()
-    channel.basic_publish(exchange=que,
-                          routing_key='',
-                          body=DATA
-                          )
+    channel.basic_publish(
+        exchange=que,
+        routing_key='',
+        body=data.SerializeToString()
+    )
     connection.close()
 
