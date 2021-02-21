@@ -7,9 +7,8 @@ from sendMQ import telegramBot
 import datetime as dt
 
 def hockey(Data):
-    try:
-        sendData = []
-        for hc in Data:
+    for hc in Data.aphdc:
+        try:
             source = hc.source
             league = hc.information.league
             gameType = hc.game_type
@@ -87,19 +86,14 @@ def hockey(Data):
                 else:
                     noCal = testCutOneP.justCutOne_fun([hc])
                     noCalData = noCal.aphdc
-
-            sendData.append(copy.deepcopy(hc))
-        # print(sendData)
-        datas = APHDC_noDB_pb2.ApHdcArr()
-        datas.aphdc.extend(sendData)
-        return datas
-    except Exception as e:
-        telegramBot("HC錯誤")
+        except Exception as e:
+            telegramBot("HC錯誤")
+        return Data
 
 
 # if __name__ == "__main__":
     # testData = 
     # enData = APHDC_noDB_pb2.ApHdcArr()
     # enData.ParseFromString(testData)
-    # Data = enData.aphdc
+    # Data = enData
     # hockey(Data)

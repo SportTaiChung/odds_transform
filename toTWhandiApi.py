@@ -1,72 +1,66 @@
-from flask_cors import CORS
-from flask import Flask
-from flask import request
-from sendMQ import telegramBot
 import datetime
-import sendMQ
+import traceback
+from flask import Flask, jsonify
+from flask import request
 import APHDC_noDB_pb2
+from google.protobuf import text_format
 import testHcFunctionP
 import testBskFunctionP
 import testCutOneP
 import newBSMixFunction
+from sendMQ import telegramBot
+import sendMQ
 
 app = Flask(__name__)
-CORS(app)
 
 @app.route('/')
 def hello():
     return 'Start to Trans ! '
 
+sport_queue_postfix_map ={
+    'mlb':'_BS',
+    'npb':'_BS',
+    'kbo':'_BS',
+    'hockey':'_HC',
+    'football':'_FB',
+    'basketball':'_BK',
+    'otherbasketball':'_BK',
+    'soccer':'_SC',
+    'UCL':'_SC',
+    'tennis':'_TN',
+    'eSport':'_ES'
+}
 @app.route('/transWithProtobuf', methods=['GET', 'POST'])
 def trans():
     try:
-        data = request.get_data()
-        enData = APHDC_noDB_pb2.ApHdcArr()
-        enData.ParseFromString(data)
-        Data = enData.aphdc
+        raw_data = request.get_data()
+        data = APHDC_noDB_pb2.ApHdcArr()
+        data.ParseFromString(raw_data)
         try:
-            ## 球賽對應function
-            for en in Data:
-                game = en.game_class
-                gameId = en.game_id
+            source = data.aphdc[-1].source
+            sport = data.aphdc[-1].game_class
+            if 'basketball' in sport:
+                out = testBskFunctionP.basketball(data)
+            elif 'hockey' in sport:
+                out = testHcFunctionP.hockey(data)
+            elif sport in ('UCL', 'football', 'soccer', 'tennis', 'eSport'):
+                out = testCutOneP.justCutOne_fun(data)
+            elif sport in ('mlb', 'npb', 'kbo'):
+                out = newBSMixFunction.baseballMix(data)
 
-            if 'basketball' in game:
-                out = testBskFunctionP.basketball(Data)
-            elif 'hockey' in game:
-                out = testHcFunctionP.hockey(Data)
-            elif game in ('UCL', 'football', 'soccer', 'tennis', 'eSport'):
-                out = testCutOneP.justCutOne_fun(Data)
-            elif game in ('mlb', 'npb', 'kbo'):
-                out = newBSMixFunction.baseballMix(Data)
-            sportMap ={
-                'mlb':'_BS',
-                'npb':'_BS',
-                'kbo':'_BS',
-                'hockey':'_HC',
-                'football':'_FB',
-                'basketball':'_BK',
-                'otherbasketball':'_BK',
-                'soccer':'_SC',
-                'UCL':'_SC',
-                'tennis':'_TN',
-                'eSport':'_ES'
-            }
-            Data = out.aphdc
-            ## 來源對應que
-            for ou in Data:
-                ous = ou.source
-                ouc = ou.game_class
-                que = ous + sportMap.get(ouc)
-
-            sendMQ.send_MQ(out, que, '192.168.1.201', 'GTR', '565p', 5672)
-            return '200'
+            que = source + sport_queue_postfix_map.get(sport)
+            # sendMQ.send_MQ(out, que, '192.168.1.201', 'GTR', '565p', 5672)
+            return jsonify({'success': True})
         except Exception as e:
-            with open('Log/'+game+'.log', 'a') as errorfile:
-                errorfile.write(str(data)+'\n'+str(e)+'\n'+datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')+'\n')
-            return '400', gameId
-
+            with open('Log/'+sport+'.log', 'a') as errorfile:
+                errorfile.write(
+                    f'{datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")}\n'
+                    f'{traceback.format_exc()}\n'
+                    f'{text_format.MessageToString(data, as_utf8=True)}\n'
+                )
+            return jsonify({'success': False, 'error': traceback.format_exc()}), 400
     except Exception as e:
-        print(str(e))
+        return jsonify({'error': traceback.format_exc()}), 400
         
 
 if __name__ == '__main__':

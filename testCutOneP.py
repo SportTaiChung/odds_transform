@@ -1,5 +1,5 @@
 # -*- coding:utf-8 -*-
-import copy
+import traceback
 import APHDC_noDB_pb2
 import mapping
 
@@ -12,10 +12,10 @@ def cutOne(home, away):
         aO = str(away)
     return str(hO), str(aO)
 
+
 def justCutOne_fun(Data):
-    sendData = []
-    try:
-        for cut in Data:
+    for cut in Data.aphdc:
+        try:
             homeline = cut.usZF.homeZF.line
             awayline = cut.usZF.awayZF.line
             homeodds = cut.usZF.homeZF.odds
@@ -87,13 +87,9 @@ def justCutOne_fun(Data):
                 sd = cutOne(sdhome, sdaway)
                 cut.sd.home = sd[0]
                 cut.sd.away = sd[1]
-
-            sendData.append(copy.deepcopy(cut))
-            datas = APHDC_noDB_pb2.ApHdcArr()
-            datas.aphdc.extend(sendData)
-        return datas
-    except Exception as e:
-        print(str(e))
+        except Exception as e:
+            traceback.print_exc()
+    return Data
 
 
 # if __name__ == '__main__':

@@ -1,4 +1,4 @@
-import copy
+import traceback
 import APHDC_noDB_pb2
 import testBSzf
 import testBSds
@@ -9,9 +9,8 @@ import newBSzf
 import datetime as dt
 
 def baseballMix(Data):
-    try:
-        sendData = []
-        for bs in Data:
+    for bs in Data.aphdc:
+        try:
             source = bs.source
             league = bs.information.league
             gameType = bs.game_type
@@ -167,15 +166,10 @@ def baseballMix(Data):
                     else:
                         bs.twDS.over = "0.94"
                         bs.twDS.under = "0.94"
-            sendData.append(copy.deepcopy(bs))
-        # print(sendData) 
-        datas = APHDC_noDB_pb2.ApHdcArr()
-        datas.aphdc.extend(sendData)
-        return datas
+        except Exception as e:
+            traceback.print_exc()
+    return Data
 
-    except Exception as e:
-        print(str(e))
-        
 
 if __name__ == '__main__':
     f = open('baseball.bin', 'rb')

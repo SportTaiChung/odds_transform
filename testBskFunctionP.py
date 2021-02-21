@@ -1,5 +1,6 @@
 # -*- coding:utf-8 -*-
 import copy
+import traceback
 import APHDC_noDB_pb2
 import testBKzf
 import testBKds
@@ -8,9 +9,8 @@ import datetime as dt
 
 
 def basketball(Data):
-    try:
-        sendData = []
-        for bsk in Data:
+    for bsk in Data.aphdc:
+        try:
             source = bsk.source
             gameType = bsk.game_type
             league = bsk.information.league
@@ -124,16 +124,9 @@ def basketball(Data):
                     bsk.twDS.line = dsline.replace('.0','+0').replace('.5','-100')
                     bsCutOne = testCutOneP.cutOne(over,under)
                     bsk.twDS.over, bsk.twDS.under = bsCutOne
-
-
-            sendData.append(copy.deepcopy(bsk))
-        
-        # print(sendData)
-        datas = APHDC_noDB_pb2.ApHdcArr()
-        datas.aphdc.extend(sendData)
-        return datas
-    except Exception as e:
-        print(str(e))
+        except Exception as e:
+            traceback.print_exc()
+        return Data
 
 # if __name__ == '__main__':
     # ff = open('ps38_basketball_today.bin', 'rb')
