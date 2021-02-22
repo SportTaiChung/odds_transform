@@ -36,6 +36,8 @@ def trans():
         raw_data = request.get_data()
         data = APHDC_noDB_pb2.ApHdcArr()
         data.ParseFromString(raw_data)
+        if not data.aphdc:
+            return jsonify({'success': True, 'empty': True})
         try:
             source = data.aphdc[-1].source
             sport = data.aphdc[-1].game_class
@@ -47,13 +49,12 @@ def trans():
                 out = testCutOneP.justCutOne_fun(data)
             elif sport in ('mlb', 'npb', 'kbo'):
                 out = newBSMixFunction.baseballMix(data)
-
             que = source + sport_queue_postfix_map.get(sport)
             sendMQ.send_MQ(out, que, '192.168.1.201', 'GTR', '565p', 5672)
             return jsonify({'success': True})
         except Exception as e:
-            with open('Log/'+sport+'.log', 'a') as errorfile:
-                errorfile.write(
+            with open('Log/error.log', 'a') as error_log:
+                error_log.write(
                     f'{datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")}\n'
                     f'{traceback.format_exc()}\n'
                     f'{text_format.MessageToString(data, as_utf8=True)}\n'
