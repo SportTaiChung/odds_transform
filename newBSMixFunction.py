@@ -1,4 +1,5 @@
 import traceback
+from google.protobuf import text_format
 import APHDC_noDB_pb2
 import testBSzf
 import testBSds
@@ -172,11 +173,8 @@ def baseballMix(Data):
 
 
 if __name__ == '__main__':
-    f = open('baseball.bin', 'rb')
-    testData = f.read()
-    enData = APHDC_noDB_pb2.ApHdcArr()
-    enData.ParseFromString(testData)
-    Data = enData.event
-    print(Data)
-    # baseballMix(Data) 
-
+    with open('ps38_baseball_today.bin', 'rb') as data:
+        enData = APHDC_noDB_pb2.ApHdcArr()
+        enData.ParseFromString(data.read())
+        out = baseballMix(enData) 
+        text = text_format.MessageToString(out, as_utf8=True)

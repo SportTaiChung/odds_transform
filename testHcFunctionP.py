@@ -1,5 +1,5 @@
 # -*- coding:utf-8 -*-
-import copy
+from google.protobuf import text_format
 import APHDC_noDB_pb2
 import testCutOneP
 import testBSzf
@@ -13,7 +13,6 @@ def hockey(Data):
             league = hc.information.league
             gameType = hc.game_type
             gameClass = hc.game_class
-
 
             if '總得分' in league:  # 其他冰球賽事皆不用換算 只需減掉本金
                 noCal = testCutOneP.justCutOne_fun(Data, single=hc)
@@ -85,12 +84,12 @@ def hockey(Data):
                     noCal = testCutOneP.justCutOne_fun(Data, single=hc)
         except Exception as e:
             telegramBot("HC錯誤")
-        return Data
+    return Data
 
 
-# if __name__ == "__main__":
-    # testData = 
-    # enData = APHDC_noDB_pb2.ApHdcArr()
-    # enData.ParseFromString(testData)
-    # Data = enData
-    # hockey(Data)
+if __name__ == "__main__":
+    with open('ps38_hockey_today.bin', 'rb') as data:
+        enData = APHDC_noDB_pb2.ApHdcArr()
+        enData.ParseFromString(data.read())
+        out = hockey(enData)
+        text = text_format.MessageToString(out, as_utf8=True)

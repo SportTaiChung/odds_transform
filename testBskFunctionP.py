@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*-
 import copy
 import traceback
+from google.protobuf import text_format
 import APHDC_noDB_pb2
 import testBKzf
 import testBKds
@@ -126,13 +127,11 @@ def basketball(Data):
                     bsk.twDS.over, bsk.twDS.under = bsCutOne
         except Exception as e:
             traceback.print_exc()
-        return Data
+    return Data
 
-# if __name__ == '__main__':
-    # ff = open('ps38_basketball_today.bin', 'rb')
-    # testData = ff.read()
-    # enData = APHDC_noDB_pb2.ApHdcArr()
-    # enData.ParseFromString(testData)
-    # Data = enData.aphdc
-    # out = basketball(Data)
-
+if __name__ == '__main__':
+    with open('ps38_basketball_today.bin', 'rb') as data:
+        enData = APHDC_noDB_pb2.ApHdcArr()
+        enData.ParseFromString(data.read())
+        out = basketball(enData)
+        text = text_format.MessageToString(out, as_utf8=True)

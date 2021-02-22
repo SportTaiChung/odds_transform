@@ -1,5 +1,6 @@
 # -*- coding:utf-8 -*-
 import traceback
+from google.protobuf import text_format
 import APHDC_noDB_pb2
 import mapping
 
@@ -98,9 +99,9 @@ def justCutOne_fun(Data, single=None):
     return Data
 
 
-# if __name__ == '__main__':
-    # testData=
-    # enData = APHDC_noDB_pb2.ApHdcArr()
-    # enData.ParseFromString(testData)
-    # Data = enData.aphdc
-    # justCutOne_fun(Data)
+if __name__ == '__main__':
+    with open('ps38_soccer_today.bin', 'rb') as data:
+        enData = APHDC_noDB_pb2.ApHdcArr()
+        enData.ParseFromString(data.read())
+        out = justCutOne_fun(enData)
+        text = text_format.MessageToString(out, as_utf8=True)
