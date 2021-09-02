@@ -1,4 +1,4 @@
-from sendMQ import telegramBot
+from app.sendMQ import telegramBot
 
 def calBKds(source, line, over, under):
 

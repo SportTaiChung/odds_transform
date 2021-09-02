@@ -1,21 +1,14 @@
 import datetime
 import traceback
-from flask import Flask, jsonify
-from flask import request
-import APHDC_noDB_pb2
+from flask import current_app, jsonify, request, Blueprint
+from app import APHDC_noDB_pb2
 from google.protobuf import text_format
-import testHcFunctionP
-import testBskFunctionP
-import testCutOneP
-import newBSMixFunction
-from sendMQ import telegramBot
-import sendMQ
+from app import testHcFunctionP
+from app import testBskFunctionP
+from app import testCutOneP
+from app import newBSMixFunction
+from app.sendMQ import send_MQ
 
-app = Flask(__name__)
-
-@app.route('/')
-def hello():
-    return 'Start to Trans ! '
 
 sport_queue_postfix_map ={
     'mlb':'_BS',
@@ -30,7 +23,12 @@ sport_queue_postfix_map ={
     'tennis':'_TN',
     'eSport':'_ES'
 }
-@app.route('/transWithProtobuf', methods=['GET', 'POST'])
+
+
+api = Blueprint('api', __name__)
+
+
+@api.route('/transWithProtobuf', methods=['GET', 'POST'])
 def trans():
     try:
         raw_data = request.get_data()
@@ -50,7 +48,7 @@ def trans():
             elif sport in ('mlb', 'npb', 'kbo'):
                 out = newBSMixFunction.baseballMix(data)
             que = source + sport_queue_postfix_map.get(sport)
-            sendMQ.send_MQ(out, que, '192.168.1.201', 'GTR', '565p', 5672)
+            send_MQ(out, current_app.config['mq_exchange'], que, current_app.config['mq_url'])
             return jsonify({'success': True})
         except Exception as e:
             with open('Log/error.log', 'a') as error_log:
@@ -62,8 +60,3 @@ def trans():
             return jsonify({'success': False, 'error': traceback.format_exc()}), 400
     except Exception as e:
         return jsonify({'error': traceback.format_exc()}), 400
-        
-
-if __name__ == '__main__':
-    # app.run(host='127.0.0.1', port=5004, debug=True, threaded=True)
-    app.run(host='0.0.0.0', port=5004, debug=True, threaded=True)

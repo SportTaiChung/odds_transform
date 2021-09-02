@@ -1,4 +1,4 @@
-from sendMQ import telegramBot
+from app.sendMQ import telegramBot
 
 def calBSds(source, gameClass, gameType, line, over, under):
     if over in ('', '0', '0.0'):

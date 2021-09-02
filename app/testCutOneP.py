@@ -1,8 +1,8 @@
 # -*- coding:utf-8 -*-
 import traceback
 from google.protobuf import text_format
-import APHDC_noDB_pb2
-import mapping
+from app import APHDC_noDB_pb2
+from app import mapping
 
 def cutOne(home, away):
     if home != '0':

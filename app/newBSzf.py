@@ -1,6 +1,6 @@
-import mapping
-import testBSde
-from sendMQ import telegramBot
+from app import mapping
+from app import testBSde
+from app.sendMQ import telegramBot
 
 ## 冰球棒球都是用亞洲賠率(不加本金)計算
 def calBSzf(source, gameClass, gameType, homeL, awayL, homeO, awayO):

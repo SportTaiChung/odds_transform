@@ -1,12 +1,11 @@
 # -*- coding:utf-8 -*-
-import copy
+import datetime as dt
 import traceback
 from google.protobuf import text_format
-import APHDC_noDB_pb2
-import testBKzf
-import testBKds
-import testCutOneP
-import datetime as dt
+from app import APHDC_noDB_pb2
+from app import testBKzf
+from app import testBKds
+from app import testCutOneP
 
 
 def basketball(Data):

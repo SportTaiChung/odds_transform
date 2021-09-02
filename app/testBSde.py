@@ -1,5 +1,5 @@
-import mapping
-from sendMQ import telegramBot
+from app import mapping
+from app.sendMQ import telegramBot
 
 
 def calBSde(source, gameClass, gameType, homeDe, awayDe):

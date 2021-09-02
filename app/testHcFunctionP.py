@@ -1,10 +1,10 @@
 # -*- coding:utf-8 -*-
-from google.protobuf import text_format
-import APHDC_noDB_pb2
-import testCutOneP
-import testBSzf
-from sendMQ import telegramBot
 import datetime as dt
+from google.protobuf import text_format
+from app import APHDC_noDB_pb2
+from app import testCutOneP
+from app import testBSzf
+from app.sendMQ import telegramBot
 
 def hockey(Data):
     for hc in Data.aphdc:

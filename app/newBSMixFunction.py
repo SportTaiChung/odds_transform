@@ -1,13 +1,13 @@
+import datetime as dt
 import traceback
 from google.protobuf import text_format
-import APHDC_noDB_pb2
-import testBSzf
-import testBSds
-import testBSde
-import testCutOneP
-import newBSds
-import newBSzf
-import datetime as dt
+from app import APHDC_noDB_pb2
+from app import testBSzf
+from app import testBSds
+from app import testBSde
+from app import testCutOneP
+from app import newBSds
+from app import newBSzf
 
 def baseballMix(Data):
     for bs in Data.aphdc:
@@ -144,6 +144,8 @@ def baseballMix(Data):
                 # 大小兩盤口
                 elif ',' in line:
                     dsBS = newBSds.calBSds(source, gameClass, line, over, under)
+                    if bs.game_id == '131466438111':
+                        print(dsBS)
                     bs.twDS.line = dsBS[0]
                     bs.usDS.line = dsBS[1]
                     bs.usDS.over = str(round((float(dsBS[2])+1), 2))

@@ -1,4 +1,4 @@
-from sendMQ import telegramBot
+from app.sendMQ import telegramBot
 
 def calBKzf(source, gameType, homeL, awayL, homeO, awayO, homeDe, awayDe):
     
