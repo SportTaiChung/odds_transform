@@ -13,8 +13,8 @@ def split_list(data):
 
 # telegram 機器人
 def telegramBot(message):
-    bot = telegram.Bot(token=current_app.config['telegram']['token'])
-    bot.send_message(chat_id=current_app.config['telegram']['chat_id'], text=message)
+    bot = telegram.Bot(token=current_app.config['TELEGRAM']['TOKEN'])
+    bot.send_message(chat_id=current_app.config['TELEGRAM']['CHAT_ID'], text=message)
 
 
 # 傳送資料到ＭＱ的交換機

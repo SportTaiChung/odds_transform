@@ -48,7 +48,7 @@ def trans():
             elif sport in ('mlb', 'npb', 'kbo'):
                 out = newBSMixFunction.baseballMix(data)
             que = source + sport_queue_postfix_map.get(sport)
-            send_MQ(out, current_app.config['mq_exchange'], que, current_app.config['mq_url'])
+            send_MQ(out, current_app.config['MQ_EXCHANGE'], que, current_app.config['MQ_URL'])
             return jsonify({'success': True})
         except Exception as e:
             with open('Log/error.log', 'a') as error_log:
