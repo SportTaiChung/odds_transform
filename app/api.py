@@ -1,5 +1,6 @@
 import datetime
 import traceback
+import gzip
 from flask import current_app, jsonify, request, Blueprint
 from app import APHDC_noDB_pb2
 from google.protobuf import text_format
@@ -31,7 +32,9 @@ api = Blueprint('api', __name__)
 @api.route('/transWithProtobuf', methods=['GET', 'POST'])
 def trans():
     try:
-        raw_data = request.get_data()
+        raw_data = memoryview(request.get_data())
+        if request.content_encoding == 'gzip':
+            raw_data = memoryview(gzip.decompress(raw_data))
         data = APHDC_noDB_pb2.ApHdcArr()
         data.ParseFromString(raw_data)
         if not data.aphdc:
