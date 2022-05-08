@@ -9,13 +9,13 @@ pycodestyle = "*"
 [packages]
 flask = "*"
 flask-cors = "*"
-gunicorn = "*"
 protobuf = "*"
 pyyaml = "*"
 gevent = "*"
 telegram = "*"
 pika = "*"
 supervisor = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.8"
